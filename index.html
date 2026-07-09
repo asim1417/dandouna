@@ -3,42 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>منصة دندونة · الواجهات المعتمدة V4</title>
+<title>منصة دندونة · كل الواجهات والبوابات V4</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ===================== دندونة · Design Tokens V4 ===================== */
 :root{
-  --dandona-white:#FFFFFF;
-  --dandona-soft-pink-bg:#FFF5F8;
-  --dandona-pink:#F472B6;
-  --dandona-pink-strong:#EC4899;
-  --dandona-pink-light:#FCE7F3;
-  --dandona-blue:#1E3A8A;
-  --dandona-blue-light:#DBEAFE;
-  --dandona-gold:#D6A85A;
-  --dandona-green:#16A34A;
-  --dandona-slate:#64748B;
-  --dandona-border:#E5E7EB;
-  --radius-card:24px;
-  --radius-button:14px;
-  --shadow-soft:0 16px 40px rgba(30,58,138,0.08);
-  --shadow-hover:0 20px 48px rgba(30,58,138,0.12);
-  --font-arabic:'Noto Sans Arabic','IBM Plex Sans Arabic',sans-serif;
-  --font-num:'Inter','Noto Sans Arabic',sans-serif;
+  --dandona-white:#FFFFFF;--dandona-soft-pink-bg:#FFF5F8;--dandona-pink:#F472B6;--dandona-pink-strong:#EC4899;
+  --dandona-pink-light:#FCE7F3;--dandona-blue:#1E3A8A;--dandona-blue-light:#DBEAFE;--dandona-gold:#D6A85A;
+  --dandona-green:#16A34A;--dandona-slate:#64748B;--dandona-border:#E5E7EB;
+  --radius-card:24px;--radius-button:14px;--shadow-soft:0 16px 40px rgba(30,58,138,0.08);--shadow-hover:0 20px 48px rgba(30,58,138,0.12);
+  --font-arabic:'Noto Sans Arabic','IBM Plex Sans Arabic',sans-serif;--font-num:'Inter','Noto Sans Arabic',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  font-family:var(--font-arabic);
-  background:var(--dandona-soft-pink-bg);
-  color:var(--dandona-blue);
-  line-height:1.7;
-  text-align:right;
-  direction:rtl;
-  -webkit-font-smoothing:antialiased;
-}
+body{font-family:var(--font-arabic);background:var(--dandona-soft-pink-bg);color:var(--dandona-blue);line-height:1.7;text-align:right;direction:rtl;-webkit-font-smoothing:antialiased}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 h1,h2,h3,h4{color:var(--dandona-blue);line-height:1.35}
 p{color:var(--dandona-slate)}
@@ -46,250 +25,321 @@ p{color:var(--dandona-slate)}
 button{font-family:inherit;cursor:pointer}
 a{color:inherit;text-decoration:none}
 
-/* ===================== شريط التبديل بين الشاشات ===================== */
-.topbar{
-  position:sticky;top:0;z-index:100;
-  background:rgba(255,255,255,.86);backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--dandona-border);
-  box-shadow:0 4px 20px rgba(30,58,138,.05);
-}
-.topbar-inner{max-width:1280px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+/* ===== topbar + grouped nav ===== */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--dandona-border);box-shadow:0 4px 20px rgba(30,58,138,.05)}
+.topbar-inner{max-width:1300px;margin:0 auto;padding:11px 22px}
+.trow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
 .brand .logo{width:38px;height:38px;flex:0 0 38px}
 .brand small{display:block;font-family:var(--font-num);font-size:9px;letter-spacing:3px;color:var(--dandona-pink-strong);font-weight:700}
-.nav{display:flex;gap:6px;flex-wrap:wrap;margin-inline-start:auto}
-.nav button{
-  border:1px solid transparent;background:transparent;color:var(--dandona-slate);
-  padding:8px 14px;border-radius:999px;font-size:14px;font-weight:600;transition:.2s;
-}
+.groupbar{display:flex;gap:8px;margin-inline-start:auto}
+.groupbar button{border:1px solid var(--dandona-border);background:#fff;color:var(--dandona-slate);padding:8px 18px;border-radius:999px;font-size:14px;font-weight:700;transition:.2s}
+.groupbar button:hover{border-color:var(--dandona-pink)}
+.groupbar button.gactive{background:var(--dandona-blue);color:#fff;border-color:var(--dandona-blue)}
+.nav{display:flex;gap:6px;flex-wrap:wrap;padding-top:10px;margin-top:9px;border-top:1px solid var(--dandona-border)}
+.ngroup{display:flex;gap:6px;flex-wrap:wrap}
+.ngroup[hidden]{display:none}
+.nav button{border:1px solid transparent;background:transparent;color:var(--dandona-slate);padding:7px 13px;border-radius:999px;font-size:13px;font-weight:600;transition:.2s}
 .nav button:hover{background:var(--dandona-pink-light);color:var(--dandona-blue)}
-.nav button.active{background:var(--dandona-blue);color:#fff}
+.nav button.active{background:var(--dandona-pink-light);color:var(--dandona-blue);box-shadow:inset 0 0 0 1.5px var(--dandona-pink)}
 
-/* ===================== تخطيط عام ===================== */
-.stage{max-width:1280px;margin:0 auto;padding:34px 22px 80px}
-.screen{display:none;animation:fade .4s ease}
+.stage{max-width:1300px;margin:0 auto;padding:30px 22px 80px}
+.screen{display:none;animation:fade .35s ease}
 .screen.show{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.screen-label{display:flex;align-items:center;gap:12px;margin-bottom:22px}
-.screen-label .chip{background:var(--dandona-blue);color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;font-family:var(--font-num)}
-.screen-label h2{font-size:22px}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.screen-label{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.screen-label .chip{background:var(--dandona-blue);color:#fff;font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px;font-family:var(--font-num);white-space:nowrap}
+.screen-label h2{font-size:21px}
 .screen-label p{font-size:13px}
 
+/* ===== shared components ===== */
 .card{background:#fff;border:1px solid var(--dandona-border);border-radius:var(--radius-card);box-shadow:var(--shadow-soft)}
-.btn{border:none;border-radius:var(--radius-button);padding:13px 26px;font-size:15px;font-weight:700;min-height:44px;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn{border:none;border-radius:var(--radius-button);padding:12px 24px;font-size:15px;font-weight:700;min-height:44px;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
 .btn-pink{background:var(--dandona-pink-strong);color:#fff;box-shadow:0 10px 22px rgba(236,72,153,.28)}
 .btn-pink:hover{background:var(--dandona-pink);transform:translateY(-1px)}
-.btn-blue{background:var(--dandona-blue);color:#fff}
-.btn-blue:hover{filter:brightness(1.12);transform:translateY(-1px)}
-.btn-ghost{background:#fff;color:var(--dandona-blue);border:1.5px solid var(--dandona-border)}
-.btn-ghost:hover{border-color:var(--dandona-pink);color:var(--dandona-pink-strong)}
+.btn-blue{background:var(--dandona-blue);color:#fff}.btn-blue:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.btn-ghost{background:#fff;color:var(--dandona-blue);border:1.5px solid var(--dandona-border)}.btn-ghost:hover{border-color:var(--dandona-pink);color:var(--dandona-pink-strong)}
+.btn-sm{padding:8px 14px;font-size:13px;min-height:36px;border-radius:10px}
 .safety{background:var(--dandona-blue-light);color:var(--dandona-blue);border-radius:14px;padding:11px 15px;font-size:13px;font-weight:600;display:flex;gap:9px;align-items:flex-start}
 .safety svg{flex:0 0 18px;margin-top:2px}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:3px 12px;border-radius:999px}
+.tag-green{background:#dcfce7;color:var(--dandona-green)}.tag-pink{background:var(--dandona-pink-light);color:var(--dandona-pink-strong)}
+.tag-blue{background:var(--dandona-blue-light);color:var(--dandona-blue)}.tag-gold{background:#f7edd9;color:#a97e2f}.tag-slate{background:#f1f5f9;color:var(--dandona-slate)}
+.bar{height:9px;border-radius:999px;background:var(--dandona-pink-light);overflow:hidden}.bar>i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--dandona-pink),var(--dandona-pink-strong))}
+.bar.blue>i{background:linear-gradient(90deg,#60a5fa,var(--dandona-blue))}
+.field{margin-bottom:12px}
+.field label{font-size:13px;font-weight:600;color:var(--dandona-blue);display:block;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;border:1.5px solid var(--dandona-border);border-radius:12px;padding:11px 13px;font-family:inherit;font-size:14px;text-align:right;direction:rtl;color:var(--dandona-blue);background:#fff}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--dandona-pink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mini-note{font-size:11px;color:var(--dandona-slate);margin-top:8px}
+.avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--dandona-pink),var(--dandona-pink-strong));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:20px;flex:0 0 52px}
+.center-wrap{max-width:460px;margin:0 auto}
+.stepper{display:flex;align-items:center;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+.stepper .st{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--dandona-slate)}
+.stepper .st i{width:26px;height:26px;border-radius:50%;background:var(--dandona-pink-light);color:var(--dandona-pink-strong);display:flex;align-items:center;justify-content:center;font-family:var(--font-num);font-style:normal}
+.stepper .st.on i{background:var(--dandona-pink-strong);color:#fff}
+.stepper .ln{width:22px;height:2px;background:var(--dandona-border)}
+.choice{display:flex;flex-direction:column;gap:10px}
+.choice .c{border:1.5px solid var(--dandona-border);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;transition:.15s;cursor:pointer}
+.choice .c:hover{border-color:var(--dandona-pink);background:#fffafc}
+.choice .c.sel{border-color:var(--dandona-pink-strong);background:var(--dandona-pink-light)}
+.choice .c .ic{width:38px;height:38px;flex:0 0 38px;border-radius:11px;background:var(--dandona-blue-light);color:var(--dandona-blue);display:flex;align-items:center;justify-content:center;font-size:18px}
+.choice .c b{font-size:14px;display:block}.choice .c small{font-size:12px;color:var(--dandona-slate)}
+.choice .c .rd{margin-inline-start:auto;width:20px;height:20px;border-radius:50%;border:2px solid var(--dandona-border)}
+.choice .c.sel .rd{border-color:var(--dandona-pink-strong);background:radial-gradient(circle,#fff 30%,var(--dandona-pink-strong) 40%)}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button{border:1.5px solid var(--dandona-border);background:#fff;border-radius:10px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--dandona-slate)}
+.seg button.on{border-color:var(--dandona-pink-strong);background:var(--dandona-pink-light);color:var(--dandona-blue)}
+.toggle{width:46px;height:26px;border-radius:999px;background:var(--dandona-border);position:relative;flex:0 0 46px;transition:.2s}
+.toggle.on{background:var(--dandona-pink-strong)}
+.toggle i{position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
+.toggle.on i{right:23px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 
-/* ===================== 1 · الرئيسية ===================== */
+/* ===== 1 landing ===== */
 .landing{display:grid;grid-template-columns:1.15fr .85fr;gap:26px}
 .hero{position:relative;overflow:hidden;padding:44px 40px;background:linear-gradient(155deg,#fff 0%,var(--dandona-soft-pink-bg) 55%,var(--dandona-pink-light) 100%)}
 .hero .petal{position:absolute;border-radius:60% 40% 55% 45%;background:radial-gradient(circle at 30% 30%,#fff,var(--dandona-pink));opacity:.5}
-.hero h1{font-size:40px;font-weight:800;line-height:1.25;margin-bottom:14px;position:relative}
-.hero h1 span{color:var(--dandona-pink-strong)}
+.hero h1{font-size:38px;font-weight:800;line-height:1.25;margin-bottom:14px;position:relative}.hero h1 span{color:var(--dandona-pink-strong)}
 .hero .lead{font-size:17px;color:var(--dandona-slate);max-width:440px;margin-bottom:12px;position:relative}
-.hero .sub{font-size:14px;color:var(--dandona-slate);margin-bottom:26px;position:relative}
+.hero .sub{font-size:14px;color:var(--dandona-slate);margin-bottom:24px;position:relative}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;position:relative}
-.hero-photo{position:relative;margin-top:30px;height:280px;border-radius:20px;overflow:hidden;background:linear-gradient(160deg,#fff,var(--dandona-pink-light));box-shadow:inset 0 0 0 1px var(--dandona-pink-light)}
+.hero-photo{position:relative;margin-top:28px;height:280px;border-radius:20px;overflow:hidden;background:linear-gradient(160deg,#fff,var(--dandona-pink-light));box-shadow:inset 0 0 0 1px var(--dandona-pink-light)}
 .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block}
 .hero-photo .cap{position:absolute;inset-inline:0;bottom:0;padding:22px 16px 12px;background:linear-gradient(to top,rgba(255,255,255,.92),transparent);font-size:12px;color:var(--dandona-slate);text-align:center;font-weight:600}
 .trust{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
 .trust .t{background:#fff;border:1px solid var(--dandona-border);border-radius:18px;padding:16px 12px;text-align:center}
 .trust .t .ic{width:42px;height:42px;margin:0 auto 8px;border-radius:12px;background:var(--dandona-pink-light);display:flex;align-items:center;justify-content:center;color:var(--dandona-pink-strong)}
-.trust .t b{font-size:14px;display:block;margin-bottom:3px}
-.trust .t small{font-size:11px;color:var(--dandona-slate)}
-.why{padding:30px}
-.why h3{font-size:19px;margin-bottom:18px}
-.why .row{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid var(--dandona-border)}
-.why .row:last-child{border-bottom:none}
-.why .row .ic{width:40px;height:40px;flex:0 0 40px;border-radius:12px;background:var(--dandona-blue-light);color:var(--dandona-blue);display:flex;align-items:center;justify-content:center}
-.why .row b{font-size:15px;display:block;margin-bottom:2px}
-.why .row p{font-size:13px}
-.login-card{padding:30px;text-align:center}
-.login-card .logo{width:52px;height:52px;margin:0 auto 12px}
-.login-card h3{font-size:19px;margin-bottom:4px}
-.login-card p{font-size:13px;margin-bottom:20px}
+.trust .t b{font-size:14px;display:block;margin-bottom:3px}.trust .t small{font-size:11px;color:var(--dandona-slate)}
+.login-card{padding:30px;text-align:center}.login-card .logo{width:52px;height:52px;margin:0 auto 12px}
+.login-card h3{font-size:19px;margin-bottom:4px}.login-card p{font-size:13px;margin-bottom:20px}
 .oauth{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
 .oauth button{width:100%;border:1.5px solid var(--dandona-border);background:#fff;border-radius:var(--radius-button);padding:12px;font-weight:700;font-size:14px;color:var(--dandona-blue);display:flex;align-items:center;justify-content:center;gap:10px;min-height:46px;transition:.2s}
 .oauth button:hover{border-color:var(--dandona-pink);background:#fffafc}
 .divider{display:flex;align-items:center;gap:10px;color:var(--dandona-slate);font-size:12px;margin:14px 0}
 .divider::before,.divider::after{content:"";height:1px;background:var(--dandona-border);flex:1}
-.field{text-align:right;margin-bottom:12px}
-.field label{font-size:13px;font-weight:600;color:var(--dandona-blue);display:block;margin-bottom:6px}
-.field input{width:100%;border:1.5px solid var(--dandona-border);border-radius:12px;padding:12px 14px;font-family:inherit;font-size:14px;text-align:right;direction:rtl;color:var(--dandona-blue)}
-.field input:focus{outline:none;border-color:var(--dandona-pink)}
-.mini-note{font-size:11px;color:var(--dandona-slate);margin-top:8px}
+.why{padding:28px}.why h3{font-size:19px;margin-bottom:16px}
+.why .row{display:flex;gap:13px;padding:12px 0;border-bottom:1px solid var(--dandona-border)}.why .row:last-child{border-bottom:none}
+.why .row .ic{width:40px;height:40px;flex:0 0 40px;border-radius:12px;background:var(--dandona-blue-light);color:var(--dandona-blue);display:flex;align-items:center;justify-content:center}
+.why .row b{font-size:15px;display:block;margin-bottom:2px}.why .row p{font-size:13px}
 
-/* ===================== 2 · لوحة المستخدم ===================== */
+/* ===== dashboard ===== */
 .dash{display:grid;grid-template-columns:220px 1fr;gap:22px;align-items:start}
-.side{background:#fff;border:1px solid var(--dandona-border);border-radius:var(--radius-card);padding:20px 14px;box-shadow:var(--shadow-soft)}
-.side .brand{margin:4px 8px 20px}
-.side nav{display:flex;flex-direction:column;gap:3px}
-.side nav a{display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:13px;font-size:14px;font-weight:600;color:var(--dandona-slate);transition:.15s}
-.side nav a .ic{width:20px;height:20px;flex:0 0 20px}
+.side{background:#fff;border:1px solid var(--dandona-border);border-radius:var(--radius-card);padding:18px 12px;box-shadow:var(--shadow-soft);position:sticky;top:150px}
+.side .brand{margin:4px 8px 16px;font-size:17px}
+.side nav{display:flex;flex-direction:column;gap:2px}
+.side nav a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;font-size:13.5px;font-weight:600;color:var(--dandona-slate);transition:.15s;cursor:pointer}
 .side nav a:hover{background:var(--dandona-soft-pink-bg);color:var(--dandona-blue)}
 .side nav a.on{background:var(--dandona-pink-light);color:var(--dandona-blue)}
-.dash-main{display:flex;flex-direction:column;gap:20px}
+.dash-main{display:flex;flex-direction:column;gap:18px}
 .greet{display:flex;align-items:center;justify-content:space-between;gap:14px}
-.greet h2{font-size:24px}
-.greet p{font-size:14px}
-.avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--dandona-pink),var(--dandona-pink-strong));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:20px;flex:0 0 52px}
+.greet h2{font-size:23px}.greet p{font-size:14px}
 .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .metric{background:#fff;border:1px solid var(--dandona-border);border-radius:20px;padding:18px 16px;text-align:center;box-shadow:var(--shadow-soft);transition:.2s}
 .metric:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px)}
-.metric .cap{font-size:13px;font-weight:600;color:var(--dandona-slate);margin-bottom:12px}
-.metric .big{font-family:var(--font-num);font-size:34px;font-weight:700;color:var(--dandona-blue)}
-.metric .emoji{font-size:34px}
-.metric .tag{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;padding:3px 12px;border-radius:999px}
-.tag-green{background:#dcfce7;color:var(--dandona-green)}
-.tag-pink{background:var(--dandona-pink-light);color:var(--dandona-pink-strong)}
-.tag-blue{background:var(--dandona-blue-light);color:var(--dandona-blue)}
-.ring{display:block;margin:0 auto 6px}
-.rec-wrap{background:#fff;border:1px solid var(--dandona-border);border-radius:var(--radius-card);padding:24px;box-shadow:var(--shadow-soft)}
-.rec-wrap h3{font-size:18px;margin-bottom:16px}
+.metric .cap{font-size:13px;font-weight:600;color:var(--dandona-slate);margin-bottom:10px}
+.metric .emoji{font-size:34px}.ring{display:block;margin:0 auto 6px}
+.rec-wrap{background:#fff;border:1px solid var(--dandona-border);border-radius:var(--radius-card);padding:22px;box-shadow:var(--shadow-soft)}
+.rec-wrap h3{font-size:18px;margin-bottom:14px}
 .recs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.rec{border:1px solid var(--dandona-border);border-radius:18px;overflow:hidden;transition:.2s}
-.rec:hover{border-color:var(--dandona-pink);transform:translateY(-2px)}
-.rec .thumb{height:74px;display:flex;align-items:center;justify-content:center;font-size:30px}
-.rec .body{padding:12px 14px}
-.rec b{font-size:14px;display:block;margin-bottom:3px}
-.rec small{font-size:12px;color:var(--dandona-slate)}
-.calm{background:linear-gradient(135deg,var(--dandona-soft-pink-bg),var(--dandona-pink-light));border:1px solid var(--dandona-pink-light);border-radius:var(--radius-card);padding:22px 26px;display:flex;align-items:center;gap:20px}
-.calm .orn{font-size:40px}
-.calm .txt{flex:1}
-.calm .txt .v{font-size:17px;font-weight:700;color:var(--dandona-blue);margin-bottom:4px}
-.calm .txt .src{font-size:12px;color:var(--dandona-gold);font-weight:700}
+.rec{border:1px solid var(--dandona-border);border-radius:18px;overflow:hidden;transition:.2s}.rec:hover{border-color:var(--dandona-pink);transform:translateY(-2px)}
+.rec .thumb{height:70px;display:flex;align-items:center;justify-content:center;font-size:28px}.rec .body{padding:11px 13px}
+.rec b{font-size:14px;display:block;margin-bottom:2px}.rec small{font-size:12px;color:var(--dandona-slate)}
+.calm{background:linear-gradient(135deg,var(--dandona-soft-pink-bg),var(--dandona-pink-light));border:1px solid var(--dandona-pink-light);border-radius:var(--radius-card);padding:20px 24px;display:flex;align-items:center;gap:18px}
+.calm .orn{font-size:38px}.calm .txt{flex:1}
+.calm .txt .v{font-size:16px;font-weight:700;color:var(--dandona-blue);margin-bottom:4px}.calm .txt .src{font-size:12px;color:var(--dandona-gold);font-weight:700}
 .calm .off{background:#fff;border:1px solid var(--dandona-border);border-radius:999px;padding:8px 14px;font-size:12px;font-weight:700;color:var(--dandona-slate);white-space:nowrap}
 
-/* ===================== 3 · الجوال ===================== */
+/* ===== mobile ===== */
 .mobile-wrap{display:grid;grid-template-columns:340px 1fr;gap:34px;align-items:start}
 .phone{width:340px;background:#0b1020;border-radius:46px;padding:12px;box-shadow:0 30px 70px rgba(30,58,138,.22);margin:0 auto}
 .phone .screen-in{background:var(--dandona-soft-pink-bg);border-radius:36px;overflow:hidden;height:700px;position:relative;display:flex;flex-direction:column}
 .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:130px;height:26px;background:#0b1020;border-radius:0 0 18px 18px;z-index:5}
 .m-head{padding:34px 20px 14px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--dandona-border)}
-.m-head .g b{font-size:16px}
-.m-head .g small{font-size:12px;color:var(--dandona-slate)}
+.m-head .g b{font-size:16px}.m-head .g small{font-size:12px;color:var(--dandona-slate)}
 .m-body{flex:1;overflow:auto;padding:16px 18px 90px}
 .m-result{background:#fff;border:1px solid var(--dandona-border);border-radius:22px;padding:20px;text-align:center;box-shadow:var(--shadow-soft);margin-bottom:14px}
-.m-result .cap{font-size:13px;color:var(--dandona-slate);font-weight:600}
-.m-two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-.m-two .metric{padding:14px 10px}
-.m-two .metric .cap{margin-bottom:6px;font-size:12px}
+.m-two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}.m-two .metric{padding:14px 10px}.m-two .metric .cap{margin-bottom:6px;font-size:12px}
 .m-prog{background:#fff;border:1px solid var(--dandona-border);border-radius:20px;padding:16px 18px;box-shadow:var(--shadow-soft)}
 .m-prog .top{display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:10px}
-.bar{height:9px;border-radius:999px;background:var(--dandona-pink-light);overflow:hidden}
-.bar>i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--dandona-pink),var(--dandona-pink-strong))}
 .m-nav{position:absolute;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--dandona-border);display:flex;justify-content:space-around;padding:10px 6px 16px}
-.m-nav a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:600;color:var(--dandona-slate)}
-.m-nav a.on{color:var(--dandona-pink-strong)}
-.m-nav a .ic{width:22px;height:22px}
-.mobile-notes{display:flex;flex-direction:column;gap:14px}
-.note{background:#fff;border:1px solid var(--dandona-border);border-radius:18px;padding:18px 20px;box-shadow:var(--shadow-soft)}
-.note b{font-size:15px;display:block;margin-bottom:6px}
-.note p{font-size:13px}
+.m-nav a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:600;color:var(--dandona-slate)}.m-nav a.on{color:var(--dandona-pink-strong)}.m-nav a .ic{font-size:18px}
+.notes{display:flex;flex-direction:column;gap:14px}
+.note{background:#fff;border:1px solid var(--dandona-border);border-radius:18px;padding:16px 20px;box-shadow:var(--shadow-soft)}.note b{font-size:15px;display:block;margin-bottom:6px}.note p{font-size:13px}
 
-/* ===================== 4 · الاختبار والنتيجة ===================== */
-.assess{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
-.assess-start{padding:28px}
-.assess-start h3{font-size:19px;margin-bottom:6px}
-.assess-meta{display:flex;flex-direction:column;gap:12px;margin:20px 0}
-.assess-meta .m{display:flex;align-items:center;gap:12px;padding:13px 15px;border:1px solid var(--dandona-border);border-radius:14px}
+/* ===== assessment/result ===== */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.pad{padding:26px}
+.assess-meta{display:flex;flex-direction:column;gap:12px;margin:18px 0}
+.assess-meta .m{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--dandona-border);border-radius:14px}
 .assess-meta .m .ic{width:38px;height:38px;flex:0 0 38px;border-radius:11px;background:var(--dandona-pink-light);color:var(--dandona-pink-strong);display:flex;align-items:center;justify-content:center}
-.assess-meta .m b{font-size:14px}
-.assess-meta .m span{margin-inline-start:auto;font-family:var(--font-num);font-weight:700;color:var(--dandona-blue)}
+.assess-meta .m b{font-size:14px}.assess-meta .m span{margin-inline-start:auto;font-family:var(--font-num);font-weight:700;color:var(--dandona-blue)}
+.qcard{padding:30px}
+.qbar{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--dandona-slate);margin-bottom:8px}
+.qtext{font-size:20px;font-weight:700;color:var(--dandona-blue);margin:18px 0 22px;line-height:1.5}
+.likert{display:flex;flex-direction:column;gap:10px}
+.likert .lk{border:1.5px solid var(--dandona-border);border-radius:12px;padding:13px 15px;font-size:14px;font-weight:600;color:var(--dandona-blue);display:flex;align-items:center;gap:12px;cursor:pointer;transition:.15s}
+.likert .lk:hover{border-color:var(--dandona-pink);background:#fffafc}.likert .lk.sel{border-color:var(--dandona-pink-strong);background:var(--dandona-pink-light)}
+.likert .lk .rd{width:20px;height:20px;border-radius:50%;border:2px solid var(--dandona-border)}.likert .lk.sel .rd{border-color:var(--dandona-pink-strong);background:radial-gradient(circle,#fff 30%,var(--dandona-pink-strong) 40%)}
+.qnav{display:flex;justify-content:space-between;margin-top:22px}
 .result-card{padding:28px;text-align:center}
-.result-card .score{font-family:var(--font-num);font-size:60px;font-weight:700;color:var(--dandona-blue);line-height:1}
-.result-card .score small{font-size:22px;color:var(--dandona-slate)}
+.result-card .score{font-family:var(--font-num);font-size:58px;font-weight:700;color:var(--dandona-blue);line-height:1}.result-card .score small{font-size:22px;color:var(--dandona-slate)}
 .result-band{display:inline-block;margin:8px 0 4px;font-size:14px;font-weight:700;padding:5px 18px;border-radius:999px;background:var(--dandona-pink-light);color:var(--dandona-pink-strong)}
-.bands{display:flex;gap:4px;margin:16px 0 12px}
-.bands .b{flex:1;text-align:center;font-size:10px;color:var(--dandona-slate)}
-.bands .b i{display:block;height:8px;border-radius:6px;margin-bottom:5px}
-.radar-wrap{display:flex;justify-content:center;margin-top:8px}
+.bands{display:flex;gap:4px;margin:16px 0 12px}.bands .b{flex:1;text-align:center;font-size:10px;color:var(--dandona-slate)}.bands .b i{display:block;height:8px;border-radius:6px;margin-bottom:5px}
+.subs{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.subs .r .lbl{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:6px}.subs .r .lbl span:last-child{font-family:var(--font-num);color:var(--dandona-pink-strong);font-weight:700}
 
-/* ===================== 5 · برنامجي والتحديات ===================== */
-.prog2{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
-.panel{padding:24px}
-.panel h3{font-size:18px;margin-bottom:4px}
-.panel .hint{font-size:13px;margin-bottom:18px}
-.task{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid var(--dandona-border)}
-.task:last-child{border-bottom:none}
+/* ===== plan ===== */
+.plan-tabs{display:flex;gap:8px;margin-bottom:18px}
+.plan-tabs button{border:1.5px solid var(--dandona-border);background:#fff;border-radius:10px;padding:9px 18px;font-size:14px;font-weight:700;color:var(--dandona-slate)}
+.plan-tabs button.on{background:var(--dandona-blue);color:#fff;border-color:var(--dandona-blue)}
+.task{display:flex;align-items:center;gap:13px;padding:12px 0;border-bottom:1px solid var(--dandona-border)}.task:last-child{border-bottom:none}
 .tick{width:26px;height:26px;flex:0 0 26px;border-radius:50%;border:2px solid var(--dandona-border);display:flex;align-items:center;justify-content:center;color:#fff}
-.task.done .tick{background:var(--dandona-green);border-color:var(--dandona-green)}
-.task.done .tx{color:var(--dandona-slate);text-decoration:line-through}
-.task .tx{font-size:14px;font-weight:600;color:var(--dandona-blue)}
-.task .day{margin-inline-start:auto;font-family:var(--font-num);font-size:12px;color:var(--dandona-slate)}
-.chal{padding:15px 0;border-bottom:1px solid var(--dandona-border)}
-.chal:last-child{border-bottom:none}
+.task.done .tick{background:var(--dandona-green);border-color:var(--dandona-green)}.task.done .tx{color:var(--dandona-slate);text-decoration:line-through}
+.task .tx{font-size:14px;font-weight:600;color:var(--dandona-blue)}.task .day{margin-inline-start:auto;font-family:var(--font-num);font-size:12px;color:var(--dandona-slate)}
+.chal{padding:14px 0;border-bottom:1px solid var(--dandona-border)}.chal:last-child{border-bottom:none}
 .chal .top{display:flex;align-items:center;gap:10px;margin-bottom:9px}
 .chal .top .ic{width:34px;height:34px;flex:0 0 34px;border-radius:10px;background:var(--dandona-pink-light);color:var(--dandona-pink-strong);display:flex;align-items:center;justify-content:center;font-size:16px}
-.chal .top b{font-size:14px}
-.chal .top span{margin-inline-start:auto;font-family:var(--font-num);font-size:12px;font-weight:700;color:var(--dandona-pink-strong)}
+.chal .top b{font-size:14px}.chal .top span{margin-inline-start:auto;font-family:var(--font-num);font-size:12px;font-weight:700;color:var(--dandona-pink-strong)}
 
-/* ===================== 6 · التقارير ===================== */
+/* ===== calm corner ===== */
+.calm-hero{background:linear-gradient(160deg,var(--dandona-soft-pink-bg),var(--dandona-pink-light));border:1px solid var(--dandona-pink-light);border-radius:var(--radius-card);padding:34px;text-align:center;position:relative;overflow:hidden}
+.calm-hero .verse{font-size:22px;font-weight:700;color:var(--dandona-blue);line-height:1.9;max-width:640px;margin:0 auto 10px}
+.calm-hero .src{color:var(--dandona-gold);font-weight:700;font-size:13px}
+.calm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.calm-item{background:#fff;border:1px solid var(--dandona-border);border-radius:18px;padding:20px;text-align:center}
+.calm-item .ic{font-size:30px}.calm-item b{display:block;font-size:15px;margin:8px 0 4px}.calm-item p{font-size:12.5px}
+
+/* ===== privacy ===== */
+.prow{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--dandona-border)}.prow:last-child{border-bottom:none}
+.prow .ic{width:42px;height:42px;flex:0 0 42px;border-radius:12px;background:var(--dandona-blue-light);color:var(--dandona-blue);display:flex;align-items:center;justify-content:center;font-size:18px}
+.prow .tx{flex:1}.prow .tx b{font-size:15px;display:block}.prow .tx small{font-size:12.5px;color:var(--dandona-slate)}
+
+/* ===== portals ===== */
+.portal-hero{border-radius:var(--radius-card);padding:26px 30px;display:flex;align-items:center;gap:18px;margin-bottom:20px;color:#fff}
+.portal-hero .pic{width:56px;height:56px;flex:0 0 56px;border-radius:16px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:26px}
+.portal-hero h2{color:#fff;font-size:22px}.portal-hero p{color:rgba(255,255,255,.86);font-size:13.5px}
+.ph-blue{background:linear-gradient(135deg,#2547a6,var(--dandona-blue))}
+.ph-pink{background:linear-gradient(135deg,var(--dandona-pink),var(--dandona-pink-strong))}
+.ph-gold{background:linear-gradient(135deg,#e0bd7a,var(--dandona-gold))}
+.ph-slate{background:linear-gradient(135deg,#7d8ba1,#475569)}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stat{background:#fff;border:1px solid var(--dandona-border);border-radius:18px;padding:18px 20px;box-shadow:var(--shadow-soft)}
+.stat .n{font-family:var(--font-num);font-size:30px;font-weight:700;color:var(--dandona-blue)}.stat .c{font-size:13px;color:var(--dandona-slate);font-weight:600}
+.list-card{padding:22px}.list-card h3{font-size:17px;margin-bottom:6px}.list-card .hint{font-size:12.5px;margin-bottom:14px}
+.lrow{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--dandona-border)}.lrow:last-child{border-bottom:none}
+.lrow .av{width:38px;height:38px;flex:0 0 38px;border-radius:50%;background:var(--dandona-pink-light);color:var(--dandona-pink-strong);display:flex;align-items:center;justify-content:center;font-weight:700}
+.lrow .tx{flex:1}.lrow .tx b{font-size:14px;display:block}.lrow .tx small{font-size:12px;color:var(--dandona-slate)}
+
+/* ===== reports ===== */
 .reports{display:grid;grid-template-columns:1.3fr .7fr;gap:22px;align-items:start}
-.report-main{padding:26px}
 .report-main .head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-.report-main .head h3{font-size:18px}
-.report-main .head .pill{font-family:var(--font-num);font-size:12px;font-weight:700;background:var(--dandona-blue-light);color:var(--dandona-blue);padding:5px 12px;border-radius:999px}
-.avg{display:flex;align-items:baseline;gap:8px;margin:14px 0}
-.avg .n{font-family:var(--font-num);font-size:40px;font-weight:700;color:var(--dandona-blue)}
-.avg .up{font-family:var(--font-num);font-size:14px;font-weight:700;color:var(--dandona-green)}
+.report-main .head h3{font-size:18px}.report-main .head .pill{font-family:var(--font-num);font-size:12px;font-weight:700;background:var(--dandona-blue-light);color:var(--dandona-blue);padding:5px 12px;border-radius:999px}
+.avg{display:flex;align-items:baseline;gap:8px;margin:12px 0}.avg .n{font-family:var(--font-num);font-size:38px;font-weight:700;color:var(--dandona-blue)}.avg .up{font-family:var(--font-num);font-size:14px;font-weight:700;color:var(--dandona-green)}
 .improve{display:flex;flex-direction:column;gap:14px;margin-top:8px}
-.improve .r .lbl{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:6px}
-.improve .r .lbl .up{font-family:var(--font-num);color:var(--dandona-green);font-weight:700}
-.report-side{padding:24px;display:flex;flex-direction:column;gap:14px}
-.report-side .exp{border:1px dashed var(--dandona-pink);border-radius:16px;padding:18px;text-align:center;background:#fffafc}
-.report-side .exp .ic{font-size:30px}
-.report-side .exp b{display:block;font-size:15px;margin:6px 0 3px}
-.report-side .exp small{font-size:12px;color:var(--dandona-slate);display:block;margin-bottom:12px}
+.improve .r .lbl{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:6px}.improve .r .lbl .up{font-family:var(--font-num);color:var(--dandona-green);font-weight:700}
+.report-side{padding:22px;display:flex;flex-direction:column;gap:14px}
+.exp{border:1px dashed var(--dandona-pink);border-radius:16px;padding:18px;text-align:center;background:#fffafc}
+.exp .ic{font-size:28px}.exp b{display:block;font-size:15px;margin:6px 0 3px}.exp small{font-size:12px;color:var(--dandona-slate);display:block;margin-bottom:12px}
 
-/* footer */
-.foot{max-width:1280px;margin:0 auto;padding:26px 22px 50px;text-align:center;color:var(--dandona-slate);font-size:12.5px;border-top:1px solid var(--dandona-border)}
+/* ===== admin ===== */
+.admin-shell{display:grid;grid-template-columns:210px 1fr;gap:20px;align-items:start}
+.aside{background:var(--dandona-blue);border-radius:var(--radius-card);padding:18px 12px;position:sticky;top:150px}
+.aside .brand{color:#fff;margin:4px 8px 16px;font-size:16px}.aside .brand small{color:#93b4f5}
+.aside nav a{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:11px;font-size:13px;font-weight:600;color:#c7d5f5;cursor:pointer;transition:.15s}
+.aside nav a:hover{background:rgba(255,255,255,.08);color:#fff}.aside nav a.on{background:#fff;color:var(--dandona-blue)}
+.amain{display:flex;flex-direction:column;gap:16px}
+.atop{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.atop h2{font-size:20px}.atop .tools{display:flex;gap:8px;flex-wrap:wrap}
+.searchbox{border:1.5px solid var(--dandona-border);border-radius:10px;padding:8px 12px;font-size:13px;min-width:200px;font-family:inherit;text-align:right}
+.table-wrap{background:#fff;border:1px solid var(--dandona-border);border-radius:18px;box-shadow:var(--shadow-soft);overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+thead th{background:var(--dandona-soft-pink-bg);text-align:right;padding:12px 16px;font-weight:700;color:var(--dandona-blue);white-space:nowrap;border-bottom:1px solid var(--dandona-border)}
+tbody td{padding:12px 16px;border-bottom:1px solid var(--dandona-border);color:var(--dandona-slate)}
+tbody tr:last-child td{border-bottom:none}tbody tr:hover{background:#fcfdff}
+tbody td b{color:var(--dandona-blue)}
+.astat{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.astat .s{background:#fff;border:1px solid var(--dandona-border);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow-soft)}
+.astat .s .n{font-family:var(--font-num);font-size:26px;font-weight:700;color:var(--dandona-blue)}.astat .s .c{font-size:12.5px;color:var(--dandona-slate);font-weight:600}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:13.5px}.kv b{color:var(--dandona-blue)}.kv span{color:var(--dandona-slate)}
+.flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12px}
+.flow .n{background:var(--dandona-pink-light);color:var(--dandona-blue);border-radius:8px;padding:6px 10px;font-weight:700}
+.flow .ar{color:var(--dandona-border)}
+
+.foot{max-width:1300px;margin:0 auto;padding:24px 22px 50px;text-align:center;color:var(--dandona-slate);font-size:12.5px;border-top:1px solid var(--dandona-border)}
 .foot b{color:var(--dandona-blue)}
 
 @media(max-width:960px){
-  .landing,.dash,.mobile-wrap,.assess,.prog2,.reports{grid-template-columns:1fr}
-  .side{display:none}
-  .trust,.recs{grid-template-columns:1fr 1fr}
-  .metrics{grid-template-columns:1fr 1fr}
-  .hero h1{font-size:30px}
+  .landing,.dash,.mobile-wrap,.two,.reports,.admin-shell{grid-template-columns:1fr}
+  .side,.aside{position:static}
+  .trust,.recs,.calm-grid,.cols3,.astat{grid-template-columns:1fr 1fr}
+  .metrics{grid-template-columns:1fr 1fr}.hero h1{font-size:29px}
+  .table-wrap{overflow-x:auto}table{min-width:560px}
 }
 </style>
 </head>
 <body>
 
-<!-- ===================== شريط التبديل ===================== -->
 <header class="topbar">
   <div class="topbar-inner">
-    <div class="brand">
-      <svg class="logo" viewBox="0 0 40 40" fill="none">
-        <path d="M20 6c-3 0-5 2-6 4-2-1-5 0-6 3-1 2 0 5 2 6-2 2-2 5 0 7 1 2 4 3 6 2 1 2 3 4 6 3 3 0 5-2 5-4 3 0 5-3 4-6 2-2 2-5 0-7 1-3-1-6-4-6-1-2-3-2-4-2-1-1-2-2-3-3z" fill="#F472B6" opacity=".9"/>
-        <circle cx="20" cy="20" r="4" fill="#EC4899"/>
-      </svg>
-      <span>دندونة<small>DANDOUNA</small></span>
+    <div class="trow">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 40 40" fill="none"><path d="M20 6c-3 0-5 2-6 4-2-1-5 0-6 3-1 2 0 5 2 6-2 2-2 5 0 7 1 2 4 3 6 2 1 2 3 4 6 3 3 0 5-2 5-4 3 0 5-3 4-6 2-2 2-5 0-7 1-3-1-6-4-6-1-2-3-2-4-2-1-1-2-2-3-3z" fill="#F472B6"/><circle cx="20" cy="20" r="4" fill="#EC4899"/></svg>
+        <span>دندونة<small>DANDOUNA</small></span>
+      </div>
+      <div class="groupbar" id="groupbar">
+        <button data-g="user" class="gactive">بوابة المستخدم</button>
+        <button data-g="portals">البوابات</button>
+        <button data-g="admin">لوحات الإدارة</button>
+      </div>
     </div>
     <nav class="nav" id="nav">
-      <button data-s="landing" class="active">الرئيسية</button>
-      <button data-s="dashboard">لوحة المستخدم</button>
-      <button data-s="mobile">الجوال</button>
-      <button data-s="auth">تسجيل الدخول</button>
-      <button data-s="assess">الاختبار والنتيجة</button>
-      <button data-s="program">برنامجي والتحديات</button>
-      <button data-s="reports">التقارير</button>
+      <div class="ngroup" data-g="user">
+        <button data-s="landing" class="active">الرئيسية</button>
+        <button data-s="auth">تسجيل الدخول</button>
+        <button data-s="onboarding">التهيئة</button>
+        <button data-s="profile">إعداد الملف</button>
+        <button data-s="consent">الموافقة</button>
+        <button data-s="assessments">اختيار الاختبار</button>
+        <button data-s="question">شاشة السؤال</button>
+        <button data-s="result">النتيجة</button>
+        <button data-s="plan">الخطة</button>
+        <button data-s="dashboard">لوحة المستخدم</button>
+        <button data-s="mobile">الجوال</button>
+        <button data-s="calm">ركن الطمأنينة</button>
+        <button data-s="reports">التقارير</button>
+        <button data-s="privacy">الخصوصية</button>
+      </div>
+      <div class="ngroup" data-g="portals" hidden>
+        <button data-s="child" class="active">الطفل/المراهق</button>
+        <button data-s="guardian">ولي الأمر</button>
+        <button data-s="specialist">المختص</button>
+        <button data-s="institution">المؤسسة التعليمية</button>
+        <button data-s="company">الشركات</button>
+      </div>
+      <div class="ngroup" data-g="admin" hidden>
+        <button data-s="admin" class="active">لوحة الإدارة</button>
+        <button data-s="admin-users">المستخدمون</button>
+        <button data-s="admin-scales">المقاييس</button>
+        <button data-s="admin-questions">الأسئلة</button>
+        <button data-s="admin-scoring">الدرجات</button>
+        <button data-s="admin-recs">التوصيات</button>
+        <button data-s="admin-islamic">المراجع الشرعية</button>
+        <button data-s="admin-orgs">المؤسسات</button>
+        <button data-s="admin-audit">سجل التدقيق</button>
+        <button data-s="admin-security">الأمن</button>
+      </div>
     </nav>
   </div>
 </header>
 
 <main class="stage">
 
-<!-- ============================================================ 1 · الرئيسية -->
+<!-- ==================== USER · 1 landing ==================== -->
 <section class="screen show" id="landing">
-  <div class="screen-label"><span class="chip">01</span><div><h2>الواجهة الرئيسية</h2><p>Hero بصورة طفلة مبهجة، عنوان أزرق، زر رئيسي وردي، وبطاقات ثقة</p></div></div>
+  <div class="screen-label"><span class="chip">مستخدم · ٠١</span><div><h2>الواجهة الرئيسية</h2><p>Hero بصورة طفلة مبهجة، عنوان أزرق، زر رئيسي وردي، وبطاقات ثقة</p></div></div>
   <div class="landing">
     <div>
       <div class="card hero">
@@ -299,16 +349,9 @@ a{color:inherit;text-decoration:none}
         <h1>منصة متكاملة لفهم <span>نمط تحفيزك</span> وتنمية الوعي الذاتي</h1>
         <p class="lead">افهم نمطك السلوكي والتحفيزي وعاداتك اليومية، واخرج بخطوة عملية واحدة على الأقل — بلغة ودودة ومطمئنة.</p>
         <p class="sub">نحو حياة أكثر اتزانًا وسعادة</p>
-        <div class="hero-cta">
-          <button class="btn btn-pink">ابدأ رحلتك الآن ←</button>
-          <button class="btn btn-ghost">تعرّف على دندونة</button>
-        </div>
-        <div class="hero-photo">
-          <img src="assets/dana_child.jpg" alt="طفلة مبهجة بابتسامة طبيعية وإكليل زهور — صورة دندونة الرئيسية">
-          <div class="cap">نحو حياة أكثر اتزانًا وسعادة 🌸</div>
-        </div>
+        <div class="hero-cta"><button class="btn btn-pink">ابدأ رحلتك الآن ←</button><button class="btn btn-ghost">تعرّف على دندونة</button></div>
+        <div class="hero-photo"><img src="assets/dana_child.jpg" alt="طفلة مبهجة بابتسامة طبيعية وإكليل زهور — صورة دندونة الرئيسية"><div class="cap">نحو حياة أكثر اتزانًا وسعادة 🌸</div></div>
       </div>
-
       <div class="trust">
         <div class="t"><div class="ic">🔬</div><b>علمية موثوقة</b><small>مصمّمة بإشراف مختصين</small></div>
         <div class="t"><div class="ic">🛡️</div><b>تراعي خصوصيتك</b><small>بياناتك آمنة بالكامل</small></div>
@@ -316,26 +359,18 @@ a{color:inherit;text-decoration:none}
         <div class="t"><div class="ic">🌙</div><b>متوافقة مع قيمنا</b><small>ركن طمأنينة اختياري</small></div>
       </div>
     </div>
-
-    <div style="display:flex;flex-direction:column;gap:22px">
-      <div class="card login-card">
-        <svg class="logo" viewBox="0 0 40 40" fill="none"><path d="M20 6c-3 0-5 2-6 4-2-1-5 0-6 3-1 2 0 5 2 6-2 2-2 5 0 7 1 2 4 3 6 2 1 2 3 4 6 3 3 0 5-2 5-4 3 0 5-3 4-6 2-2 2-5 0-7 1-3-1-6-4-6-1-2-3-2-4-2-1-1-2-2-3-3z" fill="#F472B6"/><circle cx="20" cy="20" r="4" fill="#EC4899"/></svg>
-        <h3>مرحبًا بك في دندونة</h3>
-        <p>سجّل دخولك لبدء رحلتك نحو التوازن والسعادة</p>
-        <div class="oauth">
-          <button>🟦 المتابعة مع Google</button>
-          <button> المتابعة مع Apple</button>
-        </div>
-        <div class="divider">أو</div>
-        <div class="field"><label>البريد الإلكتروني</label><input type="email" placeholder="name@email.com" dir="ltr" style="text-align:left"></div>
-        <div class="field"><label>كلمة المرور</label><input type="password" placeholder="••••••••"></div>
-        <button class="btn btn-pink" style="width:100%">تسجيل الدخول</button>
-        <p class="mini-note">ليس لديك حساب؟ <b style="color:var(--dandona-pink-strong)">إنشاء حساب جديد</b></p>
-      </div>
+    <div class="card login-card">
+      <svg class="logo" viewBox="0 0 40 40" fill="none"><path d="M20 6c-3 0-5 2-6 4-2-1-5 0-6 3-1 2 0 5 2 6-2 2-2 5 0 7 1 2 4 3 6 2 1 2 3 4 6 3 3 0 5-2 5-4 3 0 5-3 4-6 2-2 2-5 0-7 1-3-1-6-4-6-1-2-3-2-4-2-1-1-2-2-3-3z" fill="#F472B6"/><circle cx="20" cy="20" r="4" fill="#EC4899"/></svg>
+      <h3>مرحبًا بك في دندونة</h3><p>سجّل دخولك لبدء رحلتك نحو التوازن والسعادة</p>
+      <div class="oauth"><button>🟦 المتابعة مع Google</button><button> المتابعة مع Apple</button></div>
+      <div class="divider">أو</div>
+      <div class="field" style="text-align:right"><label>البريد الإلكتروني</label><input type="email" placeholder="name@email.com" dir="ltr" style="text-align:left"></div>
+      <div class="field" style="text-align:right"><label>كلمة المرور</label><input type="password" placeholder="••••••••"></div>
+      <button class="btn btn-pink" style="width:100%">تسجيل الدخول</button>
+      <p class="mini-note">ليس لديك حساب؟ <b style="color:var(--dandona-pink-strong)">إنشاء حساب جديد</b></p>
     </div>
   </div>
-
-  <div class="card why" style="margin-top:24px">
+  <div class="card why" style="margin-top:22px">
     <h3>لماذا دندونة؟</h3>
     <div class="row"><div class="ic">🧠</div><div><b>اختبارات علمية موثوقة</b><p>مقاييس مصمّمة لقياس مؤشرات التوازن التحفيزي والسلوكي بدقة.</p></div></div>
     <div class="row"><div class="ic">🎯</div><div><b>برامج مخصّصة</b><p>خطط شخصية بناءً على نتائجك واحتياجاتك اليومية.</p></div></div>
@@ -344,116 +379,229 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<!-- ============================================================ 2 · لوحة المستخدم -->
-<section class="screen" id="dashboard">
-  <div class="screen-label"><span class="chip">02</span><div><h2>لوحة المستخدم (Desktop)</h2><p>تحية شخصية، بطاقات قياس، توصيات مخصّصة، وبطاقة ركن الطمأنينة</p></div></div>
-  <div class="dash">
-    <aside class="side">
-      <div class="brand"><svg class="logo" viewBox="0 0 40 40" fill="none"><path d="M20 6c-3 0-5 2-6 4-2-1-5 0-6 3-1 2 0 5 2 6-2 2-2 5 0 7 1 2 4 3 6 2 1 2 3 4 6 3 3 0 5-2 5-4 3 0 5-3 4-6 2-2 2-5 0-7 1-3-1-6-4-6-1-2-3-2-4-2-1-1-2-2-3-3z" fill="#F472B6"/><circle cx="20" cy="20" r="4" fill="#EC4899"/></svg><span style="font-size:17px">دندونة<small>DANDOUNA</small></span></div>
-      <nav>
-        <a class="on">▦ لوحة التحكم</a>
-        <a>🧭 اختبار المؤشر</a>
-        <a>🗂️ برنامجي</a>
-        <a>🏅 تحدياتي</a>
-        <a>📊 التقارير</a>
-        <a>📚 المحتوى المعرفي</a>
-        <a>🌙 ركن الطمأنينة</a>
-        <a>⚙️ الإعدادات</a>
-        <a>↩️ تسجيل خروج</a>
-      </nav>
-    </aside>
+<!-- ==================== USER · auth ==================== -->
+<section class="screen" id="auth">
+  <div class="screen-label"><span class="chip">مستخدم · ٠٢</span><div><h2>تسجيل الدخول (Auth)</h2><p>بطاقة بيضاء هادئة في المنتصف مع الشعار، دخول عبر Google وApple ثم البريد</p></div></div>
+  <div class="center-wrap"><div class="card login-card">
+    <svg class="logo" viewBox="0 0 40 40" fill="none"><path d="M20 6c-3 0-5 2-6 4-2-1-5 0-6 3-1 2 0 5 2 6-2 2-2 5 0 7 1 2 4 3 6 2 1 2 3 4 6 3 3 0 5-2 5-4 3 0 5-3 4-6 2-2 2-5 0-7 1-3-1-6-4-6-1-2-3-2-4-2-1-1-2-2-3-3z" fill="#F472B6"/><circle cx="20" cy="20" r="4" fill="#EC4899"/></svg>
+    <h3>أهلًا بعودتك 🌸</h3><p>سجّل دخولك لمتابعة رحلتك مع دندونة</p>
+    <div class="oauth"><button>🟦 المتابعة مع Google</button><button> المتابعة مع Apple</button></div>
+    <div class="divider">أو بالبريد الإلكتروني</div>
+    <div class="field" style="text-align:right"><label>البريد الإلكتروني</label><input type="email" placeholder="name@email.com" dir="ltr" style="text-align:left"></div>
+    <div class="field" style="text-align:right"><label>كلمة المرور</label><input type="password" placeholder="••••••••"></div>
+    <button class="btn btn-pink" style="width:100%">تسجيل الدخول</button>
+    <p class="mini-note">بتسجيل الدخول فأنت توافق على سياسة الخصوصية وشروط الاستخدام.</p>
+    <p class="mini-note" style="margin-top:6px">للقُصّر: يلزم موافقة ولي الأمر قبل بدء أي اختبار.</p>
+  </div></div>
+</section>
 
-    <div class="dash-main">
-      <div class="greet">
-        <div><h2>مرحبًا دانة 👋</h2><p>كيف تشعرين اليوم؟</p></div>
-        <div class="avatar">د</div>
+<!-- ==================== USER · onboarding ==================== -->
+<section class="screen" id="onboarding">
+  <div class="screen-label"><span class="chip">مستخدم · ٠٣</span><div><h2>التهيئة الأولية (Onboarding)</h2><p>اللغة، تعريف مختصر بالمنصة، وقبول التوجيه العام قبل البدء</p></div></div>
+  <div class="center-wrap"><div class="card pad">
+    <div class="stepper"><div class="st on"><i>١</i>التهيئة</div><span class="ln"></span><div class="st"><i>٢</i>الملف</div><span class="ln"></span><div class="st"><i>٣</i>الموافقة</div></div>
+    <h3 style="font-size:20px;margin-bottom:6px">أهلًا بك في دندونة 🌸</h3>
+    <p style="font-size:14px;margin-bottom:18px">دندونة تساعدك على فهم نمطك التحفيزي وعاداتك اليومية، وتقدّم لك خطوة عملية بلغة مطمئنة — دون تشخيص طبي.</p>
+    <div class="field"><label>لغة الواجهة</label><div class="seg"><button class="on">العربية</button><button>English</button></div></div>
+    <div class="field" style="margin-top:14px"><label>ما الذي تريده من دندونة؟</label>
+      <div class="choice">
+        <div class="c sel"><div class="ic">🧭</div><div><b>فهم نمطي التحفيزي</b><small>اختبار سريع ونتيجة مبسّطة</small></div><div class="rd"></div></div>
+        <div class="c"><div class="ic">🗂️</div><div><b>تنظيم عاداتي اليومية</b><small>خطة ٧ أيام وتحديات هادئة</small></div><div class="rd"></div></div>
+        <div class="c"><div class="ic">🌙</div><div><b>توازن مع بُعد قيمي</b><small>تفعيل ركن الطمأنينة الاختياري</small></div><div class="rd"></div></div>
       </div>
+    </div>
+    <div class="safety" style="margin:16px 0"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>دندونة تقيس مؤشرات سلوكية إرشادية، ولا تقيس الدوبامين بيولوجيًا ولا تُشخّص. النتائج تثقيفية لا تُغني عن مختص مرخّص.</span></div>
+    <button class="btn btn-pink" style="width:100%">أوافق وأتابع ←</button>
+  </div></div>
+</section>
 
-      <div class="metrics">
-        <div class="metric">
-          <div class="cap">مؤشر التوازن التحفيزي</div>
-          <svg class="ring" width="96" height="96" viewBox="0 0 96 96">
-            <circle cx="48" cy="48" r="40" fill="none" stroke="#FCE7F3" stroke-width="10"/>
-            <circle cx="48" cy="48" r="40" fill="none" stroke="#EC4899" stroke-width="10" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="55.3" transform="rotate(-90 48 48)"/>
-            <text x="48" y="46" text-anchor="middle" font-family="Inter" font-size="26" font-weight="700" fill="#1E3A8A">78</text>
-            <text x="48" y="63" text-anchor="middle" font-family="Inter" font-size="10" fill="#64748B">من 100</text>
-          </svg>
-          <span class="tag tag-pink">مرتفع</span>
+<!-- ==================== USER · profile ==================== -->
+<section class="screen" id="profile">
+  <div class="screen-label"><span class="chip">مستخدم · ٠٤</span><div><h2>إعداد الملف الشخصي</h2><p>العمر، الجنس، الفئة، نمط الاستخدام، وتفضيل ركن الطمأنينة</p></div></div>
+  <div class="center-wrap"><div class="card pad">
+    <div class="stepper"><div class="st"><i>✓</i>التهيئة</div><span class="ln"></span><div class="st on"><i>٢</i>الملف</div><span class="ln"></span><div class="st"><i>٣</i>الموافقة</div></div>
+    <div class="grid2">
+      <div class="field"><label>الاسم أو اللقب</label><input value="دانة"></div>
+      <div class="field"><label>الفئة العمرية</label><select><option>طفل (بإشراف ولي أمر)</option><option>مراهق</option><option selected>شاب/بالغ</option><option>كبير السن</option></select></div>
+    </div>
+    <div class="field"><label>الجنس</label><div class="seg"><button class="on">أنثى</button><button>ذكر</button></div></div>
+    <div class="field"><label>البيئة</label><div class="seg"><button>طالب</button><button class="on">موظف</button><button>رائد أعمال</button><button>ربة منزل</button><button>باحث عن عمل</button></div></div>
+    <div class="field"><label>نمط الاستخدام الرقمي</label><div class="seg"><button>منخفض</button><button class="on">مرتفع</button><button>مرتفع جدًا</button></div></div>
+    <div class="prow" style="border-top:1px solid var(--dandona-border);border-bottom:none;margin-top:6px"><div class="ic">🌙</div><div class="tx"><b>تفعيل ركن الطمأنينة</b><small>محتوى قيمي اختياري يدعم بناء العادة — قابل للإيقاف دائمًا</small></div><div class="toggle on" onclick="this.classList.toggle('on')"><i></i></div></div>
+    <button class="btn btn-pink" style="width:100%;margin-top:10px">حفظ ومتابعة ←</button>
+  </div></div>
+</section>
+
+<!-- ==================== USER · consent ==================== -->
+<section class="screen" id="consent">
+  <div class="screen-label"><span class="chip">مستخدم · ٠٥</span><div><h2>الموافقة والخصوصية</h2><p>الخصوصية والإخلاء وموافقة ولي الأمر عند الحاجة قبل بدء الاختبار</p></div></div>
+  <div class="center-wrap"><div class="card pad">
+    <div class="stepper"><div class="st"><i>✓</i>التهيئة</div><span class="ln"></span><div class="st"><i>✓</i>الملف</div><span class="ln"></span><div class="st on"><i>٣</i>الموافقة</div></div>
+    <h3 style="font-size:19px;margin-bottom:12px">قبل أن نبدأ</h3>
+    <div class="prow"><div class="ic">📋</div><div class="tx"><b>موافقة على معالجة البيانات</b><small>نجمع الحد الأدنى اللازم، ويمكنك الحذف والتصدير في أي وقت</small></div><div class="toggle on" onclick="this.classList.toggle('on')"><i></i></div></div>
+    <div class="prow"><div class="ic">🩺</div><div class="tx"><b>إقرار بعدم التشخيص</b><small>أفهم أن النتائج مؤشرات إرشادية وليست تشخيصًا طبيًا أو نفسيًا</small></div><div class="toggle on" onclick="this.classList.toggle('on')"><i></i></div></div>
+    <div class="prow"><div class="ic">👨‍👩‍👧</div><div class="tx"><b>موافقة ولي الأمر (للقُصّر)</b><small>تُرسل دعوة لولي الأمر لاعتماد المشاركة قبل بدء اختبار القاصر</small></div><div class="toggle" onclick="this.classList.toggle('on')"><i></i></div></div>
+    <div class="prow"><div class="ic">📨</div><div class="tx"><b>تلقّي إشعارات المتابعة</b><small>تذكيرات هادئة بخطتك — اختيارية بالكامل</small></div><div class="toggle" onclick="this.classList.toggle('on')"><i></i></div></div>
+    <div class="safety" style="margin:16px 0"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>تُسجَّل موافقتك بإصدار السياسة الذي وافقت عليه ضمن سجل التدقيق، ولا تُباع بياناتك ولا تُشارك دون إذنك.</span></div>
+    <button class="btn btn-pink" style="width:100%">أوافق وابدأ الاختبار ←</button>
+  </div></div>
+</section>
+
+<!-- ==================== USER · assessments ==================== -->
+<section class="screen" id="assessments">
+  <div class="screen-label"><span class="chip">مستخدم · ٠٦</span><div><h2>اختيار الاختبار</h2><p>سريع، تفصيلي، أو مقاييس متخصّصة حسب العمر والفئة</p></div></div>
+  <div class="cols3">
+    <div class="card pad" style="text-align:center"><div style="font-size:34px">⚡</div><h3 style="margin:8px 0 4px">الاختبار السريع</h3><p style="font-size:13px">صورة عامة عن نمطك في أقل من ٥ دقائق.</p>
+      <div class="assess-meta"><div class="m"><div class="ic">⏱️</div><b>المدة</b><span>٥ دقائق</span></div><div class="m"><div class="ic">📋</div><b>الأسئلة</b><span>١٢</span></div></div>
+      <button class="btn btn-pink" style="width:100%">ابدأ السريع</button></div>
+    <div class="card pad" style="text-align:center;box-shadow:0 0 0 2px var(--dandona-pink) inset"><span class="tag tag-pink" style="margin-bottom:6px">موصى به</span><div style="font-size:34px">🎯</div><h3 style="margin:8px 0 4px">الاختبار التفصيلي</h3><p style="font-size:13px">مؤشر عام + خمسة مؤشرات فرعية دقيقة.</p>
+      <div class="assess-meta"><div class="m"><div class="ic">⏱️</div><b>المدة</b><span>١٥ دقيقة</span></div><div class="m"><div class="ic">📋</div><b>الأسئلة</b><span>٢٠</span></div></div>
+      <button class="btn btn-pink" style="width:100%">ابدأ التفصيلي</button></div>
+    <div class="card pad" style="text-align:center"><div style="font-size:34px">🧩</div><h3 style="margin:8px 0 4px">مقاييس متخصّصة</h3><p style="font-size:13px">التشتّت الرقمي، النوم والطاقة، السوشال ميديا…</p>
+      <div class="assess-meta"><div class="m"><div class="ic">🗂️</div><b>المقاييس</b><span>٧</span></div><div class="m"><div class="ic">🎚️</div><b>قابلة للدمج</b><span>نعم</span></div></div>
+      <button class="btn btn-ghost" style="width:100%">تصفّح المقاييس</button></div>
+  </div>
+</section>
+
+<!-- ==================== USER · question ==================== -->
+<section class="screen" id="question">
+  <div class="screen-label"><span class="chip">مستخدم · ٠٧</span><div><h2>شاشة السؤال</h2><p>سؤال واحد، خيارات ليكرت، شريط تقدّم، حفظ تلقائي، وتخطٍّ للأسئلة الحسّاسة</p></div></div>
+  <div class="two">
+    <div class="card qcard">
+      <div class="qbar"><span>اختبار التوازن التحفيزي · التشتّت الرقمي</span><span class="num">السؤال ٤ من ٢٠</span></div>
+      <div class="bar"><i style="width:20%"></i></div>
+      <div class="qtext">عندما أشعر بالملل، أفتح الجوال مباشرةً دون هدف واضح.</div>
+      <div class="likert" id="likert">
+        <div class="lk"><div class="rd"></div>لا ينطبق</div>
+        <div class="lk"><div class="rd"></div>ينطبق قليلًا</div>
+        <div class="lk sel"><div class="rd"></div>ينطبق أحيانًا</div>
+        <div class="lk"><div class="rd"></div>ينطبق غالبًا</div>
+        <div class="lk"><div class="rd"></div>ينطبق دائمًا</div>
+      </div>
+      <div class="qnav"><button class="btn btn-ghost btn-sm">← رجوع</button><div style="display:flex;gap:8px"><button class="btn btn-ghost btn-sm">تخطّي</button><button class="btn btn-pink btn-sm">التالي ←</button></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="note"><b>حفظ تلقائي 💾</b><p>تُحفظ كل إجابة فور اختيارها؛ يمكنك المتابعة لاحقًا من حيث توقّفت دون فقدان تقدّمك.</p></div>
+      <div class="note"><b>الأسئلة الحسّاسة</b><p>يظهر زر «تخطّي» للأسئلة ذات الحساسية المتوسطة أو العالية، دون التأثير على اكتمال الاختبار.</p></div>
+      <div class="note"><b>سؤال واحد في الشاشة</b><p>على الجوال يُعرض سؤال واحد فقط لتقليل التشتّت، مع شريط تقدّم واضح.</p></div>
+      <div class="safety"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>أجب بصدق ودون تهويل — لا توجد إجابة صحيحة أو خاطئة، والنتيجة إرشادية.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== USER · result ==================== -->
+<section class="screen" id="result">
+  <div class="screen-label"><span class="chip">مستخدم · ٠٨</span><div><h2>النتيجة</h2><p>درجة عامة، مؤشرات فرعية، تفسير، ومخطط راداري وردي — دون لغة تشخيصية</p></div></div>
+  <div class="two">
+    <div class="card result-card">
+      <div style="font-size:14px;color:var(--dandona-slate);font-weight:600">نتيجة اختبار التوازن التحفيزي والسلوكي</div>
+      <div class="score">78<small>/100</small></div>
+      <span class="result-band">مؤشرات مرتفعة</span>
+      <div class="bands"><div class="b"><i style="background:#16A34A"></i>منخفض<br>٠–٤٠</div><div class="b"><i style="background:#D6A85A"></i>متوسط<br>٤١–٦٠</div><div class="b"><i style="background:#EC4899"></i>مرتفع<br>٦١–١٠٠</div></div>
+      <div style="display:flex;justify-content:center;margin-top:6px">
+        <svg width="260" height="240" viewBox="0 0 260 240">
+          <g stroke="#E5E7EB" fill="none" stroke-width="1"><polygon points="130,30 216,80 216,180 130,230 44,180 44,80"/><polygon points="130,63 187,96 187,163 130,197 73,163 73,96"/><polygon points="130,96 158,113 158,146 130,163 102,146 102,113"/></g>
+          <g stroke="#E5E7EB" stroke-width="1"><line x1="130" y1="130" x2="130" y2="30"/><line x1="130" y1="130" x2="216" y2="80"/><line x1="130" y1="130" x2="216" y2="180"/><line x1="130" y1="130" x2="130" y2="230"/><line x1="130" y1="130" x2="44" y2="180"/><line x1="130" y1="130" x2="44" y2="80"/></g>
+          <polygon points="130,45 205,88 190,170 130,205 60,168 62,95" fill="rgba(236,72,153,.22)" stroke="#EC4899" stroke-width="2"/>
+          <g fill="#EC4899"><circle cx="130" cy="45" r="3.5"/><circle cx="205" cy="88" r="3.5"/><circle cx="190" cy="170" r="3.5"/><circle cx="130" cy="205" r="3.5"/><circle cx="60" cy="168" r="3.5"/><circle cx="62" cy="95" r="3.5"/></g>
+          <g font-family="Noto Sans Arabic" font-size="11" fill="#64748B" text-anchor="middle"><text x="130" y="20">التشتّت الرقمي</text><text x="240" y="78">المكافأة</text><text x="240" y="192">التسويف</text><text x="130" y="236">النوم</text><text x="24" y="192">النشاط</text><text x="24" y="78">المزاج</text></g>
+        </svg>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card pad">
+        <h3 style="font-size:17px;margin-bottom:4px">المؤشرات الفرعية</h3>
+        <div class="subs" style="margin-top:12px">
+          <div class="r"><div class="lbl"><span>التشتّت الرقمي</span><span class="num">78</span></div><div class="bar"><i style="width:78%"></i></div></div>
+          <div class="r"><div class="lbl"><span>حساسية المكافأة</span><span class="num">70</span></div><div class="bar"><i style="width:70%"></i></div></div>
+          <div class="r"><div class="lbl"><span>التسويف والإنجاز</span><span class="num">66</span></div><div class="bar"><i style="width:66%"></i></div></div>
+          <div class="r"><div class="lbl"><span>النوم والطاقة</span><span class="num">55</span></div><div class="bar"><i style="width:55%"></i></div></div>
+          <div class="r"><div class="lbl"><span>العادات والقيم</span><span class="num">42</span></div><div class="bar"><i style="width:42%"></i></div></div>
         </div>
-        <div class="metric"><div class="cap">الحالة المزاجية</div><div class="emoji">🙂</div><div style="height:20px"></div><span class="tag tag-green">جيدة</span></div>
-        <div class="metric"><div class="cap">التركيز</div><div class="emoji">🎯</div><div style="height:20px"></div><span class="tag tag-blue">ممتاز</span></div>
-        <div class="metric"><div class="cap">النشاط البدني</div><div class="emoji">🏃</div><div style="height:20px"></div><span class="tag tag-pink">متوسط</span></div>
       </div>
-
-      <div class="rec-wrap">
-        <h3>توصيات مخصّصة لك</h3>
-        <div class="recs">
-          <div class="rec"><div class="thumb" style="background:#eaf7ee">🌱</div><div class="body"><b>تمرين تنفّس</b><small>٥ دقائق لهدوء أعمق</small></div></div>
-          <div class="rec"><div class="thumb" style="background:#e7f0fe">⛰️</div><div class="body"><b>مشي في الطبيعة</b><small>٢٠ دقيقة تنشّط يومك</small></div></div>
-          <div class="rec"><div class="thumb" style="background:#fdf0e6">📓</div><div class="body"><b>الامتنان اليومي</b><small>اكتب ٣ أشياء</small></div></div>
-          <div class="rec"><div class="thumb" style="background:#fce7f3">✍️</div><div class="body"><b>جلسة تركيز</b><small>٢٥ دقيقة بلا تشتّت</small></div></div>
-        </div>
-      </div>
-
-      <div class="calm">
-        <span class="orn">🌙</span>
-        <div class="txt">
-          <div class="v">«وتعاونوا على البِرِّ والتقوى ولا تعاونوا على الإثم والعدوان»</div>
-          <div class="src">سورة المائدة · الآية ٢</div>
-        </div>
-        <button class="off">لا أريد هذا المحتوى الآن</button>
-      </div>
-
-      <div class="safety">
-        <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg>
-        <span>هذه مؤشرات إرشادية تثقيفية وليست تشخيصًا طبيًا أو نفسيًا، ولا تُغني عن مختص مرخّص.</span>
+      <div class="card pad">
+        <p style="font-size:14px;color:var(--dandona-blue);font-weight:600;line-height:1.8">تظهر لديك مؤشرات مرتفعة في التشتّت الرقمي والبحث عن التحفيز السريع. هذه نتيجة إرشادية وليست تشخيصًا. ابدئي بخطة ٧ أيام لتقليل فرط التحفيز وتنظيم اليوم.</p>
+        <div class="safety" style="margin-top:14px"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>إذا أثّرت هذه المؤشرات على دراستك أو عملك أو علاقاتك، ننصح بالتواصل مع مختص مرخّص.</span></div>
+        <div style="display:flex;gap:10px;margin-top:14px"><button class="btn btn-pink" style="flex:1">عرض خطة ٧ أيام</button><button class="btn btn-ghost" style="flex:1">حفظ التقرير</button></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================ 3 · الجوال -->
-<section class="screen" id="mobile">
-  <div class="screen-label"><span class="chip">03</span><div><h2>واجهة الجوال (Mobile Home)</h2><p>نتيجة رئيسية + مؤشران + تقدّم اليوم، وتنقّل سفلي بأزرار كبيرة</p></div></div>
-  <div class="mobile-wrap">
-    <div class="phone">
-      <div class="screen-in">
-        <div class="notch"></div>
-        <div class="m-head">
-          <div class="g"><b>مرحبًا دانة</b><small>كيف تشعرين اليوم؟</small></div>
-          <div class="avatar" style="width:42px;height:42px;flex:0 0 42px;font-size:16px">د</div>
-        </div>
-        <div class="m-body">
-          <div class="m-result">
-            <div class="cap">مؤشر التوازن التحفيزي</div>
-            <svg width="120" height="120" viewBox="0 0 120 120" style="margin:6px auto">
-              <circle cx="60" cy="60" r="50" fill="none" stroke="#FCE7F3" stroke-width="12"/>
-              <circle cx="60" cy="60" r="50" fill="none" stroke="#EC4899" stroke-width="12" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="69" transform="rotate(-90 60 60)"/>
-              <text x="60" y="58" text-anchor="middle" font-family="Inter" font-size="34" font-weight="700" fill="#1E3A8A">78</text>
-              <text x="60" y="78" text-anchor="middle" font-family="Inter" font-size="11" fill="#64748B">من 100</text>
-            </svg>
-            <span class="tag tag-pink">مرتفع</span>
-          </div>
-          <div class="m-two">
-            <div class="metric"><div class="cap">الحالة المزاجية</div><div class="emoji">🙂</div><span class="tag tag-green" style="margin-top:6px">جيدة</span></div>
-            <div class="metric"><div class="cap">التركيز</div><div class="emoji">🎯</div><span class="tag tag-blue" style="margin-top:6px">ممتاز</span></div>
-          </div>
-          <div class="m-prog">
-            <div class="top"><span>تقدّم اليوم</span><span class="num">٥ من ٧ مهام</span></div>
-            <div class="bar"><i style="width:71%"></i></div>
-            <p style="font-size:12px;margin-top:8px">أنجزتِ معظم مهام اليوم، خطوة صغيرة تكفي 🌸</p>
-          </div>
-        </div>
-        <nav class="m-nav">
-          <a class="on"><span class="ic">🏠</span>الرئيسية</a>
-          <a><span class="ic">📊</span>التقرير</a>
-          <a><span class="ic">🗂️</span>برنامجي</a>
-          <a><span class="ic">🏅</span>تحدياتي</a>
-          <a><span class="ic">👤</span>الحساب</a>
-        </nav>
-      </div>
+<!-- ==================== USER · plan ==================== -->
+<section class="screen" id="plan">
+  <div class="screen-label"><span class="chip">مستخدم · ٠٩</span><div><h2>الخطة والتحديات</h2><p>خطة ٧ أيام و٣٠ يومًا كقائمة مهام بدوائر اكتمال، وتحديات بأشرطة تقدّم هادئة</p></div></div>
+  <div class="two">
+    <div class="card pad">
+      <div class="plan-tabs" id="planTabs"><button class="on" data-p="7">خطة ٧ أيام</button><button data-p="30">خطة ٣٠ يومًا</button></div>
+      <p class="hint" style="font-size:13px;margin-bottom:14px;color:var(--dandona-slate)">مهام بسيطة تُبنى تدريجيًا. عودي بهدوء إن تعثّرتِ، دون جلد للذات.</p>
+      <div class="task done"><span class="tick">✓</span><span class="tx">راقبي أكثر وقت تستخدمين فيه الجوال دون هدف</span><span class="day">اليوم ١</span></div>
+      <div class="task done"><span class="tick">✓</span><span class="tx">أوقفي إشعارات تطبيق واحد يشتّتك</span><span class="day">اليوم ٢</span></div>
+      <div class="task done"><span class="tick">✓</span><span class="tx">لا تفتحي التطبيق المفضّل إلا بعد إنجاز مهمة</span><span class="day">اليوم ٣</span></div>
+      <div class="task done"><span class="tick">✓</span><span class="tx">امشي ١٥ دقيقة أو مارسي نشاطًا خفيفًا</span><span class="day">اليوم ٤</span></div>
+      <div class="task"><span class="tick"></span><span class="tx">اجلسي ٢٠ دقيقة مع الأسرة دون جوال</span><span class="day">اليوم ٥</span></div>
+      <div class="task"><span class="tick"></span><span class="tx">اجعلي ١٠ دقائق بعد إحدى الصلوات بلا هاتف</span><span class="day">اليوم ٦</span></div>
+      <div class="task"><span class="tick"></span><span class="tx">راجعي الأسبوع واكتبي عادة واحدة أفادتك</span><span class="day">اليوم ٧</span></div>
+      <div style="margin-top:16px"><div class="bar"><i style="width:57%"></i></div><p style="font-size:12px;margin-top:8px;color:var(--dandona-slate)">أنجزتِ ٤ من ٧ مهام — استمري 🌸</p></div>
     </div>
-    <div class="mobile-notes">
+    <div class="card pad">
+      <h3 style="font-size:18px;margin-bottom:4px">تحدياتي</h3>
+      <p class="hint" style="font-size:13px;margin-bottom:14px;color:var(--dandona-slate)">لا يزيد على ٣–٤ تحديات يوميًا، بأشرطة تقدّم هادئة بلا مكافآت مبالغة.</p>
+      <div class="chal"><div class="top"><div class="ic">📵</div><b>تحدي ٧ أيام بلا تصفّح عشوائي</b><span class="num">٥/٧</span></div><div class="bar"><i style="width:71%"></i></div></div>
+      <div class="chal"><div class="top"><div class="ic">🎯</div><b>تحدي التركيز العميق</b><span class="num">٨/١٠</span></div><div class="bar"><i style="width:80%"></i></div></div>
+      <div class="chal"><div class="top"><div class="ic">🚶</div><b>تحدي المشي اليومي</b><span class="num">١٢/٣٠</span></div><div class="bar"><i style="width:40%"></i></div></div>
+      <div class="chal"><div class="top"><div class="ic">🌙</div><b>تحدي الامتنان</b><span class="num">٤/٧</span></div><div class="bar"><i style="width:57%"></i></div></div>
+      <div class="calm" style="margin-top:16px;padding:16px 18px"><span class="orn" style="font-size:26px">🌿</span><div class="txt"><div class="v" style="font-size:14px">حفظ الوقت ونعمة الفراغ</div><div class="src" style="font-size:11px">توصية قيمية — اختيارية</div></div><button class="off">إيقاف</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== USER · dashboard ==================== -->
+<section class="screen" id="dashboard">
+  <div class="screen-label"><span class="chip">مستخدم · ١٠</span><div><h2>لوحة المستخدم (Desktop)</h2><p>تحية شخصية، بطاقات قياس، توصيات مخصّصة، وبطاقة ركن الطمأنينة</p></div></div>
+  <div class="dash">
+    <aside class="side">
+      <div class="brand"><svg class="logo" viewBox="0 0 40 40" fill="none"><path d="M20 6c-3 0-5 2-6 4-2-1-5 0-6 3-1 2 0 5 2 6-2 2-2 5 0 7 1 2 4 3 6 2 1 2 3 4 6 3 3 0 5-2 5-4 3 0 5-3 4-6 2-2 2-5 0-7 1-3-1-6-4-6-1-2-3-2-4-2-1-1-2-2-3-3z" fill="#F472B6"/><circle cx="20" cy="20" r="4" fill="#EC4899"/></svg><span style="font-size:16px">دندونة<small>DANDOUNA</small></span></div>
+      <nav><a class="on">▦ لوحة التحكم</a><a>🧭 اختبار المؤشر</a><a>🗂️ برنامجي</a><a>🏅 تحدياتي</a><a>📊 التقارير</a><a>📚 المحتوى المعرفي</a><a>🌙 ركن الطمأنينة</a><a>⚙️ الإعدادات</a><a>↩️ خروج</a></nav>
+    </aside>
+    <div class="dash-main">
+      <div class="greet"><div><h2>مرحبًا دانة 👋</h2><p>كيف تشعرين اليوم؟</p></div><div class="avatar">د</div></div>
+      <div class="metrics">
+        <div class="metric"><div class="cap">مؤشر التوازن التحفيزي</div>
+          <svg class="ring" width="96" height="96" viewBox="0 0 96 96"><circle cx="48" cy="48" r="40" fill="none" stroke="#FCE7F3" stroke-width="10"/><circle cx="48" cy="48" r="40" fill="none" stroke="#EC4899" stroke-width="10" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="55.3" transform="rotate(-90 48 48)"/><text x="48" y="46" text-anchor="middle" font-family="Inter" font-size="26" font-weight="700" fill="#1E3A8A">78</text><text x="48" y="63" text-anchor="middle" font-family="Inter" font-size="10" fill="#64748B">من 100</text></svg>
+          <span class="tag tag-pink">مرتفع</span></div>
+        <div class="metric"><div class="cap">الحالة المزاجية</div><div class="emoji">🙂</div><div style="height:18px"></div><span class="tag tag-green">جيدة</span></div>
+        <div class="metric"><div class="cap">التركيز</div><div class="emoji">🎯</div><div style="height:18px"></div><span class="tag tag-blue">ممتاز</span></div>
+        <div class="metric"><div class="cap">النشاط البدني</div><div class="emoji">🏃</div><div style="height:18px"></div><span class="tag tag-pink">متوسط</span></div>
+      </div>
+      <div class="rec-wrap"><h3>توصيات مخصّصة لك</h3><div class="recs">
+        <div class="rec"><div class="thumb" style="background:#eaf7ee">🌱</div><div class="body"><b>تمرين تنفّس</b><small>٥ دقائق لهدوء أعمق</small></div></div>
+        <div class="rec"><div class="thumb" style="background:#e7f0fe">⛰️</div><div class="body"><b>مشي في الطبيعة</b><small>٢٠ دقيقة تنشّط يومك</small></div></div>
+        <div class="rec"><div class="thumb" style="background:#fdf0e6">📓</div><div class="body"><b>الامتنان اليومي</b><small>اكتب ٣ أشياء</small></div></div>
+        <div class="rec"><div class="thumb" style="background:#fce7f3">✍️</div><div class="body"><b>جلسة تركيز</b><small>٢٥ دقيقة بلا تشتّت</small></div></div>
+      </div></div>
+      <div class="calm"><span class="orn">🌙</span><div class="txt"><div class="v">«وتعاونوا على البِرِّ والتقوى ولا تعاونوا على الإثم والعدوان»</div><div class="src">سورة المائدة · الآية ٢</div></div><button class="off">لا أريد هذا المحتوى الآن</button></div>
+      <div class="safety"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>هذه مؤشرات إرشادية تثقيفية وليست تشخيصًا طبيًا أو نفسيًا، ولا تُغني عن مختص مرخّص.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== USER · mobile ==================== -->
+<section class="screen" id="mobile">
+  <div class="screen-label"><span class="chip">مستخدم · ١١</span><div><h2>واجهة الجوال (Mobile Home)</h2><p>نتيجة رئيسية + مؤشران + تقدّم اليوم، وتنقّل سفلي بأزرار كبيرة</p></div></div>
+  <div class="mobile-wrap">
+    <div class="phone"><div class="screen-in"><div class="notch"></div>
+      <div class="m-head"><div class="g"><b>مرحبًا دانة</b><small>كيف تشعرين اليوم؟</small></div><div class="avatar" style="width:42px;height:42px;flex:0 0 42px;font-size:16px">د</div></div>
+      <div class="m-body">
+        <div class="m-result"><div class="cap" style="font-size:13px;color:var(--dandona-slate);font-weight:600">مؤشر التوازن التحفيزي</div>
+          <svg width="120" height="120" viewBox="0 0 120 120" style="margin:6px auto"><circle cx="60" cy="60" r="50" fill="none" stroke="#FCE7F3" stroke-width="12"/><circle cx="60" cy="60" r="50" fill="none" stroke="#EC4899" stroke-width="12" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="69" transform="rotate(-90 60 60)"/><text x="60" y="58" text-anchor="middle" font-family="Inter" font-size="34" font-weight="700" fill="#1E3A8A">78</text><text x="60" y="78" text-anchor="middle" font-family="Inter" font-size="11" fill="#64748B">من 100</text></svg>
+          <span class="tag tag-pink">مرتفع</span></div>
+        <div class="m-two"><div class="metric"><div class="cap">المزاج</div><div class="emoji">🙂</div><span class="tag tag-green" style="margin-top:6px">جيدة</span></div><div class="metric"><div class="cap">التركيز</div><div class="emoji">🎯</div><span class="tag tag-blue" style="margin-top:6px">ممتاز</span></div></div>
+        <div class="m-prog"><div class="top"><span>تقدّم اليوم</span><span class="num">٥ من ٧ مهام</span></div><div class="bar"><i style="width:71%"></i></div><p style="font-size:12px;margin-top:8px;color:var(--dandona-slate)">أنجزتِ معظم مهام اليوم، خطوة صغيرة تكفي 🌸</p></div>
+      </div>
+      <nav class="m-nav"><a class="on"><span class="ic">🏠</span>الرئيسية</a><a><span class="ic">📊</span>التقرير</a><a><span class="ic">🗂️</span>برنامجي</a><a><span class="ic">🏅</span>تحدياتي</a><a><span class="ic">👤</span>الحساب</a></nav>
+    </div></div>
+    <div class="notes">
       <div class="note"><b>Mobile-first</b><p>سؤال واحد في الشاشة، حفظ تلقائي بعد كل إجابة، وأزرار لا يقل ارتفاعها عن ٤٤px مناسبة للإبهام.</p></div>
       <div class="note"><b>تنقّل سفلي هادئ</b><p>خمسة عناصر فقط: الرئيسية، التقرير، برنامجي، تحدياتي، الحساب — بلا مؤثرات ألعاب أو مكافآت مفرطة.</p></div>
       <div class="note"><b>نبرة مطمئنة</b><p>رسائل قصيرة غير تأنيبية تدعم الاستمرار: «خطوة صغيرة تكفي»، «عودي بهدوء».</p></div>
@@ -462,135 +610,34 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<!-- ============================================================ 4 · تسجيل الدخول -->
-<section class="screen" id="auth">
-  <div class="screen-label"><span class="chip">04</span><div><h2>تسجيل الدخول (Auth)</h2><p>بطاقة بيضاء هادئة في المنتصف مع الشعار، دخول عبر Google وApple ثم البريد</p></div></div>
-  <div style="max-width:440px;margin:0 auto">
-    <div class="card login-card">
-      <svg class="logo" viewBox="0 0 40 40" fill="none"><path d="M20 6c-3 0-5 2-6 4-2-1-5 0-6 3-1 2 0 5 2 6-2 2-2 5 0 7 1 2 4 3 6 2 1 2 3 4 6 3 3 0 5-2 5-4 3 0 5-3 4-6 2-2 2-5 0-7 1-3-1-6-4-6-1-2-3-2-4-2-1-1-2-2-3-3z" fill="#F472B6"/><circle cx="20" cy="20" r="4" fill="#EC4899"/></svg>
-      <h3>أهلًا بعودتك 🌸</h3>
-      <p>سجّل دخولك لمتابعة رحلتك مع دندونة</p>
-      <div class="oauth">
-        <button>🟦 المتابعة مع Google</button>
-        <button> المتابعة مع Apple</button>
-      </div>
-      <div class="divider">أو بالبريد الإلكتروني</div>
-      <div class="field"><label>البريد الإلكتروني</label><input type="email" placeholder="name@email.com" dir="ltr" style="text-align:left"></div>
-      <div class="field"><label>كلمة المرور</label><input type="password" placeholder="••••••••"></div>
-      <button class="btn btn-pink" style="width:100%">تسجيل الدخول</button>
-      <p class="mini-note">بتسجيل الدخول فأنت توافق على سياسة الخصوصية وشروط الاستخدام.</p>
-      <p class="mini-note" style="margin-top:6px">للقُصّر: يلزم موافقة ولي الأمر قبل بدء أي اختبار.</p>
-    </div>
+<!-- ==================== USER · calm corner ==================== -->
+<section class="screen" id="calm">
+  <div class="screen-label"><span class="chip">مستخدم · ١٢</span><div><h2>ركن الطمأنينة</h2><p>محتوى قيمي اختياري بتدرّج وردي ثلجي وزخرفة خفيفة — لا يقيس الإيمان</p></div></div>
+  <div class="calm-hero">
+    <div style="font-size:34px;margin-bottom:8px">🌙</div>
+    <div class="verse">«ألا بذكر الله تطمئنّ القلوب»</div>
+    <div class="src">سورة الرعد · الآية ٢٨</div>
+    <p style="font-size:13.5px;max-width:560px;margin:12px auto 0">لحظة هدوء قصيرة تربط تنظيم يومك بمعنى أعمق — دون إلزام أو تأنيب.</p>
+    <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn btn-pink btn-sm">ابدأ تمرين هدوء دقيقة</button><button class="btn btn-ghost btn-sm">لا أريد هذا المحتوى الآن</button></div>
   </div>
+  <div class="calm-grid">
+    <div class="calm-item"><div class="ic">🕰️</div><b>حفظ الوقت</b><p>نعمة الفراغ وتقليل الهدر الرقمي بخطوة صغيرة.</p></div>
+    <div class="calm-item"><div class="ic">🤲</div><b>الذكر والطمأنينة</b><p>مواد قصيرة وتمارين هدوء تقلّل التشتّت.</p></div>
+    <div class="calm-item"><div class="ic">🌱</div><b>شكر النعم</b><p>العناية بالنوم والجسد باعتبارها شكرًا عمليًا.</p></div>
+  </div>
+  <div class="safety" style="margin-top:18px"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>البُعد القيمي يساعدك على بناء عادة نافعة ولا يقيس إيمانك. كل نص موثّق ومراجَع من مختص شرعي.</span></div>
 </section>
 
-<!-- ============================================================ 5 · الاختبار والنتيجة -->
-<section class="screen" id="assess">
-  <div class="screen-label"><span class="chip">05</span><div><h2>الاختبار والنتيجة</h2><p>بطاقة بدء الاختبار (المدة، عدد الأسئلة، الحساسية)، ونتيجة برقم واضح ومخطط راداري وردي</p></div></div>
-  <div class="assess">
-    <div class="card assess-start">
-      <h3>اختبار التوازن التحفيزي والسلوكي</h3>
-      <p style="font-size:14px">اختبار علمي مبسّط لفهم نمطك التحفيزي المرتبط بالمكافأة السريعة والتشتت والعادات اليومية.</p>
-      <div class="assess-meta">
-        <div class="m"><div class="ic">⏱️</div><b>مدة الاختبار</b><span>١٥ دقيقة</span></div>
-        <div class="m"><div class="ic">📋</div><b>عدد الأسئلة</b><span>٢٠ سؤالًا</span></div>
-        <div class="m"><div class="ic">🎚️</div><b>درجة الحساسية</b><span>عادية</span></div>
-      </div>
-      <div class="safety" style="margin-bottom:16px"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>قبل البدء: تخصيص وقت هادئ، عدم تناول الاختبار أثناء الانشغال، والإجابة بصدق دون تهويل. النتيجة إرشادية وليست تشخيصًا.</span></div>
-      <button class="btn btn-pink" style="width:100%">ابدأ الاختبار</button>
-      <div style="margin-top:18px">
-        <div class="top" style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--dandona-slate);margin-bottom:7px"><span>السؤال ٤ من ٢٠</span><span class="num">٢٠٪</span></div>
-        <div class="bar"><i style="width:20%"></i></div>
-      </div>
-    </div>
-
-    <div class="card result-card">
-      <div class="cap" style="font-size:14px;color:var(--dandona-slate);font-weight:600">نتيجة الاختبار الأخيرة</div>
-      <div class="score">78<small>/100</small></div>
-      <span class="result-band">مؤشرات مرتفعة</span>
-      <div class="bands">
-        <div class="b"><i style="background:#16A34A"></i>منخفض<br>٠–٤٠</div>
-        <div class="b"><i style="background:#D6A85A"></i>متوسط<br>٤١–٦٠</div>
-        <div class="b"><i style="background:#EC4899"></i>مرتفع<br>٦١–١٠٠</div>
-      </div>
-      <div class="radar-wrap">
-        <svg width="260" height="240" viewBox="0 0 260 240">
-          <g stroke="#E5E7EB" fill="none" stroke-width="1">
-            <polygon points="130,30 216,80 216,180 130,230 44,180 44,80"/>
-            <polygon points="130,63 187,96 187,163 130,197 73,163 73,96"/>
-            <polygon points="130,96 158,113 158,146 130,163 102,146 102,113"/>
-          </g>
-          <g stroke="#E5E7EB" stroke-width="1">
-            <line x1="130" y1="130" x2="130" y2="30"/><line x1="130" y1="130" x2="216" y2="80"/>
-            <line x1="130" y1="130" x2="216" y2="180"/><line x1="130" y1="130" x2="130" y2="230"/>
-            <line x1="130" y1="130" x2="44" y2="180"/><line x1="130" y1="130" x2="44" y2="80"/>
-          </g>
-          <polygon points="130,45 205,88 190,170 130,205 60,168 62,95" fill="rgba(236,72,153,.22)" stroke="#EC4899" stroke-width="2"/>
-          <g fill="#EC4899"><circle cx="130" cy="45" r="3.5"/><circle cx="205" cy="88" r="3.5"/><circle cx="190" cy="170" r="3.5"/><circle cx="130" cy="205" r="3.5"/><circle cx="60" cy="168" r="3.5"/><circle cx="62" cy="95" r="3.5"/></g>
-          <g font-family="Noto Sans Arabic" font-size="11" fill="#64748B" text-anchor="middle">
-            <text x="130" y="20">التشتّت الرقمي</text>
-            <text x="240" y="78">المكافأة</text>
-            <text x="240" y="192">التسويف</text>
-            <text x="130" y="236">النوم</text>
-            <text x="24" y="192">النشاط</text>
-            <text x="24" y="78">المزاج</text>
-          </g>
-        </svg>
-      </div>
-      <p style="font-size:13px;margin-top:6px">تظهر لديك مؤشرات مرتفعة في التشتّت الرقمي والبحث عن التحفيز السريع. ابدئي بخطة ٧ أيام.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ 6 · برنامجي والتحديات -->
-<section class="screen" id="program">
-  <div class="screen-label"><span class="chip">06</span><div><h2>برنامجي والتحديات</h2><p>خطة اليوم كقائمة مهام بدوائر اكتمال، وتحديات بأشرطة تقدّم وردية هادئة</p></div></div>
-  <div class="prog2">
-    <div class="card panel">
-      <h3>برنامجي — خطة ٧ أيام</h3>
-      <p class="hint">مهام بسيطة تُبنى تدريجيًا. عودي بهدوء إن تعثّرتِ، دون جلد للذات.</p>
-      <div class="task done"><span class="tick">✓</span><span class="tx">راقبي أكثر وقت تستخدمين فيه الجوال دون هدف</span><span class="day">اليوم ١</span></div>
-      <div class="task done"><span class="tick">✓</span><span class="tx">أوقفي إشعارات تطبيق واحد يشتّتك</span><span class="day">اليوم ٢</span></div>
-      <div class="task done"><span class="tick">✓</span><span class="tx">لا تفتحي التطبيق المفضّل إلا بعد إنجاز مهمة</span><span class="day">اليوم ٣</span></div>
-      <div class="task done"><span class="tick">✓</span><span class="tx">امشي ١٥ دقيقة أو مارسي نشاطًا خفيفًا</span><span class="day">اليوم ٤</span></div>
-      <div class="task"><span class="tick"></span><span class="tx">اجلسي ٢٠ دقيقة مع الأسرة دون جوال</span><span class="day">اليوم ٥</span></div>
-      <div class="task"><span class="tick"></span><span class="tx">اجعلي ١٠ دقائق بعد إحدى الصلوات بلا هاتف</span><span class="day">اليوم ٦</span></div>
-      <div class="task"><span class="tick"></span><span class="tx">راجعي الأسبوع واكتبي عادة واحدة أفادتك</span><span class="day">اليوم ٧</span></div>
-      <div style="margin-top:16px"><div class="bar"><i style="width:57%"></i></div><p style="font-size:12px;margin-top:8px">أنجزتِ ٤ من ٧ مهام — استمري 🌸</p></div>
-    </div>
-
-    <div class="card panel">
-      <h3>تحدياتي</h3>
-      <p class="hint">لا يزيد على ٣–٤ تحديات يوميًا، بأشرطة تقدّم هادئة بلا مكافآت مبالغة.</p>
-      <div class="chal"><div class="top"><div class="ic">📵</div><b>تحدي ٧ أيام بلا تصفّح عشوائي</b><span class="num">٥/٧</span></div><div class="bar"><i style="width:71%"></i></div></div>
-      <div class="chal"><div class="top"><div class="ic">🎯</div><b>تحدي التركيز العميق</b><span class="num">٨/١٠</span></div><div class="bar"><i style="width:80%"></i></div></div>
-      <div class="chal"><div class="top"><div class="ic">🚶</div><b>تحدي المشي اليومي</b><span class="num">١٢/٣٠</span></div><div class="bar"><i style="width:40%"></i></div></div>
-      <div class="chal"><div class="top"><div class="ic">🌙</div><b>تحدي الامتنان</b><span class="num">٤/٧</span></div><div class="bar"><i style="width:57%"></i></div></div>
-      <div class="calm" style="margin-top:18px;padding:16px 18px">
-        <span class="orn" style="font-size:28px">🌿</span>
-        <div class="txt"><div class="v" style="font-size:14px">حفظ الوقت ونعمة الفراغ</div><div class="src" style="font-size:11px">توصية قيمية — اختيارية</div></div>
-        <button class="off">إيقاف</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ 7 · التقارير -->
+<!-- ==================== USER · reports ==================== -->
 <section class="screen" id="reports">
-  <div class="screen-label"><span class="chip">07</span><div><h2>التقارير</h2><p>تحسّن المؤشرات بخط أزرق وأشرطة وردية، بلغة مطمئنة، وتصدير PDF بإخفاء الحساسة</p></div></div>
+  <div class="screen-label"><span class="chip">مستخدم · ١٣</span><div><h2>التقارير</h2><p>تحسّن المؤشرات بخط أزرق وأشرطة وردية، بلغة مطمئنة، وتصدير PDF بإخفاء الحساسة</p></div></div>
   <div class="reports">
-    <div class="card report-main">
+    <div class="card report-main pad">
       <div class="head"><h3>متوسط مؤشر التوازن التحفيزي</h3><span class="pill">هذا الشهر</span></div>
       <div class="avg"><span class="n">72</span><span class="up">+١٢٪ عن الشهر الماضي</span></div>
-      <svg width="100%" height="160" viewBox="0 0 560 160" preserveAspectRatio="none">
-        <g stroke="#E5E7EB" stroke-width="1"><line x1="0" y1="40" x2="560" y2="40"/><line x1="0" y1="80" x2="560" y2="80"/><line x1="0" y1="120" x2="560" y2="120"/></g>
-        <polygon points="0,120 80,110 160,118 240,92 320,96 400,70 480,74 560,44 560,160 0,160" fill="rgba(30,58,138,.06)"/>
-        <polyline points="0,120 80,110 160,118 240,92 320,96 400,70 480,74 560,44" fill="none" stroke="#1E3A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <g fill="#EC4899"><circle cx="0" cy="120" r="4"/><circle cx="160" cy="118" r="4"/><circle cx="320" cy="96" r="4"/><circle cx="480" cy="74" r="4"/><circle cx="560" cy="44" r="4"/></g>
-      </svg>
-
+      <svg width="100%" height="160" viewBox="0 0 560 160" preserveAspectRatio="none"><g stroke="#E5E7EB" stroke-width="1"><line x1="0" y1="40" x2="560" y2="40"/><line x1="0" y1="80" x2="560" y2="80"/><line x1="0" y1="120" x2="560" y2="120"/></g><polygon points="0,120 80,110 160,118 240,92 320,96 400,70 480,74 560,44 560,160 0,160" fill="rgba(30,58,138,.06)"/><polyline points="0,120 80,110 160,118 240,92 320,96 400,70 480,74 560,44" fill="none" stroke="#1E3A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><g fill="#EC4899"><circle cx="0" cy="120" r="4"/><circle cx="160" cy="118" r="4"/><circle cx="320" cy="96" r="4"/><circle cx="480" cy="74" r="4"/><circle cx="560" cy="44" r="4"/></g></svg>
       <h3 style="font-size:16px;margin:22px 0 4px">تحسّن في الجوانب</h3>
-      <p class="hint" style="font-size:13px;margin-bottom:14px">نعرض التحسّن لا «المشكلات» — كل خطوة تُحتسب.</p>
+      <p style="font-size:13px;margin-bottom:14px;color:var(--dandona-slate)">نعرض التحسّن لا «المشكلات» — كل خطوة تُحتسب.</p>
       <div class="improve">
         <div class="r"><div class="lbl"><span>التركيز</span><span class="up">+١٨٪</span></div><div class="bar"><i style="width:78%"></i></div></div>
         <div class="r"><div class="lbl"><span>المزاج</span><span class="up">+١٥٪</span></div><div class="bar"><i style="width:70%"></i></div></div>
@@ -598,21 +645,340 @@ a{color:inherit;text-decoration:none}
         <div class="r"><div class="lbl"><span>النشاط</span><span class="up">+١٦٪</span></div><div class="bar"><i style="width:66%"></i></div></div>
       </div>
     </div>
-
     <div class="card report-side">
-      <div class="exp">
-        <div class="ic">📄</div>
-        <b>تقرير PDF</b>
-        <small>ملخّص نتائجك وخطتك بلغة مطمئنة</small>
-        <button class="btn btn-blue" style="width:100%">تصدير PDF</button>
-      </div>
-      <div class="exp" style="border-color:var(--dandona-border);background:#fff">
-        <div class="ic">🤝</div>
-        <b>مشاركة مع مختص</b>
-        <small>بتفويض صريح منكِ فقط</small>
-        <button class="btn btn-ghost" style="width:100%">مشاركة النتيجة</button>
-      </div>
+      <div class="exp"><div class="ic">📄</div><b>تقرير PDF</b><small>ملخّص نتائجك وخطتك بلغة مطمئنة</small><button class="btn btn-blue" style="width:100%">تصدير PDF</button></div>
+      <div class="exp" style="border-color:var(--dandona-border);background:#fff"><div class="ic">🤝</div><b>مشاركة مع مختص</b><small>بتفويض صريح منكِ فقط</small><button class="btn btn-ghost" style="width:100%">مشاركة النتيجة</button></div>
       <div class="safety"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>تُخفى البيانات الحسّاسة في التقارير، والمؤسسة لا ترى أي بيانات فردية بالاسم.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== USER · privacy ==================== -->
+<section class="screen" id="privacy">
+  <div class="screen-label"><span class="chip">مستخدم · ١٤</span><div><h2>الخصوصية والبيانات</h2><p>تصدير، حذف، إدارة الموافقات، والتحكّم في المشاركة</p></div></div>
+  <div class="two">
+    <div class="card pad">
+      <h3 style="font-size:17px;margin-bottom:8px">التحكّم في بياناتك</h3>
+      <div class="prow"><div class="ic">⬇️</div><div class="tx"><b>تصدير بياناتي</b><small>احصل على نسخة كاملة من نتائجك وخططك</small></div><button class="btn btn-ghost btn-sm">تصدير</button></div>
+      <div class="prow"><div class="ic">🗑️</div><div class="tx"><b>حذف الحساب</b><small>حذف نهائي وفق سياسة احتفاظ واضحة</small></div><button class="btn btn-ghost btn-sm" style="border-color:#fecdd3;color:#e11d48">حذف</button></div>
+      <div class="prow"><div class="ic">🔗</div><div class="tx"><b>المشاركة مع مختص</b><small>تفويض صريح قابل للسحب في أي وقت</small></div><div class="toggle" onclick="this.classList.toggle('on')"><i></i></div></div>
+      <div class="prow"><div class="ic">🌙</div><div class="tx"><b>ركن الطمأنينة</b><small>تفعيل/إيقاف المحتوى القيمي</small></div><div class="toggle on" onclick="this.classList.toggle('on')"><i></i></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card pad">
+        <h3 style="font-size:16px;margin-bottom:10px">سجل موافقاتي</h3>
+        <div class="kv"><b>سياسة الخصوصية</b><span>الإصدار 1.2 · بتاريخ 15/01/2026م</span><b>الإخلاء الطبي</b><span>موافَق عليه</span><b>معالجة البيانات</b><span>الحد الأدنى فقط</span></div>
+      </div>
+      <div class="safety"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>لا تُباع بياناتك ولا تُستخدم في التوظيف أو العقوبة أو التمييز. متوافق مع نظام حماية البيانات الشخصية (PDPL).</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PORTAL · child ==================== -->
+<section class="screen" id="child">
+  <div class="screen-label"><span class="chip">بوابة · طفل</span><div><h2>بوابة الطفل / المراهق</h2><p>تجربة مبسّطة وأسئلة مناسبة ورسائل آمنة دون نتائج مخيفة</p></div></div>
+  <div class="portal-hero ph-pink"><div class="pic">🧒</div><div><h2>مرحبًا يا بطل! 🌟</h2><p>رحلة لطيفة لتفهم عاداتك وتصبح أكثر توازنًا — بخطوات صغيرة وممتعة.</p></div></div>
+  <div class="cols3">
+    <div class="card pad" style="text-align:center"><div style="font-size:34px">🎈</div><b style="display:block;margin:8px 0">اختبار قصير وممتع</b><p style="font-size:13px">أسئلة بسيطة بصور، سؤال واحد في كل مرة.</p></div>
+    <div class="card pad" style="text-align:center"><div style="font-size:34px">⭐</div><b style="display:block;margin:8px 0">مهمة اليوم</b><p style="font-size:13px">خطوة صغيرة واحدة تكفي: العب، تحرّك، ثم استرح.</p></div>
+    <div class="card pad" style="text-align:center"><div style="font-size:34px">🛡️</div><b style="display:block;margin:8px 0">آمن ومطمئن</b><p style="font-size:13px">لا كلمات مخيفة، ورسائل تشجّعك بلطف.</p></div>
+  </div>
+  <div class="safety" style="margin-top:18px"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>تتطلّب هذه البوابة موافقة ولي الأمر أولًا، وتُخفى الأسئلة الحسّاسة، ولا تُعرض صورة الطفل في أي نتيجة.</span></div>
+</section>
+
+<!-- ==================== PORTAL · guardian ==================== -->
+<section class="screen" id="guardian">
+  <div class="screen-label"><span class="chip">بوابة · ولي أمر</span><div><h2>بوابة ولي الأمر</h2><p>موافقة ومتابعة عامة وتوصيات أسرية — دون تفاصيل حسّاسة</p></div></div>
+  <div class="portal-hero ph-blue"><div class="pic">👨‍👩‍👧</div><div><h2>لوحة ولي الأمر</h2><p>تابع مؤشرات أبنائك العامة، واعتمد المشاركة، واطّلع على توصيات أسرية داعمة.</p></div></div>
+  <div class="cols3" style="margin-bottom:16px">
+    <div class="stat"><div class="n">2</div><div class="c">أبناء مرتبطون</div></div>
+    <div class="stat"><div class="n">1</div><div class="c">طلب موافقة معلّق</div></div>
+    <div class="stat"><div class="n">3</div><div class="c">توصيات أسرية جديدة</div></div>
+  </div>
+  <div class="two">
+    <div class="card list-card"><h3>الأبناء المرتبطون</h3><p class="hint" style="color:var(--dandona-slate)">مؤشرات عامة فقط دون تفاصيل الإجابات.</p>
+      <div class="lrow"><div class="av">س</div><div class="tx"><b>سارة · ١٢ سنة</b><small>مؤشر عام: متوسط · آخر نشاط: أمس</small></div><span class="tag tag-gold">متوسط</span></div>
+      <div class="lrow"><div class="av">ع</div><div class="tx"><b>عمر · ٩ سنوات</b><small>بانتظار موافقتك لبدء الاختبار</small></div><button class="btn btn-pink btn-sm">اعتماد</button></div>
+    </div>
+    <div class="card list-card"><h3>توصيات أسرية</h3><p class="hint" style="color:var(--dandona-slate)">خطوات لطيفة تدعمها كأسرة.</p>
+      <div class="lrow"><div class="av">🕗</div><div class="tx"><b>وقت عائلي بلا شاشات</b><small>٢٠ دقيقة يوميًا تعزّز التوازن</small></div></div>
+      <div class="lrow"><div class="av">🌙</div><div class="tx"><b>روتين نوم ثابت</b><small>إبعاد الأجهزة قبل النوم</small></div></div>
+      <div class="lrow"><div class="av">🚶</div><div class="tx"><b>نشاط بدني مشترك</b><small>مشي قصير بعد العصر</small></div></div>
+    </div>
+  </div>
+  <div class="safety" style="margin-top:16px"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>لا يطّلع ولي الأمر على تفاصيل الإجابات الحسّاسة، بل على مؤشرات عامة وتوصيات فقط.</span></div>
+</section>
+
+<!-- ==================== PORTAL · specialist ==================== -->
+<section class="screen" id="specialist">
+  <div class="screen-label"><span class="chip">بوابة · مختص</span><div><h2>بوابة المختص</h2><p>نتائج بتفويض صريح، وملاحظات، ومتابعة، وسجل تفويضات</p></div></div>
+  <div class="portal-hero ph-blue"><div class="pic">🩺</div><div><h2>لوحة المختص</h2><p>تطّلع فقط على نتائج مفوّضة صراحةً من المستخدم أو ولي الأمر، مع أدوات متابعة وملاحظات.</p></div></div>
+  <div class="cols3" style="margin-bottom:16px">
+    <div class="stat"><div class="n">14</div><div class="c">حالات مفوّضة نشطة</div></div>
+    <div class="stat"><div class="n">3</div><div class="c">تفويضات جديدة</div></div>
+    <div class="stat"><div class="n">28</div><div class="c">تقارير مشتركة</div></div>
+  </div>
+  <div class="table-wrap">
+    <table><thead><tr><th>المستفيد</th><th>المؤشر العام</th><th>حالة التفويض</th><th>آخر متابعة</th><th>إجراء</th></tr></thead>
+    <tbody>
+      <tr><td><b>مستخدم #A-2291</b></td><td><span class="tag tag-pink">مرتفع</span></td><td><span class="tag tag-green">مفوّض</span></td><td>03/07/2026م</td><td><button class="btn btn-ghost btn-sm">فتح الملف</button></td></tr>
+      <tr><td><b>مستخدم #A-2288</b></td><td><span class="tag tag-gold">متوسط</span></td><td><span class="tag tag-green">مفوّض</span></td><td>01/07/2026م</td><td><button class="btn btn-ghost btn-sm">فتح الملف</button></td></tr>
+      <tr><td><b>مستخدم #A-2305</b></td><td><span class="tag tag-slate">—</span></td><td><span class="tag tag-slate">بانتظار التفويض</span></td><td>—</td><td><button class="btn btn-ghost btn-sm" disabled style="opacity:.5">محجوب</button></td></tr>
+    </tbody></table>
+  </div>
+  <div class="safety" style="margin-top:16px"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>لا يُفتح أي ملف دون تفويض صريح، وكل اطّلاع يُسجَّل في سجل التدقيق.</span></div>
+</section>
+
+<!-- ==================== PORTAL · institution ==================== -->
+<section class="screen" id="institution">
+  <div class="screen-label"><span class="chip">بوابة · مؤسسة</span><div><h2>بوابة المؤسسة التعليمية</h2><p>مؤشرات جماعية مجهولة الهوية وتوصيات برامج — دون أي بيانات فردية</p></div></div>
+  <div class="portal-hero ph-blue"><div class="pic">🏫</div><div><h2>مدرسة دانة النموذجية</h2><p>مؤشرات رفاه رقمي جماعية مجهولة، ومتوسطات، وتوصيات برامج للطلاب.</p></div></div>
+  <div class="cols3" style="margin-bottom:16px">
+    <div class="stat"><div class="n">640</div><div class="c">طالب مشارك (مجهول)</div></div>
+    <div class="stat"><div class="n">68</div><div class="c">متوسط المؤشر العام</div></div>
+    <div class="stat"><div class="n">82%</div><div class="c">معدل إكمال الاختبار</div></div>
+  </div>
+  <div class="two">
+    <div class="card report-main pad"><div class="head"><h3>توزّع المؤشر حسب الصفوف</h3><span class="pill">مجهول الهوية</span></div>
+      <svg width="100%" height="150" viewBox="0 0 520 150" preserveAspectRatio="none" style="margin-top:10px">
+        <g fill="#EC4899"><rect x="20" y="70" width="60" height="70" rx="8"/><rect x="120" y="50" width="60" height="90" rx="8"/><rect x="220" y="90" width="60" height="50" rx="8"/><rect x="320" y="40" width="60" height="100" rx="8"/><rect x="420" y="78" width="60" height="62" rx="8"/></g>
+        <g font-family="Noto Sans Arabic" font-size="11" fill="#64748B" text-anchor="middle"><text x="50" y="148">أول</text><text x="150" y="148">ثاني</text><text x="250" y="148">ثالث</text><text x="350" y="148">رابع</text><text x="450" y="148">خامس</text></g>
+      </svg>
+    </div>
+    <div class="card list-card"><h3>توصيات برامج</h3><p class="hint" style="color:var(--dandona-slate)">مبادرات جماعية لا فردية.</p>
+      <div class="lrow"><div class="av">📵</div><div class="tx"><b>أسبوع بلا إشعارات</b><small>حملة مدرسية لتقليل التشتّت</small></div></div>
+      <div class="lrow"><div class="av">🛌</div><div class="tx"><b>ورشة النوم والطاقة</b><small>للصفوف ذات المؤشر المرتفع</small></div></div>
+      <div class="lrow"><div class="av">🎯</div><div class="tx"><b>نادي التركيز العميق</b><small>جلسات ٢٥ دقيقة</small></div></div>
+    </div>
+  </div>
+  <div class="safety" style="margin-top:16px"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>المؤسسة لا ترى أي بيانات فردية بالاسم، ولا تُستخدم النتائج ضد أي طالب.</span></div>
+</section>
+
+<!-- ==================== PORTAL · company ==================== -->
+<section class="screen" id="company">
+  <div class="screen-label"><span class="chip">بوابة · شركة</span><div><h2>بوابة الشركات</h2><p>مؤشرات رفاه رقمي مجهولة وتوصيات بيئة عمل — دون أسماء أو استخدام تمييزي</p></div></div>
+  <div class="portal-hero ph-slate"><div class="pic">🏢</div><div><h2>لوحة رفاه الموظفين</h2><p>مؤشرات عامة مجهولة الهوية لدعم بيئة عمل أكثر توازنًا رقميًا.</p></div></div>
+  <div class="cols3" style="margin-bottom:16px">
+    <div class="stat"><div class="n">210</div><div class="c">موظف مشارك (مجهول)</div></div>
+    <div class="stat"><div class="n">71</div><div class="c">متوسط مؤشر الرفاه</div></div>
+    <div class="stat"><div class="n">+9%</div><div class="c">تحسّن ربع سنوي</div></div>
+  </div>
+  <div class="two">
+    <div class="card list-card"><h3>جوانب بيئة العمل</h3>
+      <div class="improve" style="margin-top:6px">
+        <div class="r"><div class="lbl"><span>التوازن الرقمي</span><span class="num" style="color:var(--dandona-blue)">74</span></div><div class="bar blue"><i style="width:74%"></i></div></div>
+        <div class="r"><div class="lbl"><span>جودة النوم</span><span class="num" style="color:var(--dandona-blue)">62</span></div><div class="bar blue"><i style="width:62%"></i></div></div>
+        <div class="r"><div class="lbl"><span>التركيز في العمل</span><span class="num" style="color:var(--dandona-blue)">69</span></div><div class="bar blue"><i style="width:69%"></i></div></div>
+      </div>
+    </div>
+    <div class="card list-card"><h3>توصيات بيئة العمل</h3>
+      <div class="lrow"><div class="av">🔕</div><div class="tx"><b>ساعات تركيز بلا إشعارات</b><small>نافذتان يوميًا</small></div></div>
+      <div class="lrow"><div class="av">☕</div><div class="tx"><b>استراحات دقيقة قصيرة</b><small>تقليل الإجهاد الرقمي</small></div></div>
+      <div class="lrow"><div class="av">📅</div><div class="tx"><b>سياسة اجتماعات أخف</b><small>وقت أعمق للإنجاز</small></div></div>
+    </div>
+  </div>
+  <div class="safety" style="margin-top:16px"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>يُمنع ربط أي نتيجة بموظف بالاسم، ويُمنع استخدام البيانات في التوظيف أو التقييم أو العقوبة.</span></div>
+</section>
+
+<!-- ==================== ADMIN · dashboard ==================== -->
+<section class="screen" id="admin">
+  <div class="screen-label"><span class="chip">إدارة · لوحة</span><div><h2>لوحة الإدارة (Super Admin)</h2><p>أعداد المستخدمين والاختبارات والتنبيهات والأخطاء ونظرة عامة على النظام</p></div></div>
+  <div class="admin-shell">
+    <aside class="aside"><div class="brand" style="font-weight:800;display:flex;align-items:center;gap:8px">دندونة<small style="font-family:var(--font-num);font-size:8px;letter-spacing:2px;display:block">ADMIN</small></div>
+      <nav><a class="on">▦ اللوحة</a><a>👥 المستخدمون</a><a>📐 المقاييس</a><a>❓ الأسئلة</a><a>🎚️ الدرجات</a><a>🎯 التوصيات</a><a>🕌 المراجع الشرعية</a><a>🏫 المؤسسات</a><a>🧾 سجل التدقيق</a><a>🔐 الأمن</a></nav></aside>
+    <div class="amain">
+      <div class="atop"><h2>نظرة عامة</h2><div class="tools"><button class="btn btn-ghost btn-sm">تصدير</button><button class="btn btn-blue btn-sm">+ إجراء سريع</button></div></div>
+      <div class="astat"><div class="s"><div class="n">18,240</div><div class="c">مستخدم مسجّل</div></div><div class="s"><div class="n">42,910</div><div class="c">اختبار مكتمل</div></div><div class="s"><div class="n">7</div><div class="c">تنبيهات مفتوحة</div></div><div class="s"><div class="n">99.9%</div><div class="c">توفّر النظام</div></div></div>
+      <div class="two">
+        <div class="card report-main pad"><div class="head"><h3>الاختبارات المكتملة</h3><span class="pill">آخر ٣٠ يومًا</span></div>
+          <svg width="100%" height="150" viewBox="0 0 520 150" preserveAspectRatio="none" style="margin-top:8px"><g stroke="#E5E7EB"><line x1="0" y1="50" x2="520" y2="50"/><line x1="0" y1="100" x2="520" y2="100"/></g><polyline points="0,120 90,100 180,108 270,70 360,80 450,48 520,40" fill="none" stroke="#1E3A8A" stroke-width="2.5"/><g fill="#EC4899"><circle cx="180" cy="108" r="4"/><circle cx="360" cy="80" r="4"/><circle cx="520" cy="40" r="4"/></g></svg>
+        </div>
+        <div class="card list-card"><h3>تنبيهات وأخطاء</h3>
+          <div class="lrow"><div class="av" style="background:#fee2e2;color:#e11d48">!</div><div class="tx"><b>ارتفاع زمن استجابة API</b><small>منذ ١٢ دقيقة</small></div><span class="tag" style="background:#fee2e2;color:#e11d48">حرج</span></div>
+          <div class="lrow"><div class="av" style="background:#fef3c7;color:#b45309">⚠</div><div class="tx"><b>٣ أسئلة بانتظار المراجعة الشرعية</b><small>اليوم</small></div><span class="tag tag-gold">متوسط</span></div>
+          <div class="lrow"><div class="av" style="background:#dcfce7;color:#16a34a">✓</div><div class="tx"><b>نسخة احتياطية ناجحة</b><small>فجر اليوم</small></div><span class="tag tag-green">سليم</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ADMIN · users ==================== -->
+<section class="screen" id="admin-users">
+  <div class="screen-label"><span class="chip">إدارة · مستخدمون</span><div><h2>إدارة المستخدمين</h2><p>بحث، إيقاف، أدوار، وطلبات بيانات</p></div></div>
+  <div class="admin-shell">
+    <aside class="aside"><div class="brand" style="font-weight:800">دندونة<small style="font-family:var(--font-num);font-size:8px;letter-spacing:2px;display:block">ADMIN</small></div>
+      <nav><a>▦ اللوحة</a><a class="on">👥 المستخدمون</a><a>📐 المقاييس</a><a>❓ الأسئلة</a><a>🎚️ الدرجات</a><a>🎯 التوصيات</a><a>🕌 المراجع الشرعية</a><a>🏫 المؤسسات</a><a>🧾 سجل التدقيق</a><a>🔐 الأمن</a></nav></aside>
+    <div class="amain">
+      <div class="atop"><h2>المستخدمون</h2><div class="tools"><input class="searchbox" placeholder="بحث بالاسم أو المعرّف…"><button class="btn btn-blue btn-sm">+ دعوة</button></div></div>
+      <div class="table-wrap"><table><thead><tr><th>المعرّف</th><th>الدور</th><th>الفئة</th><th>الحالة</th><th>آخر دخول</th><th>إجراء</th></tr></thead><tbody>
+        <tr><td><b>#A-2291</b></td><td>مستخدم فردي</td><td>بالغ</td><td><span class="tag tag-green">نشط</span></td><td>اليوم</td><td><button class="btn btn-ghost btn-sm">إدارة</button></td></tr>
+        <tr><td><b>#M-1180</b></td><td>قاصر</td><td>مراهق</td><td><span class="tag tag-gold">بانتظار ولي الأمر</span></td><td>أمس</td><td><button class="btn btn-ghost btn-sm">إدارة</button></td></tr>
+        <tr><td><b>#S-0044</b></td><td>مختص</td><td>—</td><td><span class="tag tag-green">نشط</span></td><td>03/07/2026م</td><td><button class="btn btn-ghost btn-sm">إدارة</button></td></tr>
+        <tr><td><b>#A-2140</b></td><td>مستخدم فردي</td><td>بالغ</td><td><span class="tag tag-slate">موقوف</span></td><td>25/06/2026م</td><td><button class="btn btn-ghost btn-sm">إدارة</button></td></tr>
+      </tbody></table></div>
+      <div class="safety"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>كل تعديل على دور أو حالة مستخدم يُكتب في سجل التدقيق مع هوية المنفّذ ووقت التنفيذ.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ADMIN · scales ==================== -->
+<section class="screen" id="admin-scales">
+  <div class="screen-label"><span class="chip">إدارة · مقاييس</span><div><h2>إدارة المقاييس</h2><p>إنشاء، نسخ، اعتماد، ونشر مقاييس جديدة دون تدخّل المطوّر</p></div></div>
+  <div class="admin-shell">
+    <aside class="aside"><div class="brand" style="font-weight:800">دندونة<small style="font-family:var(--font-num);font-size:8px;letter-spacing:2px;display:block">ADMIN</small></div>
+      <nav><a>▦ اللوحة</a><a>👥 المستخدمون</a><a class="on">📐 المقاييس</a><a>❓ الأسئلة</a><a>🎚️ الدرجات</a><a>🎯 التوصيات</a><a>🕌 المراجع الشرعية</a><a>🏫 المؤسسات</a><a>🧾 سجل التدقيق</a><a>🔐 الأمن</a></nav></aside>
+    <div class="amain">
+      <div class="atop"><h2>المقاييس</h2><div class="tools"><button class="btn btn-blue btn-sm">+ مقياس جديد</button></div></div>
+      <div class="table-wrap"><table><thead><tr><th>المقياس</th><th>الفئة</th><th>الأسئلة</th><th>الإصدار</th><th>الحالة</th></tr></thead><tbody>
+        <tr><td><b>التوازن التحفيزي العام</b></td><td>كل المستخدمين</td><td>٢٠–٣٥</td><td>v2.1</td><td><span class="tag tag-green">منشور</span></td></tr>
+        <tr><td><b>التشتّت الرقمي</b></td><td>مراهق/بالغ</td><td>١٢–٢٠</td><td>v1.4</td><td><span class="tag tag-green">منشور</span></td></tr>
+        <tr><td><b>النوم والطاقة</b></td><td>كل المستخدمين</td><td>٨–١٢</td><td>v1.0</td><td><span class="tag tag-gold">قيد الاعتماد</span></td></tr>
+        <tr><td><b>البُعد القيمي والإيماني</b></td><td>اختياري</td><td>١٠–٢٠</td><td>v0.9</td><td><span class="tag tag-slate">مسودة</span></td></tr>
+      </tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ADMIN · questions ==================== -->
+<section class="screen" id="admin-questions">
+  <div class="screen-label"><span class="chip">إدارة · أسئلة</span><div><h2>بنك الأسئلة</h2><p>إضافة، تصنيف، وزن، ومراجعة — بدورة حياة كاملة لكل سؤال</p></div></div>
+  <div class="admin-shell">
+    <aside class="aside"><div class="brand" style="font-weight:800">دندونة<small style="font-family:var(--font-num);font-size:8px;letter-spacing:2px;display:block">ADMIN</small></div>
+      <nav><a>▦ اللوحة</a><a>👥 المستخدمون</a><a>📐 المقاييس</a><a class="on">❓ الأسئلة</a><a>🎚️ الدرجات</a><a>🎯 التوصيات</a><a>🕌 المراجع الشرعية</a><a>🏫 المؤسسات</a><a>🧾 سجل التدقيق</a><a>🔐 الأمن</a></nav></aside>
+    <div class="amain">
+      <div class="atop"><h2>الأسئلة</h2><div class="tools"><input class="searchbox" placeholder="بحث في نص السؤال…"><button class="btn btn-blue btn-sm">+ سؤال</button></div></div>
+      <div class="card pad" style="padding:16px 20px"><div style="font-size:13px;font-weight:700;color:var(--dandona-blue);margin-bottom:8px">دورة حياة السؤال</div>
+        <div class="flow"><span class="n">مسودة</span><span class="ar">←</span><span class="n">مراجعة لغوية</span><span class="ar">←</span><span class="n">مراجعة نفسية</span><span class="ar">←</span><span class="n">مراجعة شرعية</span><span class="ar">←</span><span class="n">تجريبي</span><span class="ar">←</span><span class="n">معتمد</span><span class="ar">←</span><span class="n">منشور</span></div>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>نص السؤال</th><th>المحور</th><th>النوع</th><th>الوزن</th><th>الحساسية</th><th>الحالة</th></tr></thead><tbody>
+        <tr><td><b>عندما أشعر بالملل أفتح الجوال دون هدف</b></td><td>التشتّت الرقمي</td><td>مباشر</td><td class="num">1.0</td><td><span class="tag tag-slate">عادي</span></td><td><span class="tag tag-green">منشور</span></td></tr>
+        <tr><td><b>أجد صعوبة في تأجيل المتعة حتى أنجز مهمة</b></td><td>المكافأة السريعة</td><td>مباشر</td><td class="num">1.2</td><td><span class="tag tag-slate">عادي</span></td><td><span class="tag tag-green">منشور</span></td></tr>
+        <tr><td><b>أستخدم الصلاة كنقطة لتنظيم يومي</b></td><td>البُعد القيمي</td><td>عكسي</td><td class="num">1.0</td><td><span class="tag tag-gold">متوسط</span></td><td><span class="tag tag-gold">مراجعة شرعية</span></td></tr>
+      </tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ADMIN · scoring ==================== -->
+<section class="screen" id="admin-scoring">
+  <div class="screen-label"><span class="chip">إدارة · درجات</span><div><h2>محرّك الدرجات</h2><p>حدود النتيجة (Bands)، الأسئلة العكسية (Reverse)، والأعلام (Flags)</p></div></div>
+  <div class="admin-shell">
+    <aside class="aside"><div class="brand" style="font-weight:800">دندونة<small style="font-family:var(--font-num);font-size:8px;letter-spacing:2px;display:block">ADMIN</small></div>
+      <nav><a>▦ اللوحة</a><a>👥 المستخدمون</a><a>📐 المقاييس</a><a>❓ الأسئلة</a><a class="on">🎚️ الدرجات</a><a>🎯 التوصيات</a><a>🕌 المراجع الشرعية</a><a>🏫 المؤسسات</a><a>🧾 سجل التدقيق</a><a>🔐 الأمن</a></nav></aside>
+    <div class="amain">
+      <div class="atop"><h2>حدود النتيجة والأعلام</h2><div class="tools"><button class="btn btn-blue btn-sm">حفظ التغييرات</button></div></div>
+      <div class="table-wrap"><table><thead><tr><th>المدى</th><th>الوصف</th><th>الرسالة</th></tr></thead><tbody>
+        <tr><td class="num">٠–٢٠</td><td>توازن جيد</td><td>مؤشراتك مستقرة غالبًا. استمر في العادات النافعة</td></tr>
+        <tr><td class="num">٢١–٤٠</td><td>مؤشرات بسيطة</td><td>توجد نقاط صغيرة قابلة للتحسين</td></tr>
+        <tr><td class="num">٤١–٦٠</td><td>مؤشرات متوسطة</td><td>قد تستفيد من خطة تنظيم عادات خلال أسبوعين</td></tr>
+        <tr><td class="num">٦١–٨٠</td><td>مؤشرات مرتفعة</td><td>تحتاج خطوات عملية لتقليل فرط التحفيز</td></tr>
+        <tr><td class="num">٨١–١٠٠</td><td>مؤشرات عالية</td><td>ننصح بخطة متابعة، والتواصل مع مختص إذا أثّرت على حياتك</td></tr>
+      </tbody></table></div>
+      <div class="two">
+        <div class="card pad"><h3 style="font-size:15px;margin-bottom:10px">نموذج ليكرت (مباشر/عكسي)</h3>
+          <div class="kv"><b>لا ينطبق</b><span>مباشر ٠ · عكسي ٤</span><b>ينطبق قليلًا</b><span>مباشر ١ · عكسي ٣</span><b>ينطبق أحيانًا</b><span>مباشر ٢ · عكسي ٢</span><b>ينطبق غالبًا</b><span>مباشر ٣ · عكسي ١</span><b>ينطبق دائمًا</b><span>مباشر ٤ · عكسي ٠</span></div>
+        </div>
+        <div class="card pad"><h3 style="font-size:15px;margin-bottom:10px">الأعلام (Flags)</h3>
+          <div class="tag-row"><span class="tag tag-pink">contradiction_flag</span><span class="tag tag-pink">high_digital_distraction_flag</span><span class="tag tag-pink">sleep_impact_flag</span><span class="tag tag-blue">guardian_required_flag</span><span class="tag tag-gold">specialist_suggestion_flag</span><span class="tag tag-green">faith_content_enabled_flag</span></div>
+          <p style="font-size:12.5px;color:var(--dandona-slate)">تُفعَّل تلقائيًا عند تجاوز عتبات محددة، وكلها قابلة للتهيئة من اللوحة.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ADMIN · recommendations ==================== -->
+<section class="screen" id="admin-recs">
+  <div class="screen-label"><span class="chip">إدارة · توصيات</span><div><h2>محرّك التوصيات</h2><p>ربط النتائج بالمحتوى والخطط بقواعد قابلة للتعديل</p></div></div>
+  <div class="admin-shell">
+    <aside class="aside"><div class="brand" style="font-weight:800">دندونة<small style="font-family:var(--font-num);font-size:8px;letter-spacing:2px;display:block">ADMIN</small></div>
+      <nav><a>▦ اللوحة</a><a>👥 المستخدمون</a><a>📐 المقاييس</a><a>❓ الأسئلة</a><a>🎚️ الدرجات</a><a class="on">🎯 التوصيات</a><a>🕌 المراجع الشرعية</a><a>🏫 المؤسسات</a><a>🧾 سجل التدقيق</a><a>🔐 الأمن</a></nav></aside>
+    <div class="amain">
+      <div class="atop"><h2>قواعد التوصيات</h2><div class="tools"><button class="btn btn-blue btn-sm">+ قاعدة</button></div></div>
+      <div class="table-wrap"><table><thead><tr><th>الشرط</th><th>التوصية</th><th>المحتوى المرتبط</th><th>ركن الطمأنينة</th></tr></thead><tbody>
+        <tr><td><b>distraction ≥ 70</b></td><td>تقليل الإشعارات وتحدي ١٠ دقائق بلا جوال</td><td>كيف أستعيد انتباهي؟</td><td>الذكر وهدوء القلب</td></tr>
+        <tr><td><b>procrastination ≥ 65</b></td><td>مهمة واحدة بعد بداية اليوم</td><td>قاعدة ١٠ دقائق</td><td>حفظ الوقت ونعمة الفراغ</td></tr>
+        <tr><td><b>sleep_energy ≥ 60</b></td><td>إبعاد الجوال قبل النوم</td><td>نومك وطاقة يومك</td><td>شكر نعمة الجسد</td></tr>
+        <tr><td><b>reward ≥ 70</b></td><td>تأجيل المكافأة حتى الإنجاز</td><td>المتعة السريعة والإنجاز</td><td>مجاهدة الهوى بلغة عملية</td></tr>
+      </tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ADMIN · islamic references ==================== -->
+<section class="screen" id="admin-islamic">
+  <div class="screen-label"><span class="chip">إدارة · شرعي</span><div><h2>المراجع الشرعية</h2><p>آيات وأحاديث ومصدر ودرجة واعتماد شرعي قبل النشر</p></div></div>
+  <div class="admin-shell">
+    <aside class="aside"><div class="brand" style="font-weight:800">دندونة<small style="font-family:var(--font-num);font-size:8px;letter-spacing:2px;display:block">ADMIN</small></div>
+      <nav><a>▦ اللوحة</a><a>👥 المستخدمون</a><a>📐 المقاييس</a><a>❓ الأسئلة</a><a>🎚️ الدرجات</a><a>🎯 التوصيات</a><a class="on">🕌 المراجع الشرعية</a><a>🏫 المؤسسات</a><a>🧾 سجل التدقيق</a><a>🔐 الأمن</a></nav></aside>
+    <div class="amain">
+      <div class="atop"><h2>النصوص الشرعية</h2><div class="tools"><button class="btn btn-blue btn-sm">+ نص</button></div></div>
+      <div class="table-wrap"><table><thead><tr><th>النص</th><th>النوع</th><th>المصدر</th><th>الدرجة</th><th>الاعتماد</th></tr></thead><tbody>
+        <tr><td><b>«ألا بذكر الله تطمئنّ القلوب»</b></td><td>آية</td><td>الرعد · ٢٨</td><td><span class="tag tag-green">قطعي</span></td><td><span class="tag tag-green">معتمد</span></td></tr>
+        <tr><td><b>«وتعاونوا على البِرِّ والتقوى…»</b></td><td>آية</td><td>المائدة · ٢</td><td><span class="tag tag-green">قطعي</span></td><td><span class="tag tag-green">معتمد</span></td></tr>
+        <tr><td><b>«احرص على ما ينفعك…»</b></td><td>حديث</td><td>صحيح مسلم</td><td><span class="tag tag-green">صحيح</span></td><td><span class="tag tag-gold">قيد المراجعة</span></td></tr>
+      </tbody></table></div>
+      <div class="safety"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>يُمنع الأحاديث الضعيفة في التوصيات الأساسية، ولا يُستخدم أي نص في التأنيب أو التخويف. المراجعة من مختص شرعي إلزامية قبل النشر.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ADMIN · organizations ==================== -->
+<section class="screen" id="admin-orgs">
+  <div class="screen-label"><span class="chip">إدارة · مؤسسات</span><div><h2>إدارة المؤسسات</h2><p>خطط ودعوات وتقارير مجهولة الهوية</p></div></div>
+  <div class="admin-shell">
+    <aside class="aside"><div class="brand" style="font-weight:800">دندونة<small style="font-family:var(--font-num);font-size:8px;letter-spacing:2px;display:block">ADMIN</small></div>
+      <nav><a>▦ اللوحة</a><a>👥 المستخدمون</a><a>📐 المقاييس</a><a>❓ الأسئلة</a><a>🎚️ الدرجات</a><a>🎯 التوصيات</a><a>🕌 المراجع الشرعية</a><a class="on">🏫 المؤسسات</a><a>🧾 سجل التدقيق</a><a>🔐 الأمن</a></nav></aside>
+    <div class="amain">
+      <div class="atop"><h2>المؤسسات</h2><div class="tools"><button class="btn btn-blue btn-sm">+ مؤسسة</button></div></div>
+      <div class="table-wrap"><table><thead><tr><th>المؤسسة</th><th>النوع</th><th>الأعضاء</th><th>الخطة</th><th>الحالة</th></tr></thead><tbody>
+        <tr><td><b>مدرسة دانة النموذجية</b></td><td>تعليمية</td><td class="num">640</td><td>سنوية</td><td><span class="tag tag-green">نشطة</span></td></tr>
+        <tr><td><b>شركة أفق التقنية</b></td><td>شركة</td><td class="num">210</td><td>ربع سنوية</td><td><span class="tag tag-green">نشطة</span></td></tr>
+        <tr><td><b>جامعة المستقبل</b></td><td>تعليمية</td><td class="num">1,850</td><td>تجريبية</td><td><span class="tag tag-gold">قيد التفعيل</span></td></tr>
+      </tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ADMIN · audit ==================== -->
+<section class="screen" id="admin-audit">
+  <div class="screen-label"><span class="chip">إدارة · تدقيق</span><div><h2>سجل التدقيق (Audit Log)</h2><p>كل تعديل واطّلاع وتصدير — غير قابل للتعديل من المستخدمين</p></div></div>
+  <div class="admin-shell">
+    <aside class="aside"><div class="brand" style="font-weight:800">دندونة<small style="font-family:var(--font-num);font-size:8px;letter-spacing:2px;display:block">ADMIN</small></div>
+      <nav><a>▦ اللوحة</a><a>👥 المستخدمون</a><a>📐 المقاييس</a><a>❓ الأسئلة</a><a>🎚️ الدرجات</a><a>🎯 التوصيات</a><a>🕌 المراجع الشرعية</a><a>🏫 المؤسسات</a><a class="on">🧾 سجل التدقيق</a><a>🔐 الأمن</a></nav></aside>
+    <div class="amain">
+      <div class="atop"><h2>سجل التدقيق</h2><div class="tools"><input class="searchbox" placeholder="بحث بالحدث أو المنفّذ…"><button class="btn btn-ghost btn-sm">تصدير</button></div></div>
+      <div class="table-wrap"><table><thead><tr><th>الوقت</th><th>المنفّذ</th><th>الحدث</th><th>الهدف</th><th>النتيجة</th></tr></thead><tbody>
+        <tr><td class="num">09/07/2026 · 14:22</td><td>specialist #S-0044</td><td>عرض نتيجة</td><td>#A-2291</td><td><span class="tag tag-green">مُصرّح</span></td></tr>
+        <tr><td class="num">09/07/2026 · 13:05</td><td>admin #root</td><td>تعديل سؤال</td><td>Q-1180</td><td><span class="tag tag-green">تم</span></td></tr>
+        <tr><td class="num">09/07/2026 · 11:40</td><td>user #A-2140</td><td>تصدير بيانات</td><td>ذاتي</td><td><span class="tag tag-green">تم</span></td></tr>
+        <tr><td class="num">08/07/2026 · 22:10</td><td>org #ORG-3</td><td>محاولة وصول لبيانات فردية</td><td>#A-2291</td><td><span class="tag" style="background:#fee2e2;color:#e11d48">مرفوض</span></td></tr>
+      </tbody></table></div>
+      <div class="safety"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>يُكتب سجل عند: عرض نتيجة، تصدير، مشاركة، حذف، تعديل سؤال، أو تغيير صلاحية. السجل غير قابل للتعديل.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ADMIN · security ==================== -->
+<section class="screen" id="admin-security">
+  <div class="screen-label"><span class="chip">إدارة · أمن</span><div><h2>الأمن والامتثال</h2><p>Security events، المصادقة الثنائية MFA، ومفاتيح API</p></div></div>
+  <div class="admin-shell">
+    <aside class="aside"><div class="brand" style="font-weight:800">دندونة<small style="font-family:var(--font-num);font-size:8px;letter-spacing:2px;display:block">ADMIN</small></div>
+      <nav><a>▦ اللوحة</a><a>👥 المستخدمون</a><a>📐 المقاييس</a><a>❓ الأسئلة</a><a>🎚️ الدرجات</a><a>🎯 التوصيات</a><a>🕌 المراجع الشرعية</a><a>🏫 المؤسسات</a><a>🧾 سجل التدقيق</a><a class="on">🔐 الأمن</a></nav></aside>
+    <div class="amain">
+      <div class="atop"><h2>الأمن</h2><div class="tools"><button class="btn btn-blue btn-sm">توليد مفتاح API</button></div></div>
+      <div class="astat"><div class="s"><div class="n">100%</div><div class="c">اتصالات TLS</div></div><div class="s"><div class="n">MFA</div><div class="c">مفعّلة لكل الإدارة</div></div><div class="s"><div class="n">2</div><div class="c">أحداث أمنية اليوم</div></div><div class="s"><div class="n">RLS</div><div class="c">أمان على مستوى الصف</div></div></div>
+      <div class="two">
+        <div class="card list-card"><h3>أحداث أمنية</h3>
+          <div class="lrow"><div class="av" style="background:#fef3c7;color:#b45309">⚠</div><div class="tx"><b>محاولات دخول فاشلة متكرّرة</b><small>تم تفعيل Rate limiting</small></div><span class="tag tag-gold">متوسط</span></div>
+          <div class="lrow"><div class="av" style="background:#dcfce7;color:#16a34a">✓</div><div class="tx"><b>تدوير مفاتيح الأسرار</b><small>عبر Secret Manager</small></div><span class="tag tag-green">تم</span></div>
+        </div>
+        <div class="card pad"><h3 style="font-size:15px;margin-bottom:10px">ضوابط مطبّقة</h3>
+          <div class="tag-row"><span class="tag tag-blue">TLS</span><span class="tag tag-blue">RBAC</span><span class="tag tag-blue">MFA</span><span class="tag tag-blue">Row Level Security</span><span class="tag tag-green">حماية XSS/CSRF</span><span class="tag tag-green">Rate limiting</span><span class="tag tag-gold">نسخ احتياطي</span></div>
+          <p style="font-size:12.5px;color:var(--dandona-slate)">متوافق مع الضوابط الأساسية للأمن السيبراني (ECC) ونظام حماية البيانات الشخصية (PDPL).</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -621,22 +987,48 @@ a{color:inherit;text-decoration:none}
 
 <footer class="foot">
   <p><b>منصة دندونة · DANDOUNA</b> — مؤشر التوازن التحفيزي والسلوكي · هوية V4: بياض ناعم، أزرق يطمئن، وردي يحنو</p>
-  <p style="margin-top:6px">النتائج إرشادية تثقيفية وليست تشخيصًا طبيًا أو نفسيًا، ولا تُغني عن مختص مرخّص · جميع الشاشات RTL كامل ومتوافقة مع نظام الألوان ٧٠٪ أبيض · ٢٠٪ أزرق · ٨٪ وردي · ٢٪ ذهبي</p>
+  <p style="margin-top:6px">٢٨ واجهة وبوابة · النتائج إرشادية تثقيفية وليست تشخيصًا طبيًا أو نفسيًا · جميع الشاشات RTL كامل ونظام ألوان ٧٠٪ أبيض · ٢٠٪ أزرق · ٨٪ وردي · ٢٪ ذهبي</p>
 </footer>
 
 <script>
 (function(){
+  var groupbar=document.getElementById('groupbar');
   var nav=document.getElementById('nav');
-  var btns=nav.querySelectorAll('button');
+  var groups=nav.querySelectorAll('.ngroup');
   var screens=document.querySelectorAll('.screen');
-  nav.addEventListener('click',function(e){
-    var b=e.target.closest('button'); if(!b)return;
-    btns.forEach(function(x){x.classList.remove('active')});
-    b.classList.add('active');
-    var id=b.getAttribute('data-s');
+
+  function showScreen(id){
     screens.forEach(function(s){s.classList.toggle('show', s.id===id)});
     window.scrollTo({top:0,behavior:'smooth'});
+  }
+  // group switching
+  groupbar.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b)return;
+    groupbar.querySelectorAll('button').forEach(function(x){x.classList.remove('gactive')});
+    b.classList.add('gactive');
+    var g=b.getAttribute('data-g');
+    groups.forEach(function(gr){gr.hidden = gr.getAttribute('data-g')!==g});
+    // activate first screen of that group
+    var grp=nav.querySelector('.ngroup[data-g="'+g+'"]');
+    var first=grp.querySelector('button');
+    grp.querySelectorAll('button').forEach(function(x){x.classList.remove('active')});
+    first.classList.add('active');
+    showScreen(first.getAttribute('data-s'));
   });
+  // screen switching
+  nav.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b)return;
+    var grp=b.closest('.ngroup');
+    grp.querySelectorAll('button').forEach(function(x){x.classList.remove('active')});
+    b.classList.add('active');
+    showScreen(b.getAttribute('data-s'));
+  });
+  // likert demo
+  var lk=document.getElementById('likert');
+  if(lk){lk.addEventListener('click',function(e){var o=e.target.closest('.lk');if(!o)return;lk.querySelectorAll('.lk').forEach(function(x){x.classList.remove('sel')});o.classList.add('sel')})}
+  // plan tabs demo
+  var pt=document.getElementById('planTabs');
+  if(pt){pt.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;pt.querySelectorAll('button').forEach(function(x){x.classList.remove('on')});b.classList.add('on')})}
 })();
 </script>
 </body>
