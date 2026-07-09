@@ -451,3 +451,9 @@ tbody td{padding:12px 16px;border-bottom:1px solid var(--border2);color:var(--sl
 .admin-stat div:last-child{font-size:13px;color:var(--slate);margin-top:2px}
 .admin-textarea{border:1px solid var(--border);border-radius:var(--r-btn);padding:10px 12px;font-family:inherit;font-size:14px;color:var(--blue);resize:vertical;width:100%}
 .admin-textarea:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 3px rgba(247,74,128,.12)}
+
+/* ===== الخطة والتحديات ===== */
+.challenge-row{display:flex;align-items:flex-start;gap:10px;background:var(--soft-pink);border-radius:12px;padding:10px 12px;border:0;width:100%;text-align:right;cursor:pointer}
+.challenge-row .chk{width:24px;height:24px;flex:0 0 24px;border-radius:8px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;color:#fff;margin-top:2px}
+.challenge-row .chk.on{background:var(--green);border-color:var(--green)}
+.ch-done b,.ch-done p{text-decoration:line-through;color:var(--slate2)}

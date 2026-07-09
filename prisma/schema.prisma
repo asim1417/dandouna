@@ -108,9 +108,50 @@ model Child {
 
   assessments Assessment[]
   consents    Consent[]
+  plans       Plan[]
+  specialistLinks SpecialistLink[]
 
   @@index([guardianId])
   @@index([deletedAt])
+}
+
+// ===================== الخطة والتحديات =====================
+model Plan {
+  id           String      @id @default(cuid())
+  child        Child       @relation(fields: [childId], references: [id], onDelete: Cascade)
+  childId      String
+  assessmentId String?
+  title        String
+  createdAt    DateTime    @default(now())
+  challenges   Challenge[]
+
+  @@index([childId])
+}
+
+model Challenge {
+  id          String   @id @default(cuid())
+  plan        Plan     @relation(fields: [planId], references: [id], onDelete: Cascade)
+  planId      String
+  title       String
+  description String?
+  order       Int      @default(0)
+  done        Boolean  @default(false)
+
+  @@index([planId])
+}
+
+// ===================== مشاركة المختص =====================
+// ولي الأمر يشارك ملف طفل مع مختص (بالبريد). يظهر للمختص عند دخوله بنفس البريد.
+model SpecialistLink {
+  id              String   @id @default(cuid())
+  child           Child    @relation(fields: [childId], references: [id], onDelete: Cascade)
+  childId         String
+  specialistEmail String
+  grantedById     String   // ولي الأمر المشارِك
+  createdAt       DateTime @default(now())
+
+  @@unique([childId, specialistEmail])
+  @@index([specialistEmail])
 }
 
 // ربط ولي الأمر بالقاصر

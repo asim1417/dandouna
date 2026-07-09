@@ -28,6 +28,24 @@ async function grantConsent(formData: FormData) {
   redirect(`/children/${childId}`)
 }
 
+async function shareWithSpecialist(formData: FormData) {
+  'use server'
+  const childId = String(formData.get('childId') || '')
+  const email = String(formData.get('email') || '').trim().toLowerCase()
+  const user = await currentUser()
+  if (!user) redirect('/auth')
+  const child = await prisma.child.findFirst({ where: { id: childId, guardianId: user.id, deletedAt: null } })
+  if (child && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    await prisma.specialistLink.upsert({
+      where: { childId_specialistEmail: { childId, specialistEmail: email } },
+      update: {},
+      create: { childId, specialistEmail: email, grantedById: user.id },
+    })
+    await prisma.auditLog.create({ data: { actorId: user.id, action: 'specialist.share', entity: 'SpecialistLink', entityId: childId } })
+  }
+  redirect(`/children/${childId}`)
+}
+
 async function deleteChild(formData: FormData) {
   'use server'
   const childId = String(formData.get('childId') || '')
@@ -50,6 +68,7 @@ export default async function ChildDetailPage({ params }: { params: Promise<{ id
     where: { id, guardianId: user.id, deletedAt: null },
     include: {
       consents: { where: { status: 'GRANTED' }, take: 1 },
+      specialistLinks: { orderBy: { createdAt: 'desc' } },
       assessments: {
         orderBy: { startedAt: 'desc' },
         select: { id: true, status: true, version: { select: { scale: { select: { title: true } } } } },
@@ -123,7 +142,33 @@ export default async function ChildDetailPage({ params }: { params: Promise<{ id
           </div>
         )}
 
-        <form action={deleteChild} style={{ marginTop: 30 }}>
+        <div className="card pad" style={{ marginTop: 26 }}>
+          <h4 style={{ marginBottom: 4 }}>
+            <Icon name="heart-handshake" size={16} /> مشاركة مع مختص
+          </h4>
+          <p style={{ fontSize: 13, marginBottom: 12 }}>
+            بتفويض صريح منك، يمكن لمختص الاطّلاع على تقارير {child.fullName} عند دخوله بنفس البريد.
+          </p>
+          {child.specialistLinks.length > 0 && (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
+              {child.specialistLinks.map((l) => (
+                <span key={l.id} className="pill pill-pink" style={{ fontSize: 12 }}>
+                  {l.specialistEmail}
+                </span>
+              ))}
+            </div>
+          )}
+          <form action={shareWithSpecialist} style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <input type="hidden" name="childId" value={child.id} />
+            <span className="field-input" style={{ flex: 1, minWidth: 200 }}>
+              <Icon name="mail" size={16} />
+              <input name="email" type="email" placeholder="بريد المختص" required />
+            </span>
+            <button type="submit" className="btn btn-ghost btn-sm">مشاركة</button>
+          </form>
+        </div>
+
+        <form action={deleteChild} style={{ marginTop: 20 }}>
           <input type="hidden" name="childId" value={child.id} />
           <button type="submit" className="btn btn-ghost btn-sm" style={{ borderColor: '#fecdd3', color: '#e11d48' }}>
             <Icon name="shield" size={14} /> حذف الملف نهائيًا

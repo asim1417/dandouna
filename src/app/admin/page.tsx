@@ -14,8 +14,15 @@ const CARDS = [
   { href: '/admin/references', icon: 'book-open', title: 'المراجع', desc: 'المراجع الشرعية والتربوية' },
 ]
 
+const ADMIN_CARDS = [
+  { href: '/admin/users', icon: 'users', title: 'المستخدمون', desc: 'إدارة الأدوار والصلاحيات' },
+  { href: '/admin/audit', icon: 'shield', title: 'سجل التدقيق', desc: 'سجل العمليات (PDPL)' },
+]
+
 export default async function AdminPage() {
-  await requirePermission('scale:manage')
+  const user = await requirePermission('scale:manage')
+  const isAdmin = user.role === 'ADMIN'
+  const cards = isAdmin ? [...CARDS, ...ADMIN_CARDS] : CARDS
   const [scales, questions, recs, refs] = await Promise.all([
     prisma.scale.count(),
     prisma.question.count(),
@@ -34,7 +41,7 @@ export default async function AdminPage() {
         <p className="lead">أضِف المقاييس والأسئلة والتوصيات والمراجع دون الحاجة إلى مبرمج.</p>
 
         <div className="trust" style={{ marginTop: 20 }}>
-          {CARDS.map((c) => (
+          {cards.map((c) => (
             <Link key={c.href} href={c.href} className="t t-link">
               <div className="ic-tile">
                 <Icon name={c.icon} />

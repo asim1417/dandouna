@@ -63,6 +63,19 @@ async function main() {
     });
   }
 
+  // مؤسسة/شركة تجريبية + عضوية ولي الأمر (لبوابات المؤسسة/الشركة)
+  const existingOrg = await prisma.organization.findFirst({ where: { name: "شركة أفق التقنية" } });
+  if (!existingOrg) {
+    const org = await prisma.organization.create({
+      data: { name: "شركة أفق التقنية", type: "COMPANY", seats: 50 },
+    });
+    await prisma.membership.upsert({
+      where: { userId_orgId: { userId: guardian.id, orgId: org.id } },
+      update: {},
+      create: { userId: guardian.id, orgId: org.id, roleInOrg: "COMPANY" },
+    });
+  }
+
   // تفادي التكرار عند إعادة التشغيل
   const existingScale = await prisma.scale.findUnique({ where: { code: "DOPA-SCREEN-01" } });
   if (existingScale) {

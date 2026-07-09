@@ -54,15 +54,15 @@ export default async function ParentDashboardPage() {
             <b>ابدأ اختبارًا</b>
             <small>الاختبارات المتاحة</small>
           </Link>
+          <Link href="/plan" className="t t-link">
+            <div className="ic-tile"><Icon name="calendar-check" /></div>
+            <b>الخطة والتحديات</b>
+            <small>خطط عملية</small>
+          </Link>
           <Link href="/recommendations" className="t t-link">
             <div className="ic-tile"><Icon name="sprout" /></div>
             <b>التوصيات</b>
             <small>من نتائج أطفالك</small>
-          </Link>
-          <Link href="/children/new" className="t t-link">
-            <div className="ic-tile"><Icon name="user" /></div>
-            <b>إضافة طفل</b>
-            <small>ملف جديد</small>
           </Link>
         </div>
 
