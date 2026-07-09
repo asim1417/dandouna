@@ -108,6 +108,35 @@ async function importScale(s: ScaleJson, refIds: Set<string>) {
   });
 }
 
+async function importChallenges() {
+  const data = JSON.parse(readFileSync(path.join(DIR, "challenges.json"), "utf-8"));
+  for (const p of data.programs ?? []) {
+    await prisma.challengeProgram.upsert({
+      where: { code: p.code },
+      update: { title: p.title, audience: p.audience, durationDays: p.durationDays, goal: p.goal, completionBadge: p.completionBadge ?? null, suggestedForBands: p.suggestedForBands ?? [], days: p.days ?? [] },
+      create: { code: p.code, title: p.title, audience: p.audience, durationDays: p.durationDays, goal: p.goal, completionBadge: p.completionBadge ?? null, suggestedForBands: p.suggestedForBands ?? [], days: p.days ?? [] },
+    });
+  }
+  for (const h of data.dailyHabits ?? []) {
+    await prisma.habitTemplate.upsert({
+      where: { code: h.code },
+      update: { title: h.title, desc: h.desc, points: h.points ?? 0 },
+      create: { code: h.code, title: h.title, desc: h.desc, points: h.points ?? 0 },
+    });
+  }
+  console.log(`✓ برامج تحدٍّ: ${(data.programs ?? []).length} · عادات: ${(data.dailyHabits ?? []).length}`);
+}
+
+async function importCalmAndReports() {
+  const data = JSON.parse(readFileSync(path.join(DIR, "calm-and-reports.json"), "utf-8"));
+  for (const key of ["calmCorner", "reportTexts"]) {
+    if (data[key]) {
+      await prisma.siteContent.upsert({ where: { key }, update: { data: data[key] }, create: { key, data: data[key] } });
+    }
+  }
+  console.log("✓ ركن الطمأنينة ونصوص التقارير مُخزّنة (SiteContent)");
+}
+
 async function main() {
   console.log("→ استيراد حزمة المحتوى…");
   const refIds = await importReferences();
@@ -120,6 +149,9 @@ async function main() {
     n++;
     console.log(`  ✓ ${s.code} (${s.questions.length} سؤال · ${s.bands.length} نطاق · ${(s.flags ?? []).length} عَلَم)`);
   }
+
+  await importChallenges();
+  await importCalmAndReports();
 
   console.log(`\n✓ اكتمل الاستيراد: ${refIds.size} مرجع · ${n} مقياس (كلها approved=false)`);
   if (warnings.length) console.log(`⚠ تحذيرات: ${warnings.length}`);

@@ -64,6 +64,11 @@ export default async function ParentDashboardPage() {
             <b>التوصيات</b>
             <small>من نتائج أطفالك</small>
           </Link>
+          <Link href="/calm" className="t t-link">
+            <div className="ic-tile"><Icon name="moon-star" /></div>
+            <b>ركن الطمأنينة</b>
+            <small>تنفّس وأذكار</small>
+          </Link>
         </div>
 
         <h3 style={{ margin: '30px 0 14px' }}>أطفالك</h3>

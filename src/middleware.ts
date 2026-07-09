@@ -17,6 +17,7 @@ const PROTECTED = [
   "/specialist",
   "/company",
   "/institution",
+  "/calm",
 ];
 const PROTECTED_API = ["/api/assessments", "/api/children", "/api/consent", "/api/moods", "/api/admin"];
 
@@ -59,6 +60,7 @@ export const config = {
     "/specialist/:path*",
     "/company/:path*",
     "/institution/:path*",
+    "/calm/:path*",
     "/api/:path*",
   ],
 };

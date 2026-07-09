@@ -140,6 +140,35 @@ model Challenge {
   @@index([planId])
 }
 
+// ===================== برامج التحدي والعادات (قوالب محتوى) =====================
+model ChallengeProgram {
+  id               String  @id @default(cuid())
+  code             String  @unique
+  title            String
+  audience         String  // TEEN | CHILD | ADULT ...
+  durationDays     Int
+  goal             String
+  completionBadge  String?
+  suggestedForBands Json?  // مصفوفة تسميات النطاقات المناسبة
+  days             Json    // مصفوفة الأيام {day,title,task,points}
+  createdAt        DateTime @default(now())
+}
+
+model HabitTemplate {
+  id     String @id @default(cuid())
+  code   String @unique
+  title  String
+  desc   String
+  points Int    @default(0)
+}
+
+// محتوى عام (ركن الطمأنينة، نصوص التقارير الموحّدة) — key/value مرن
+model SiteContent {
+  key       String   @id
+  data      Json
+  updatedAt DateTime @updatedAt
+}
+
 // ===================== مشاركة المختص =====================
 // ولي الأمر يشارك ملف طفل مع مختص (بالبريد). يظهر للمختص عند دخوله بنفس البريد.
 model SpecialistLink {
