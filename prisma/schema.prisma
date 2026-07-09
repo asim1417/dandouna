@@ -1,0 +1,139 @@
+// مخطط قاعدة بيانات منصة دندونة
+// المرحلة ٠–١: المصادقة، الأدوار، وموافقة ولي الأمر + هيكل أوّلي للمقاييس.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ===== الأدوار =====
+enum Role {
+  USER // مستخدم (طفل/مراهق/بالغ)
+  PARENT // ولي أمر
+  SPECIALIST // مختص
+  INSTITUTION // مؤسسة
+  COMPANY // شركة
+  ADMIN // مدير النظام
+}
+
+// فئة عمرية تحدد مسار الموافقة
+enum AgeBand {
+  ADULT // بالغ (18+)
+  MINOR // قاصر (يتطلب موافقة ولي أمر)
+}
+
+enum ConsentStatus {
+  PENDING // بانتظار موافقة ولي الأمر
+  APPROVED // معتمدة
+  REJECTED // مرفوضة
+}
+
+// ===== المستخدم =====
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  passwordHash  String? // فارغ عند الدخول عبر مزوّد خارجي فقط
+  image         String?
+  role          Role      @default(USER)
+  ageBand       AgeBand   @default(ADULT)
+  locale        String    @default("ar")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts        Account[]
+  sessions        Session[]
+  // موافقات ولي الأمر التي يملكها هذا المستخدم (بصفته قاصرًا)
+  consentsAsMinor GuardianConsent[] @relation("MinorConsents")
+  // موافقات منحها هذا المستخدم (بصفته ولي أمر)
+  consentsAsGuardian GuardianConsent[] @relation("GuardianConsents")
+
+  @@index([role])
+}
+
+// ===== موافقة ولي الأمر (لبيانات القُصّر — متطلب PDPL) =====
+model GuardianConsent {
+  id           String        @id @default(cuid())
+  minorId      String
+  minor        User          @relation("MinorConsents", fields: [minorId], references: [id], onDelete: Cascade)
+  guardianId   String?
+  guardian     User?         @relation("GuardianConsents", fields: [guardianId], references: [id])
+  guardianName String
+  guardianEmail String
+  status       ConsentStatus @default(PENDING)
+  token        String        @unique // رابط الاعتماد المُرسل لولي الأمر
+  approvedAt   DateTime?
+  createdAt    DateTime      @default(now())
+
+  @@index([minorId])
+  @@index([status])
+}
+
+// ===== نماذج Auth.js (Prisma Adapter) =====
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ===== هيكل أولي لمحرّك المقاييس (المرحلة ٢) =====
+model Scale {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  title       String
+  description String?
+  active      Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  questions   Question[]
+}
+
+enum QuestionType {
+  LIKERT // مقياس ليكرت
+  CHOICE // اختيار من متعدد
+  BOOLEAN // نعم/لا
+}
+
+model Question {
+  id      String       @id @default(cuid())
+  scaleId String
+  scale   Scale        @relation(fields: [scaleId], references: [id], onDelete: Cascade)
+  order   Int          @default(0)
+  text    String
+  type    QuestionType @default(LIKERT)
+  weight  Float        @default(1)
+
+  @@index([scaleId])
+}
