@@ -1,0 +1,468 @@
+{
+  "code": "DOPA-SOCIAL-01",
+  "title": "مقياس التحقق الاجتماعي الرقمي",
+  "description": "مقياس أصلي يرصد ارتباط تقدير الذات بالإعجابات والتعليقات وسرعة الردود. النتائج إرشادية تثقيفية وليست تشخيصًا.",
+  "audience": "USER",
+  "version": 1,
+  "scoring": "SUM",
+  "questions": [
+    {
+      "order": 1,
+      "text": "أتفقد التفاعل على منشوري خلال الدقائق الأولى مرارًا",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "text": "يتأثر مزاجي إذا قلّ التفاعل عما توقعت",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "text": "أحذف منشورًا لأن تفاعله ضعيف",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "text": "أعدّل صوري أو كلامي كثيرًا قبل النشر خوفًا من الأحكام",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "text": "أنشر لأشارك ما ينفع أو يفرح بغضّ النظر عن التفاعل",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "text": "أقارن حياتي بحياة من أتابعهم وأشعر بالنقص",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "text": "أشعر بضغط للرد فورًا حتى لا يزعل أحد",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "text": "أتفقد من شاهد قصتي شخصًا شخصًا",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "text": "أشارك لحظاتي أولًا بأول وكأن اللحظة لا تكتمل بلا نشر",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "text": "أستطيع إغلاق التطبيقات أيام المناسبات والاستمتاع بحضوري",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 11,
+      "text": "يضايقني أن أرى أصدقائي مجتمعين في منشور بدوني",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 12,
+      "text": "أعدت ترتيب يومي أو مكاني من أجل صورة للنشر",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "bands": [
+    {
+      "subscale": null,
+      "min": 0,
+      "max": 12,
+      "label": "متوازن",
+      "interpretation": "علاقتك بالتفاعل الاجتماعي الرقمي صحية؛ تشارك ولا تتعلق.",
+      "recommendations": [
+        {
+          "title": "واصل بوعي",
+          "body": "اجعل النشر امتدادًا لحياتك لا مقياسًا لقيمتها.",
+          "references": [
+            "REF-001"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 13,
+      "max": 24,
+      "label": "انتباه مبكر",
+      "interpretation": "بدأ التفاعل يلمس مزاجك وقراراتك.",
+      "recommendations": [
+        {
+          "title": "أخفِ الأرقام",
+          "body": "عطّل عدادات الإعجاب إن أتاح التطبيق، وأجّل تفقد التفاعل لمرة واحدة مساءً.",
+          "references": [
+            "REF-011"
+          ]
+        },
+        {
+          "title": "نقّح متابعاتك",
+          "body": "ألغِ متابعة الحسابات التي تخرج منها بشعور النقص، وأبقِ ما يفيدك ويريحك.",
+          "references": [
+            "REF-009"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 25,
+      "max": 36,
+      "label": "نمط ملحوظ",
+      "interpretation": "تقديرك لذاتك صار مرتبطًا بعدّادات خارجية، وهذا مرهق ومستنزف.",
+      "recommendations": [
+        {
+          "title": "صيام تفاعل",
+          "body": "أسبوعان بلا نشر إطلاقًا (مشاهدة فقط إن شئت)؛ لاحظ كيف تعود اللحظات ملكك.",
+          "references": [
+            "REF-007"
+          ]
+        },
+        {
+          "title": "قيمة بلا جمهور",
+          "body": "افعل أسبوعيًا شيئًا جميلًا لا تخبر به أحدًا ولا تنشره؛ تدريب عملي على القيمة الذاتية.",
+          "references": [
+            "REF-003"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 37,
+      "max": 48,
+      "label": "نمط مرتفع",
+      "interpretation": "الارتباط شديد ويستهلك مزاجك يوميًا. تستحق دعمًا أعمق من مجرد الضبط التقني.",
+      "recommendations": [
+        {
+          "title": "تحدث مع مختص",
+          "body": "مختص نفسي يساعدك على بناء تقدير ذات لا يهتز بالأرقام؛ هذه أنفع خطوة الآن.",
+          "references": [
+            "REF-007"
+          ]
+        },
+        {
+          "title": "عد للواقع تدريجيًا",
+          "body": "استبدل ساعة التصفح اليومية بلقاء أو مكالمة حقيقية مع شخص تحبه.",
+          "references": [
+            "REF-004"
+          ]
+        }
+      ]
+    }
+  ],
+  "flags": [
+    {
+      "code": "SPECIALIST_ADVISED",
+      "label": "يُنصح بمراجعة مختص",
+      "operator": "GTE",
+      "threshold": 37,
+      "onSubscale": null,
+      "severity": "WARN"
+    }
+  ],
+  "references": []
+}

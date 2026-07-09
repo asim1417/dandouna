@@ -1,0 +1,399 @@
+{
+  "code": "DOPA-FAMILY-01",
+  "title": "مقياس البيئة الرقمية الأسرية",
+  "description": "يقيّم ولي الأمر بيئة البيت الرقمية كلها لا طفلًا بعينه؛ لأن بيئة البيت أقوى من أي قاعدة فردية. النتائج إرشادية تثقيفية وليست تشخيصًا.",
+  "audience": "GUARDIAN",
+  "version": 1,
+  "scoring": "SUM",
+  "questions": [
+    {
+      "order": 1,
+      "text": "تحضر الأجهزة معنا على مائدة الطعام",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "text": "يقضي أفراد البيت المساء كلٌّ على جهازه في غرفته",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "text": "نستخدم الشاشة لإسكات الصغار أو إشغالهم",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "text": "لدينا أوقات عائلية أسبوعية ثابتة بلا شاشات",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "text": "ينام أفراد الأسرة وأجهزتهم داخل غرف نومهم",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "text": "يرى الأبناء والدَيهم منشغلين بالهاتف أثناء الحديث معهم",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "text": "لدينا قواعد شاشة واضحة يعرفها الجميع وتُطبق",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "text": "تشتعل خلافات متكررة في البيت بسبب الأجهزة",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "text": "نمارس نشاطًا مشتركًا خارج البيت مرة أسبوعيًا على الأقل",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "text": "تعمل الشاشات في الخلفية طوال اليوم حتى بلا مشاهد",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "bands": [
+    {
+      "subscale": null,
+      "min": 0,
+      "max": 10,
+      "label": "بيئة متوازنة",
+      "interpretation": "بيتكم يقود الأجهزة ولا تقوده؛ استمروا.",
+      "recommendations": [
+        {
+          "title": "وثّقوا نجاحكم",
+          "body": "اكتبوا ميثاقكم الرقمي الحالي وعلّقوه؛ التوثيق يحمي العادة عند الضغوط.",
+          "references": [
+            "REF-012"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 11,
+      "max": 20,
+      "label": "انتباه مبكر",
+      "interpretation": "تسريبات صغيرة في بيئة البيت تتسع مع الوقت إن تُركت.",
+      "recommendations": [
+        {
+          "title": "منطقتان محميتان",
+          "body": "ابدؤوا بأسهل مكسبين: مائدة بلا أجهزة، وشحن الأجهزة ليلًا خارج غرف النوم للجميع.",
+          "references": [
+            "REF-004"
+          ]
+        },
+        {
+          "title": "موعد عائلي ثابت",
+          "body": "خصصوا أمسية أسبوعية للجميع بلا شاشات: لعب، مشي، أو زيارة.",
+          "references": [
+            "REF-012"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 21,
+      "max": 30,
+      "label": "بيئة مستنزفة",
+      "interpretation": "الأجهزة تعيد تشكيل علاقات البيت والخلافات شاهدة.",
+      "recommendations": [
+        {
+          "title": "ميثاق البيت",
+          "body": "اجتماع أسري ودي يخرج بميثاق مكتوب يشارك الجميع في صياغته — يشمل الوالدين أولًا — بقواعد وعواقب متفق عليها.",
+          "references": [
+            "REF-012"
+          ]
+        },
+        {
+          "title": "برنامج الثلاثين يومًا",
+          "body": "نفّذوا «بيتنا المتوازن» من قسم التحديات كمشروع عائلي واحد بلوحة إنجاز مشتركة.",
+          "references": [
+            "REF-007"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 31,
+      "max": 40,
+      "label": "بيئة حرجة",
+      "interpretation": "البيت يعيش جزرًا رقمية متجاورة لا أسرة واحدة، والإصلاح يبدأ من الوالدين لا الأبناء.",
+      "recommendations": [
+        {
+          "title": "ابدأ بنفسك أسبوعًا",
+          "body": "قبل أي قاعدة على الأبناء: أسبوع يلتزم فيه الوالدان أمامهم بمائدة وحديث بلا هاتف؛ القدوة تفتح الباب.",
+          "references": [
+            "REF-012"
+          ]
+        },
+        {
+          "title": "استعينوا بمرشد أسري",
+          "body": "مرشد أسري يساعدكم على إعادة البناء بلا صدام، خصوصًا إن كانت الخلافات محتدمة.",
+          "references": [
+            "REF-010"
+          ]
+        }
+      ]
+    }
+  ],
+  "flags": [],
+  "references": []
+}

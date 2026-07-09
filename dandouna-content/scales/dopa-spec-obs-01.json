@@ -1,0 +1,445 @@
+{
+  "code": "DOPA-SPEC-OBS-01",
+  "title": "قائمة ملاحظة المختص للأنماط الرقمية",
+  "description": "أداة منظِّمة لملاحظات المختص عن الحالة خلال المقابلة وتقارير الأسرة؛ تُعبأ من قبل المختص وتوثّق شدة المؤشرات الملحوظة. النتائج إرشادية تثقيفية وليست تشخيصًا.",
+  "audience": "SPECIALIST",
+  "version": 1,
+  "scoring": "SUM",
+  "questions": [
+    {
+      "order": 1,
+      "text": "فقدان السيطرة: محاولات تقليل فاشلة متكررة يذكرها المستفيد أو أسرته",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "text": "الانسحاب: تهيّج أو قلق ملحوظ عند المنع أو الانقطاع",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "text": "التحمّل: تصاعد مدة أو شدة الاستخدام لتحقيق الرضا نفسه",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "text": "الانشغال المعرفي: حديث متكرر عن المحتوى/اللعبة خارج وقت الاستخدام",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "text": "الاستخدام كتنظيم انفعالي: اللجوء للجهاز عند الضيق أو التوتر",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "text": "الإخفاء: كذب أو تمويه بشأن مقدار الاستخدام",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "text": "الأثر الوظيفي: تراجع دراسي أو مهني موثّق",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "text": "الأثر الاجتماعي: انسحاب من العلاقات والأنشطة الواقعية",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "text": "اضطراب النوم المرتبط بالاستخدام",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "text": "استمرار الاستخدام رغم إدراك الضرر",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 11,
+      "text": "وجود عوامل حماية فاعلة: أسرة داعمة وأنشطة بديلة",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 12,
+      "text": "استبصار المستفيد: وعي بالمشكلة ودافعية للتغيير",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "bands": [
+    {
+      "subscale": null,
+      "min": 0,
+      "max": 12,
+      "label": "مؤشرات دنيا",
+      "interpretation": "الملاحظ لا يتجاوز الاستخدام الشائع؛ يُكتفى بالتثقيف والمتابعة الذاتية عبر مقاييس المنصة.",
+      "recommendations": [
+        {
+          "title": "خطة خفيفة",
+          "body": "تثقيف رقمي + متابعة بمقياس ذاتي بعد شهر.",
+          "references": [
+            "REF-003"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 13,
+      "max": 24,
+      "label": "مؤشرات خفيفة–متوسطة",
+      "interpretation": "نمط قائم يستفيد من تدخل سلوكي منظم مبكر.",
+      "recommendations": [
+        {
+          "title": "تدخل سلوكي قصير",
+          "body": "خطة ضبط منبهات + جدولة بدائل + متابعة أسبوعية عبر برنامج 14 يومًا في المنصة، مع إشراك الأسرة في الضبط البيئي.",
+          "references": [
+            "REF-007"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 25,
+      "max": 36,
+      "label": "مؤشرات متوسطة–مرتفعة",
+      "interpretation": "اختلال وظيفي واضح؛ يستدعي خطة تدخل مكتملة ومتابعة منتظمة.",
+      "recommendations": [
+        {
+          "title": "خطة مكتملة",
+          "body": "جلسات منتظمة، أهداف خفض تدريجي مقيسة، عقد سلوكي مع الأسرة، ومعالجة المحفزات الانفعالية الكامنة.",
+          "references": [
+            "REF-007"
+          ]
+        },
+        {
+          "title": "فحص المصاحبات",
+          "body": "قيّم المزاج والقلق والنوم والانتباه؛ الأنماط الرقمية كثيرًا ما تركب على حالة كامنة.",
+          "references": [
+            "REF-017"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 37,
+      "max": 48,
+      "label": "مؤشرات شديدة",
+      "interpretation": "صورة شديدة واسعة الأثر مع ضعف عوامل الحماية؛ تستدعي إدارة حالة مكثفة وقد تستدعي إحالة أعلى تخصصًا.",
+      "recommendations": [
+        {
+          "title": "إدارة مكثفة/إحالة",
+          "body": "كثّف الجلسات وأشرك الأسرة إشراكًا بنيويًا، وقيّم الحاجة لإحالة نفسية تخصصية، مع خطة أمان للنوم والدراسة/العمل.",
+          "references": [
+            "REF-017"
+          ]
+        }
+      ]
+    }
+  ],
+  "flags": [],
+  "references": []
+}

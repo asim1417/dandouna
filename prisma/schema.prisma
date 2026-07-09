@@ -243,11 +243,15 @@ model Scale {
   maxAge      Int?           // أكبر عمر مناسب
   estMinutes  Int            @default(10)
   isActive    Boolean        @default(true)
+  // اعتماد المحتوى: لا يظهر لمستخدم نهائي قبل اعتماد مختص/مدير
+  approved    Boolean        @default(false)
+  approvedAt  DateTime?
   createdAt   DateTime       @default(now())
 
   versions    ScaleVersion[]
 
   @@index([isActive])
+  @@index([approved])
 }
 
 model ScaleVersion {
@@ -263,9 +267,25 @@ model ScaleVersion {
 
   questions   Question[]
   bands       ScoreBand[]
+  flags       ScaleFlag[]
   assessments Assessment[]
 
   @@unique([scaleId, version])
+}
+
+// عَلَم على مستوى المقياس: يتفعّل عند بلوغ درجة (الإجمالي أو محور) حدًّا معيّنًا
+model ScaleFlag {
+  id         String       @id @default(cuid())
+  version    ScaleVersion @relation(fields: [versionId], references: [id], onDelete: Cascade)
+  versionId  String
+  code       String       // GUARDIAN_REQUIRED | SPECIALIST_ADVISED | COUNSELOR_ADVISED ...
+  label      String
+  operator   String       @default("GTE") // GTE | LTE | GT | LT
+  threshold  Float
+  onSubscale String?      // null = الدرجة الإجمالية
+  severity   String       @default("WARN") // WARN | CRITICAL
+
+  @@index([versionId])
 }
 
 model Question {

@@ -105,6 +105,42 @@ export function collectFlags(questions: EngineQuestion[], cfg: EngineConfig): st
   return flags;
 }
 
+export interface EngineScaleFlag {
+  code: string;
+  label: string;
+  operator: string; // GTE | GT | LTE | LT
+  threshold: number;
+  onSubscale: string | null; // null = الدرجة الإجمالية/المفردة
+  severity: string; // WARN | CRITICAL
+}
+
+export interface TriggeredFlag {
+  code: string;
+  label: string;
+  severity: string;
+  subscale: string | null;
+}
+
+/**
+ * يقيّم أعلام المقياس ضد النتائج المحسوبة (الدرجة الخام).
+ * onSubscale = null يقارن بالنتيجة الإجمالية/المفردة.
+ */
+export function evaluateScaleFlags(results: SubscaleResult[], flags: EngineScaleFlag[]): TriggeredFlag[] {
+  const out: TriggeredFlag[] = [];
+  for (const f of flags) {
+    const target = results.find((r) => (r.subscale ?? null) === (f.onSubscale ?? null));
+    if (!target) continue;
+    const s = target.rawScore;
+    const hit =
+      f.operator === "GTE" ? s >= f.threshold :
+      f.operator === "GT" ? s > f.threshold :
+      f.operator === "LTE" ? s <= f.threshold :
+      f.operator === "LT" ? s < f.threshold : false;
+    if (hit) out.push({ code: f.code, label: f.label, severity: f.severity, subscale: f.onSubscale ?? null });
+  }
+  return out;
+}
+
 /**
  * يحتسب النتيجة الكاملة لجلسة. عند SUBSCALE تُحسب كل مجموعة فرعية على حدة.
  */

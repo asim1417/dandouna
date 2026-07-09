@@ -1,0 +1,408 @@
+{
+  "code": "DOPA-SLEEP-01",
+  "title": "مقياس تسويف النوم الرقمي",
+  "description": "مقياس أصلي يرصد تأجيل النوم بسبب المحتوى الرقمي وأثره على اليوم التالي. النتائج إرشادية تثقيفية وليست تشخيصًا.",
+  "audience": "USER",
+  "version": 1,
+  "scoring": "SUM",
+  "questions": [
+    {
+      "order": 1,
+      "text": "أدخل السرير في وقت جيد ثم يسرقني الهاتف ساعة فأكثر",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "text": "أقول «آخر مقطع» ثم لا يكون الأخير",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "text": "أستيقظ مرهقًا لأني سهرت على المحتوى",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "text": "أتفقد هاتفي إذا استيقظت أثناء الليل",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "text": "أترك الهاتف خارج غرفة النوم أو بعيدًا عن سريري",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "text": "أؤجل النوم لأن الليل «وقتي الخاص» الوحيد للترفيه",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "text": "يتأخر نومي في الإجازات جدًا بسبب الأجهزة",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "text": "أغفو والجهاز في يدي أو أمام وجهي",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "text": "أشعر بنعاس نهاري يؤثر على تركيزي أو قيادتي",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "text": "ألتزم بساعة إيقاف للمحتوى قبل نومي",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "bands": [
+    {
+      "subscale": null,
+      "min": 0,
+      "max": 10,
+      "label": "نوم محمي",
+      "interpretation": "ليلتك محمية من الأجهزة ونومك في المدى الصحي.",
+      "recommendations": [
+        {
+          "title": "حافظ على السياج",
+          "body": "روتينك الليلي ثروة؛ لا تفرّط فيه في الإجازات.",
+          "references": [
+            "REF-004"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 11,
+      "max": 20,
+      "label": "انتباه مبكر",
+      "interpretation": "الهاتف بدأ يقضم أطراف نومك.",
+      "recommendations": [
+        {
+          "title": "ساعة الإطفاء",
+          "body": "حدد ساعة إيقاف ثابتة للمحتوى الترفيهي قبل النوم بساعة، وفعّل الوضع الليلي التلقائي.",
+          "references": [
+            "REF-004"
+          ]
+        },
+        {
+          "title": "أخرج الشاحن",
+          "body": "اشحن هاتفك خارج غرفة النوم واستخدم منبّهًا مستقلًا.",
+          "references": [
+            "REF-011"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 21,
+      "max": 30,
+      "label": "نمط ملحوظ",
+      "interpretation": "تسويف النوم صار عادة ليلية والإرهاق النهاري حاضر.",
+      "recommendations": [
+        {
+          "title": "روتين إحلال",
+          "body": "استبدل آخر نصف ساعة قبل النوم بروتين ثابت: وضوء وأذكار وقراءة ورقية خفيفة؛ العقل يحب الإشارات المتكررة.",
+          "references": [
+            "REF-009"
+          ]
+        },
+        {
+          "title": "عالج فكرة «وقتي الخاص»",
+          "body": "خصص لنفسك 30 دقيقة ترفيه محمية في وقت مبكر من المساء؛ حين يأخذ النهار حقك لا يسرقه الليل.",
+          "references": [
+            "REF-004"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 31,
+      "max": 40,
+      "label": "نمط مرتفع",
+      "interpretation": "الحرمان المتراكم من النوم يمس صحتك وسلامتك (خصوصًا القيادة) ويستدعي حزمًا فوريًا.",
+      "recommendations": [
+        {
+          "title": "قرار غير قابل للتفاوض",
+          "body": "من الليلة: الهاتف خارج الغرفة نهائيًا. هذه الخطوة وحدها تحل أغلب النمط.",
+          "references": [
+            "REF-004"
+          ]
+        },
+        {
+          "title": "راجع طبيبًا عند الحاجة",
+          "body": "إن بقي الأرق بعد أسبوعين من ضبط الأجهزة، فاستشارة طبية للنوم خطوة صحيحة.",
+          "references": [
+            "REF-017"
+          ]
+        }
+      ]
+    }
+  ],
+  "flags": [
+    {
+      "code": "SPECIALIST_ADVISED",
+      "label": "يُنصح باستشارة عند استمرار اضطراب النوم",
+      "operator": "GTE",
+      "threshold": 31,
+      "onSubscale": null,
+      "severity": "WARN"
+    }
+  ],
+  "references": []
+}

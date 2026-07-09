@@ -49,7 +49,7 @@ export default async function AssessmentListPage() {
 
   const [scales, children] = await Promise.all([
     prisma.scale.findMany({
-      where: { isActive: true },
+      where: { isActive: true, approved: true },
       orderBy: { createdAt: 'asc' },
       select: {
         id: true,

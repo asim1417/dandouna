@@ -3,9 +3,11 @@ import { prisma } from "@/lib/db";
 import { currentUser } from "@/lib/session";
 import {
   scoreAssessment,
+  evaluateScaleFlags,
   type EngineQuestion,
   type EngineBand,
   type EngineConfig,
+  type EngineScaleFlag,
   type ScoringMethod,
 } from "@/lib/assessment-engine";
 
@@ -37,6 +39,7 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
               recommendations: { include: { references: { include: { reference: true } } } },
             },
           },
+          flags: true,
         },
       },
     },
@@ -74,9 +77,20 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
 
   const results = scoreAssessment(questions, bands, cfg);
 
+  // أعلام المقياس (GUARDIAN_REQUIRED / SPECIALIST_ADVISED …) على الدرجة الخام
+  const scaleFlags: EngineScaleFlag[] = assessment.version.flags.map((f) => ({
+    code: f.code, label: f.label, operator: f.operator, threshold: f.threshold, onSubscale: f.onSubscale, severity: f.severity,
+  }));
+  const triggered = evaluateScaleFlags(results, scaleFlags);
+  // ادمج أعلام المقياس مع أعلام الأسئلة في النتيجة المطابقة
+  const resultsWithFlags = results.map((r) => {
+    const extra = triggered.filter((t) => (t.subscale ?? null) === (r.subscale ?? null)).map((t) => t.label);
+    return { ...r, flags: [...r.flags, ...extra] };
+  });
+
   await prisma.$transaction([
     prisma.scaleResult.deleteMany({ where: { assessmentId: id } }),
-    ...results.map((r) =>
+    ...resultsWithFlags.map((r) =>
       prisma.scaleResult.create({
         data: {
           assessmentId: id,
@@ -114,7 +128,8 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
     );
 
   return NextResponse.json({
-    results,
+    results: resultsWithFlags,
+    flags: triggered,
     recommendations,
     disclaimer: "هذه النتائج إرشادية تثقيفية وليست تشخيصًا طبيًا أو نفسيًا.",
   });

@@ -1,0 +1,54 @@
+{
+  "code": "DOPA-WORK-01",
+  "title": "مقياس التشتت الرقمي في بيئة العمل",
+  "description": "مقياس أصلي لموظفي الجهات المشتركة يرصد أثر المشتتات الرقمية على التركيز والإنتاجية. تقارير الجهة مجمّعة مجهولة الهوية. النتائج إرشادية تثقيفية.",
+  "audience": "COMPANY",
+  "version": 1,
+  "scoring": "SUM",
+  "questions": [
+    { "order": 1,  "reverse": false, "type": "LIKERT", "weight": 1, "subscale": null, "text": "أتفقد هاتفي أثناء المهام أكثر من مرة كل ساعة", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 2,  "reverse": false, "type": "LIKERT", "weight": 1, "subscale": null, "text": "أفقد خيط تركيزي بعد كل إشعار وأحتاج وقتًا للعودة", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 3,  "reverse": false, "type": "LIKERT", "weight": 1, "subscale": null, "text": "أتصفح وسائل التواصل خلال الاجتماعات", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 4,  "reverse": true,  "type": "LIKERT", "weight": 1, "subscale": null, "text": "أنجز مهامي العميقة في وقتها دون تسويف رقمي", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 5,  "reverse": false, "type": "LIKERT", "weight": 1, "subscale": null, "text": "تمتد استراحاتي أكثر من المقرر بسبب التصفح", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 6,  "reverse": false, "type": "LIKERT", "weight": 1, "subscale": null, "text": "ينتهي يومي وأشعر أني لم أنجز شيئًا حقيقيًا", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 7,  "reverse": false, "type": "LIKERT", "weight": 1, "subscale": null, "text": "أقطع عملي للرد فورًا على رسائل غير عاجلة", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 8,  "reverse": true,  "type": "LIKERT", "weight": 1, "subscale": null, "text": "أعمل بجلسات تركيز متصلة 45 دقيقة فأكثر", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 9,  "reverse": false, "type": "LIKERT", "weight": 1, "subscale": null, "text": "أسهر على المحتوى فأبدأ دوامي مرهقًا", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 10, "reverse": true,  "type": "LIKERT", "weight": 1, "subscale": null, "text": "أستخدم أدوات تقليل المشتتات (وضع التركيز، كتم الإشعارات)", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] }
+  ],
+  "bands": [
+    {
+      "subscale": null, "min": 0, "max": 10, "label": "تركيز عالٍ",
+      "interpretation": "إدارتك للمشتتات ممتازة وتركيزك في المدى الصحي.",
+      "recommendations": [
+        { "title": "شارك أسلوبك", "body": "طريقتك تستحق التعميم؛ شاركها فريقك في اجتماعكم القادم.", "references": ["REF-003"] }
+      ]
+    },
+    {
+      "subscale": null, "min": 11, "max": 20, "label": "تشتت خفيف",
+      "interpretation": "توجد تسريبات صغيرة في التركيز تتراكم أثناء اليوم.",
+      "recommendations": [
+        { "title": "جلسات محمية", "body": "احجز جلستين يوميًا 45–60 دقيقة بوضع التركيز والهاتف بعيدًا عن متناول اليد؛ الرسائل غير العاجلة تُجمع وتُرد دفعة واحدة.", "references": ["REF-001"] }
+      ]
+    },
+    {
+      "subscale": null, "min": 21, "max": 30, "label": "تشتت مؤثر",
+      "interpretation": "المشتتات تستهلك جزءًا ملموسًا من طاقتك وإنجازك اليومي.",
+      "recommendations": [
+        { "title": "أعد تصميم بيئتك", "body": "أخرج تطبيقات التواصل من هاتف العمل أو من الشاشة الرئيسية، وابدأ يومك بأثقل مهمة قبل فتح أي بريد أو محادثات.", "references": ["REF-002"] },
+        { "title": "أصلح ليلتك", "body": "السهر الرقمي يسرق تركيز الغد؛ حدد ساعة إيقاف للمحتوى الترفيهي قبل النوم بساعة.", "references": ["REF-004"] }
+      ]
+    },
+    {
+      "subscale": null, "min": 31, "max": 40, "label": "تشتت مرتفع",
+      "interpretation": "النمط الحالي يستنزف إنتاجيتك وراحتك معًا ويحتاج خطة ضبط شاملة لا تحسينات جزئية.",
+      "recommendations": [
+        { "title": "برنامج 14 يومًا", "body": "التزم ببرنامج «استعادة التركيز» في قسم التحديات، وأخبر زميلًا تثق به ليتابعك أسبوعيًا؛ المساءلة تضاعف الالتزام.", "references": ["REF-007"] },
+        { "title": "استشارة داعمة", "body": "إن استمر النمط رغم الخطة، فاستشارة مختص إنتاجية أو سلوكي استثمار وليست رفاهية.", "references": ["REF-011"] }
+      ]
+    }
+  ],
+  "flags": [],
+  "references": []
+}

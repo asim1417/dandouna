@@ -7,9 +7,12 @@ import {
   matchBand,
   collectFlags,
   scoreAssessment,
+  evaluateScaleFlags,
   type EngineQuestion,
   type EngineBand,
   type EngineConfig,
+  type EngineScaleFlag,
+  type SubscaleResult,
 } from "./index.ts";
 
 const cfg: EngineConfig = { method: "SUM", optionMin: 0, optionMax: 4 };
@@ -98,6 +101,34 @@ test("scoreAssessment يعيد نتيجة كاملة مع نطاق وأعلام 
   assert.equal(res.normalizedScore, 100);
   assert.equal(res.band, "مرتفع");
   assert.deepEqual(res.flags, ["تنبيه"]);
+});
+
+test("أعلام المقياس: GUARDIAN_REQUIRED يتفعّل عند الدرجة ≥ الحد", () => {
+  const res: SubscaleResult[] = [{ subscale: null, rawScore: 21, normalizedScore: 70, band: "يحتاج ضبطًا", interpretation: "", flags: [] }];
+  const flags: EngineScaleFlag[] = [
+    { code: "GUARDIAN_REQUIRED", label: "تُشارك مع ولي الأمر", operator: "GTE", threshold: 21, onSubscale: null, severity: "WARN" },
+    { code: "SPECIALIST_ADVISED", label: "يُنصح بمختص", operator: "GTE", threshold: 31, onSubscale: null, severity: "CRITICAL" },
+  ];
+  const t = evaluateScaleFlags(res, flags);
+  assert.equal(t.length, 1);
+  assert.equal(t[0].code, "GUARDIAN_REQUIRED");
+});
+
+test("أعلام المقياس: لا تتفعّل تحت الحد", () => {
+  const res: SubscaleResult[] = [{ subscale: null, rawScore: 20, normalizedScore: 66, band: "جيد", interpretation: "", flags: [] }];
+  const flags: EngineScaleFlag[] = [{ code: "GUARDIAN_REQUIRED", label: "x", operator: "GTE", threshold: 21, onSubscale: null, severity: "WARN" }];
+  assert.equal(evaluateScaleFlags(res, flags).length, 0);
+});
+
+test("أعلام المقياس على محور فرعي محدّد", () => {
+  const res: SubscaleResult[] = [
+    { subscale: "الاندفاع", rawScore: 10, normalizedScore: 83, band: "مرتفع", interpretation: "", flags: [] },
+    { subscale: "التركيز", rawScore: 2, normalizedScore: 16, band: "منخفض", interpretation: "", flags: [] },
+  ];
+  const flags: EngineScaleFlag[] = [{ code: "IMPULSE", label: "اندفاع مرتفع", operator: "GTE", threshold: 9, onSubscale: "الاندفاع", severity: "WARN" }];
+  const t = evaluateScaleFlags(res, flags);
+  assert.equal(t.length, 1);
+  assert.equal(t[0].subscale, "الاندفاع");
 });
 
 test("SUBSCALE يحسب كل محور على حدة", () => {

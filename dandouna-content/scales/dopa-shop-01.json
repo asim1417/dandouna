@@ -1,0 +1,408 @@
+{
+  "code": "DOPA-SHOP-01",
+  "title": "مقياس الشراء الاندفاعي الرقمي",
+  "description": "مقياس أصلي يرصد اندفاع الشراء عبر التطبيقات والعروض والإعلانات الموجهة. النتائج إرشادية تثقيفية وليست تشخيصًا.",
+  "audience": "USER",
+  "version": 1,
+  "scoring": "SUM",
+  "questions": [
+    {
+      "order": 1,
+      "text": "أشتري أشياء لم أخطط لها بعد رؤية إعلان أو عرض",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "text": "أتصفح تطبيقات التسوق للتسلية بلا حاجة",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "text": "يحمّسني العدّاد التنازلي أو «آخر قطعة» فأشتري فورًا",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "text": "أشعر بحماس عند الطلب ثم بفتور أو ندم عند الوصول",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "text": "أنتظر يومًا كاملًا على الأقل قبل شراء غير الضروري",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "text": "عندي مشتريات لم أستخدمها أو لم أفتحها",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "text": "أخفي بعض مشترياتي أو أقلل من ذكر تكلفتها",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "text": "أشتري لأحسّن مزاجي عند الضيق",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "text": "تجاوزت ميزانيتي الشهرية بسبب مشتريات التطبيقات",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "text": "أراجع مشترياتي الشهرية وألتزم بميزانية واضحة",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "bands": [
+    {
+      "subscale": null,
+      "min": 0,
+      "max": 10,
+      "label": "متوازن",
+      "interpretation": "شراؤك مخطط وواعٍ، والعروض لا تقودك.",
+      "recommendations": [
+        {
+          "title": "استمر",
+          "body": "حافظ على قاعدة التريث والميزانية؛ هما درعك.",
+          "references": [
+            "REF-014"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 11,
+      "max": 20,
+      "label": "انتباه مبكر",
+      "interpretation": "الإعلانات الموجهة بدأت تصنع رغباتك.",
+      "recommendations": [
+        {
+          "title": "قاعدة 24 ساعة",
+          "body": "أي شراء غير ضروري يدخل قائمة انتظار يومًا كاملًا؛ أغلبه سيسقط وحده.",
+          "references": [
+            "REF-014"
+          ]
+        },
+        {
+          "title": "جفّف المنبع",
+          "body": "ألغِ الاشتراك في رسائل العروض، واحذف بطاقتك المحفوظة من التطبيقات لتضيف خطوة تفكير.",
+          "references": [
+            "REF-011"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 21,
+      "max": 30,
+      "label": "نمط ملحوظ",
+      "interpretation": "الشراء صار وسيلة مزاج لا وسيلة حاجة، والفاتورة تشهد.",
+      "recommendations": [
+        {
+          "title": "افصل المزاج عن السلة",
+          "body": "عند الضيق جرّب بديل الدقائق العشر: مشي أو ذكر أو مكالمة، ثم قرر؛ الرغبة موجة تنكسر.",
+          "references": [
+            "REF-009"
+          ]
+        },
+        {
+          "title": "ميزانية مرئية",
+          "body": "حدد سقفًا شهريًا للكماليات وتتبعه أسبوعيًا؛ وأشرك من تثق به للمساءلة.",
+          "references": [
+            "REF-003"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 31,
+      "max": 40,
+      "label": "نمط مرتفع",
+      "interpretation": "الاندفاع يضغط على مالك ومزاجك معًا ويحتاج خطة حازمة وربما دعمًا متخصصًا.",
+      "recommendations": [
+        {
+          "title": "إجراءات حاسمة",
+          "body": "احذف تطبيقات التسوق من الهاتف، وفعّل حدودًا على البطاقة، واجعل المشتريات من الحاسب فقط بقائمة مكتوبة مسبقًا.",
+          "references": [
+            "REF-014"
+          ]
+        },
+        {
+          "title": "اطلب دعمًا",
+          "body": "إن تكرر الشراء لتسكين الضيق رغم الضرر، فمختص سلوكي أو مالي يعينك على جذر النمط لا أعراضه.",
+          "references": [
+            "REF-007"
+          ]
+        }
+      ]
+    }
+  ],
+  "flags": [
+    {
+      "code": "SPECIALIST_ADVISED",
+      "label": "يُنصح بمراجعة مختص",
+      "operator": "GTE",
+      "threshold": 31,
+      "onSubscale": null,
+      "severity": "WARN"
+    }
+  ],
+  "references": []
+}

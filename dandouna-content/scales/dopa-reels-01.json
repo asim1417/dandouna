@@ -1,0 +1,408 @@
+{
+  "code": "DOPA-REELS-01",
+  "title": "مقياس المقاطع القصيرة والتمرير اللانهائي",
+  "description": "مقياس أصلي لأكثر الأنماط انتشارًا: الاستهلاك المتتابع للمقاطع القصيرة والتمرير بلا هدف. النتائج إرشادية تثقيفية وليست تشخيصًا.",
+  "audience": "USER",
+  "version": 1,
+  "scoring": "SUM",
+  "questions": [
+    {
+      "order": 1,
+      "text": "أفتح المقاطع «لدقائق» فأبقى أكثر من نصف ساعة",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "text": "أمرر مقاطع لا تعجبني فقط لأني لا أستطيع التوقف",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "text": "أشعر أن المقاطع الطويلة أو الكتب صارت مملة جدًا",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "text": "أول ما أمسك هاتفي تتجه يدي للمقاطع تلقائيًا دون قرار",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "text": "أستطيع فتح هاتفي لغرض محدد وإغلاقه دون تمرير",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "text": "أشاهد المقاطع أثناء الأكل أو في دورة المياه",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "text": "أنسى ما شاهدته قبل قليل لكثرة التتابع",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "text": "أسهر على المقاطع رغم نعاسي",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "text": "أقاطع حديث من حولي لأشاهد مقطعًا وصلني",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "text": "أقضي يومًا كاملًا في الأسبوع بلا مقاطع قصيرة",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "bands": [
+    {
+      "subscale": null,
+      "min": 0,
+      "max": 10,
+      "label": "متوازن",
+      "interpretation": "استهلاكك للمقاطع واعٍ ومحدود.",
+      "recommendations": [
+        {
+          "title": "درع وقائي",
+          "body": "أبقِ التطبيقات خارج الشاشة الرئيسية؛ الوصول الأصعب بخطوة يحمي التوازن.",
+          "references": [
+            "REF-001"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 11,
+      "max": 20,
+      "label": "انتباه مبكر",
+      "interpretation": "التمرير التلقائي بدأ يتشكل كعادة يد لا قرار عقل.",
+      "recommendations": [
+        {
+          "title": "أضف احتكاكًا",
+          "body": "سجّل خروجًا من التطبيق بعد كل استخدام، وأوقف التشغيل التلقائي للمقطع التالي إن أمكن.",
+          "references": [
+            "REF-011"
+          ]
+        },
+        {
+          "title": "بديل الجيب",
+          "body": "ضع في هاتفك بديلًا نافعًا بمتناول الإبهام: مصحفًا أو كتابًا صوتيًا يفتح بدل التطبيق.",
+          "references": [
+            "REF-009"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 21,
+      "max": 30,
+      "label": "نمط ملحوظ",
+      "interpretation": "المقاطع تسرق نومك وتركيزك وقدرتك على الاستمتاع بالمحتوى الهادئ.",
+      "recommendations": [
+        {
+          "title": "صيام تدريجي",
+          "body": "ابدأ بيوم واحد أسبوعيًا بلا مقاطع، ثم يومين؛ ولا تشاهد أبدًا في السرير أو على الطعام.",
+          "references": [
+            "REF-004"
+          ]
+        },
+        {
+          "title": "أعد تدريب انتباهك",
+          "body": "خصص 15 دقيقة يوميًا لمحتوى طويل واحد (مقال، درس، فصل كتاب) لإعادة بناء عضلة التركيز.",
+          "references": [
+            "REF-003"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 31,
+      "max": 40,
+      "label": "نمط مرتفع",
+      "interpretation": "التمرير صار الوضع الافتراضي ليومك ويستنزف وقتك ونومك بوضوح.",
+      "recommendations": [
+        {
+          "title": "انسحاب منظم",
+          "body": "احذف تطبيقات المقاطع من الهاتف أسبوعين (تبقى حساباتك)، واستخدمها من المتصفح فقط عند الحاجة؛ ثم أعد التقييم.",
+          "references": [
+            "REF-007"
+          ]
+        },
+        {
+          "title": "أصلح الليل أولًا",
+          "body": "الهاتف خارج غرفة النوم نهائيًا ومنبّه مستقل؛ استعادة نومك أول انتصار.",
+          "references": [
+            "REF-004"
+          ]
+        }
+      ]
+    }
+  ],
+  "flags": [
+    {
+      "code": "SPECIALIST_ADVISED",
+      "label": "يُنصح بمراجعة مختص عند استمرار النمط",
+      "operator": "GTE",
+      "threshold": 33,
+      "onSubscale": null,
+      "severity": "WARN"
+    }
+  ],
+  "references": []
+}

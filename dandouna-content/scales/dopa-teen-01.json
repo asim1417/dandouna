@@ -1,0 +1,58 @@
+{
+  "code": "DOPA-TEEN-01",
+  "title": "مقياس عاداتي الرقمية (12–17 سنة)",
+  "description": "مقياس أصلي بلغة بسيطة يساعد المراهق على فهم علاقته بالأجهزة. يتطلب موافقة ولي أمر سارية. النتائج إرشادية تثقيفية وليست تشخيصًا.",
+  "audience": "USER",
+  "version": 1,
+  "scoring": "SUM",
+  "questions": [
+    { "order": 1,  "reverse": false, "type": "LIKERT", "weight": 1, "subscale": null, "text": "أستخدم الجهاز وقتًا أطول من الذي اتفقت عليه مع أهلي", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 2,  "reverse": false, "type": "LIKERT", "weight": 1, "subscale": null, "text": "أتضايق أو أغضب عندما يُطلب مني ترك الجهاز", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 3,  "reverse": false, "type": "LIKERT", "weight": 1, "subscale": null, "text": "أؤجل واجباتي أو مذاكرتي بسبب الألعاب أو المقاطع", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 4,  "reverse": false, "type": "LIKERT", "weight": 1, "subscale": null, "text": "أنام متأخرًا بسبب الجهاز", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 5,  "reverse": false, "type": "LIKERT", "weight": 1, "subscale": null, "text": "أفضّل الجهاز على الخروج واللعب مع أصدقائي", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 6,  "reverse": true,  "type": "LIKERT", "weight": 1, "subscale": null, "text": "أترك الجهاز بسهولة عند الأذان أو نداء الأهل", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 7,  "reverse": false, "type": "LIKERT", "weight": 1, "subscale": null, "text": "أشاهد مقاطع قصيرة كثيرة ويصعب علي التوقف", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 8,  "reverse": false, "type": "LIKERT", "weight": 1, "subscale": null, "text": "أستخدم الجهاز خلسة أو بعد وقت النوم", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 9,  "reverse": false, "type": "LIKERT", "weight": 1, "subscale": null, "text": "أشعر بملل شديد إذا لم يكن الجهاز معي", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 10, "reverse": true,  "type": "LIKERT", "weight": 1, "subscale": null, "text": "أمارس كل أسبوع هواية أو رياضة بلا شاشة", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] }
+  ],
+  "bands": [
+    {
+      "subscale": null, "min": 0, "max": 10, "label": "متوازن",
+      "interpretation": "ممتاز! أنت تتحكم بجهازك ولا يتحكم بك. استمر على هذا التوازن.",
+      "recommendations": [
+        { "title": "استمر وتميّز", "body": "حافظ على هوايتك الأسبوعية ونومك المبكر، وجرّب تحدي «أسبوع الإنجاز» في قسم التحديات لتكسب نقاطًا.", "references": ["REF-003"] }
+      ]
+    },
+    {
+      "subscale": null, "min": 11, "max": 20, "label": "جيد مع تنبيهات",
+      "interpretation": "وضعك جيد لكن توجد عادات صغيرة قد تكبر، مثل السهر أو تأجيل الواجبات.",
+      "recommendations": [
+        { "title": "قاعدة الأهم أولًا", "body": "أنجز واجبك وصلاتك أولًا ثم افتح الجهاز؛ اجعلها قاعدتك اليومية لأسبوعين وستلاحظ الفرق.", "references": ["REF-003"] },
+        { "title": "نم بلا جهاز", "body": "اترك الجهاز خارج غرفتك قبل النوم بنصف ساعة؛ نومك أهم من آخر مقطع.", "references": ["REF-004"] }
+      ]
+    },
+    {
+      "subscale": null, "min": 21, "max": 30, "label": "يحتاج ضبطًا",
+      "interpretation": "الجهاز بدأ يأخذ من نومك ودراستك وأصدقائك. تحتاج خطة مع أسرتك، والنتيجة ستُشارك مع ولي أمرك ليساعدك.",
+      "recommendations": [
+        { "title": "اتفاق عائلي", "body": "اجلس مع ولي أمرك وحددا معًا: وقتًا يوميًا أقصى، وأماكن بلا أجهزة (المذاكرة، الطعام، السرير)، ومكافأة أسبوعية عند الالتزام.", "references": ["REF-007"] },
+        { "title": "تحدي 7 أيام", "body": "ابدأ برنامج «السبعة الذهبية» في قسم التحديات: مهمة صغيرة كل يوم تستبدل عادة رقمية بعادة أنفع.", "references": ["REF-002"] }
+      ]
+    },
+    {
+      "subscale": null, "min": 31, "max": 40, "label": "يحتاج دعم الأسرة",
+      "interpretation": "المؤشرات مرتفعة ويظهر أن ترك الجهاز صار صعبًا عليك. لست وحدك؛ سيُشعر ولي أمرك بالنتيجة ليقف معك، وقد يُستعان بمختص يساعدكما.",
+      "recommendations": [
+        { "title": "خطوة شجاعة", "body": "تحدث بصراحة مع ولي أمرك عن شعورك مع الجهاز؛ طلب المساعدة قوة. وابدأوا بتقليل تدريجي لا منع مفاجئ.", "references": ["REF-010"] },
+        { "title": "املأ الفراغ بالأحب", "body": "اختر نشاطين تحبهما فعلًا (رياضة، مهارة، حفظ قرآن مع مجموعة) واجعلهما موعدًا ثابتًا في أسبوعك.", "references": ["REF-009"] }
+      ]
+    }
+  ],
+  "flags": [
+    { "code": "GUARDIAN_REQUIRED", "label": "تُشارك النتيجة مع ولي الأمر ويُنصح بجلسة أسرية", "operator": "GTE", "threshold": 21, "onSubscale": null, "severity": "WARN" },
+    { "code": "SPECIALIST_ADVISED", "label": "يُنصح بإشراك مختص عبر ولي الأمر", "operator": "GTE", "threshold": 31, "onSubscale": null, "severity": "CRITICAL" }
+  ],
+  "references": []
+}

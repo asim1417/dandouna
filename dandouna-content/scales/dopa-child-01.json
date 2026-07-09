@@ -1,0 +1,292 @@
+{
+  "code": "DOPA-CHILD-01",
+  "title": "مقياس صديقي الجهاز (8–11 سنة)",
+  "description": "مقياس مبسّط يجيب عنه الطفل بمرافقة ولي أمره، بلغة سهلة وخيارات ثلاثية. يتطلب موافقة ولي أمر سارية. النتائج إرشادية تثقيفية وليست تشخيصًا.",
+  "audience": "USER",
+  "version": 1,
+  "scoring": "SUM",
+  "questions": [
+    {
+      "order": 1,
+      "text": "أزعل أو أصيح إذا أخذوا مني الجهاز",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "لا",
+          "value": 0
+        },
+        {
+          "label": "أحيانًا",
+          "value": 1
+        },
+        {
+          "label": "كثيرًا",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "text": "أنسى الوقت وأنا ألعب أو أشاهد",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "لا",
+          "value": 0
+        },
+        {
+          "label": "أحيانًا",
+          "value": 1
+        },
+        {
+          "label": "كثيرًا",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "text": "أفضّل الجهاز على اللعب مع إخوتي أو أصحابي",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "لا",
+          "value": 0
+        },
+        {
+          "label": "أحيانًا",
+          "value": 1
+        },
+        {
+          "label": "كثيرًا",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "text": "أشاهد الجهاز وأنا آكل",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "لا",
+          "value": 0
+        },
+        {
+          "label": "أحيانًا",
+          "value": 1
+        },
+        {
+          "label": "كثيرًا",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "text": "أترك الجهاز بسرعة إذا نادتني أمي أو أبي",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "لا",
+          "value": 0
+        },
+        {
+          "label": "أحيانًا",
+          "value": 1
+        },
+        {
+          "label": "كثيرًا",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "text": "أطلب الجهاز أول ما أصحى من النوم",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "لا",
+          "value": 0
+        },
+        {
+          "label": "أحيانًا",
+          "value": 1
+        },
+        {
+          "label": "كثيرًا",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "text": "ألعب بره البيت أو أتحرك كل يوم",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "لا",
+          "value": 0
+        },
+        {
+          "label": "أحيانًا",
+          "value": 1
+        },
+        {
+          "label": "كثيرًا",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "text": "أحلم أو أفكر في اللعبة وأنا بعيد عنها",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "لا",
+          "value": 0
+        },
+        {
+          "label": "أحيانًا",
+          "value": 1
+        },
+        {
+          "label": "كثيرًا",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "bands": [
+    {
+      "subscale": null,
+      "min": 0,
+      "max": 4,
+      "label": "رائع",
+      "interpretation": "علاقة الطفل بالجهاز صحية؛ يلعب ويترك بسهولة.",
+      "recommendations": [
+        {
+          "title": "عزّزوا بالثناء",
+          "body": "امدحوا التزامه أمامه واربطوا المكافآت باللعب الحركي والأنشطة معكم لا بالشاشة.",
+          "references": [
+            "REF-010"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 5,
+      "max": 8,
+      "label": "جيد",
+      "interpretation": "توجد عادات صغيرة تُضبط بسهولة في هذا العمر.",
+      "recommendations": [
+        {
+          "title": "قواعد الثلاثة",
+          "body": "لا جهاز على الطعام، ولا في غرفة النوم، ولا قبل إنهاء الواجب — تُطبق بهدوء وثبات.",
+          "references": [
+            "REF-010"
+          ]
+        },
+        {
+          "title": "بديل ممتع",
+          "body": "نشاط حركي يحبه الطفل 3 مرات أسبوعيًا؛ الطفل المشبع حركةً يطلب الشاشة أقل.",
+          "references": [
+            "REF-012"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 9,
+      "max": 12,
+      "label": "يحتاج مساعدة أهله",
+      "interpretation": "التعلق يتشكل ويحتاج خطة أسرية هادئة الآن قبل أن يشتد.",
+      "recommendations": [
+        {
+          "title": "ابدؤوا برنامج بيتنا المتوازن",
+          "body": "برنامج الثلاثين يومًا في قسم التحديات: خفض تدريجي بالرفق مع وقت أبوي فردي يومي ولوحة نجوم.",
+          "references": [
+            "REF-010"
+          ]
+        },
+        {
+          "title": "قدوة الكبار أولًا",
+          "body": "اجعلوا وقتًا عائليًا يوميًا يترك فيه الجميع أجهزتهم — الوالدان أولًا.",
+          "references": [
+            "REF-012"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 13,
+      "max": 16,
+      "label": "يحتاج اهتمامًا خاصًا",
+      "interpretation": "المؤشرات مرتفعة لعمره ويُنصح بعرض الحالة على مختص طفولة مع الخطة الأسرية، وتجنب المنع المفاجئ والمواجهة الحادة.",
+      "recommendations": [
+        {
+          "title": "مختص طفولة",
+          "body": "استشارة مختص سلوك طفولة خطوة محبة لا وصمة؛ التدخل المبكر في هذا العمر سريع الثمرة بإذن الله.",
+          "references": [
+            "REF-010"
+          ]
+        },
+        {
+          "title": "املؤوا الخزان العاطفي",
+          "body": "ربع ساعة يومية لعبًا حرًا مع الطفل بلا شاشة ولا أوامر؛ الاتصال قبل الضبط.",
+          "references": [
+            "REF-009"
+          ]
+        }
+      ]
+    }
+  ],
+  "flags": [
+    {
+      "code": "GUARDIAN_REQUIRED",
+      "label": "تُشارك النتيجة مع ولي الأمر",
+      "operator": "GTE",
+      "threshold": 0,
+      "onSubscale": null,
+      "severity": "INFO"
+    },
+    {
+      "code": "SPECIALIST_ADVISED",
+      "label": "يُنصح بمختص طفولة",
+      "operator": "GTE",
+      "threshold": 13,
+      "onSubscale": null,
+      "severity": "CRITICAL"
+    }
+  ],
+  "references": []
+}

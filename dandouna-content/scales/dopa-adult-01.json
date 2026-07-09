@@ -1,0 +1,64 @@
+{
+  "code": "DOPA-ADULT-01",
+  "title": "مقياس التوازن الرقمي للبالغين",
+  "description": "مقياس توعوي أصلي من دندونة لرصد أنماط الاستخدام الرقمي المرتبطة بالمكافأة السريعة لدى البالغين (18+). النتائج إرشادية تثقيفية وليست تشخيصًا.",
+  "audience": "USER",
+  "version": 1,
+  "scoring": "SUM",
+  "options_note": "كل الأسئلة ليكرت خماسي: أبدًا=0، نادرًا=1، أحيانًا=2، غالبًا=3، دائمًا=4. البنود العكسية تُقلب آليًا في المحرّك.",
+  "questions": [
+    { "order": 1,  "subscale": "التحكم",   "reverse": false, "type": "LIKERT", "weight": 1, "text": "أحاول تقليل وقت الشاشة ثم أعود لعادتي خلال أيام", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 2,  "subscale": "التحكم",   "reverse": false, "type": "LIKERT", "weight": 1, "text": "أفتح تطبيقًا «لدقيقة واحدة» فأكتشف أن وقتًا طويلًا قد مضى", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 3,  "subscale": "التحكم",   "reverse": false, "type": "LIKERT", "weight": 1, "text": "أتفقد هاتفي مباشرة بعد الاستيقاظ وقبل النوم", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 4,  "subscale": "التحكم",   "reverse": true,  "type": "LIKERT", "weight": 1, "text": "أستطيع قضاء يوم كامل دون تصفح ترفيهي ومن غير ضيق", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 5,  "subscale": "التحكم",   "reverse": false, "type": "LIKERT", "weight": 1, "text": "أقاطع مهمة مهمة للرد على إشعار غير عاجل", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 6,  "subscale": "الانشغال", "reverse": false, "type": "LIKERT", "weight": 1, "text": "أفكر فيما يجري في وسائل التواصل وأنا بعيد عنها", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 7,  "subscale": "الانشغال", "reverse": false, "type": "LIKERT", "weight": 1, "text": "أشعر بتوتر أو فراغ حين لا يتوفر الإنترنت أو ينفد شحن هاتفي", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 8,  "subscale": "الانشغال", "reverse": false, "type": "LIKERT", "weight": 1, "text": "صرت أحتاج محتوى أسرع وأقصر حتى أشعر بالمتعة", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 9,  "subscale": "الانشغال", "reverse": false, "type": "LIKERT", "weight": 1, "text": "أشعر بالملل من الأنشطة الهادئة كالقراءة أو الجلسات العائلية", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 10, "subscale": "الانشغال", "reverse": true,  "type": "LIKERT", "weight": 1, "text": "أمارس كل أسبوع نشاطًا ممتعًا لا علاقة له بالشاشة", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 11, "subscale": "الأثر",    "reverse": false, "type": "LIKERT", "weight": 1, "text": "تأخرت عن صلاة أو عمل أو موعد بسبب الانشغال بالتصفح", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 12, "subscale": "الأثر",    "reverse": false, "type": "LIKERT", "weight": 1, "text": "أسهر على المحتوى الرقمي فيتأثر نومي في اليوم التالي", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 13, "subscale": "الأثر",    "reverse": false, "type": "LIKERT", "weight": 1, "text": "لاحظ من حولي انشغالي بالهاتف أثناء جلوسي معهم", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 14, "subscale": "الأثر",    "reverse": false, "type": "LIKERT", "weight": 1, "text": "أقلل من ذكر مقدار استخدامي الحقيقي حين أُسأل عنه", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] },
+    { "order": 15, "subscale": "الأثر",    "reverse": false, "type": "LIKERT", "weight": 1, "text": "تراجع إنجازي في أهداف كانت مهمة عندي", "options": [ {"label":"أبدًا","value":0},{"label":"نادرًا","value":1},{"label":"أحيانًا","value":2},{"label":"غالبًا","value":3},{"label":"دائمًا","value":4} ] }
+  ],
+  "bands": [
+    {
+      "subscale": null, "min": 0, "max": 14, "label": "متوازن",
+      "interpretation": "نمطك الرقمي متوازن؛ الاستخدام في خدمتك لا العكس، ولا تظهر مؤشرات تستدعي القلق.",
+      "recommendations": [
+        { "title": "حافظ على ما أنت عليه", "body": "ثبّت عاداتك الحالية: أوقات محددة للتصفح، وأنشطة أسبوعية بلا شاشة، ونوم منتظم.", "references": ["REF-002"] },
+        { "title": "كن قدوة", "body": "توازنك نعمة؛ شاركه من حولك، خصوصًا الصغار في أسرتك.", "references": ["REF-012"] }
+      ]
+    },
+    {
+      "subscale": null, "min": 15, "max": 29, "label": "انتباه مبكر",
+      "interpretation": "تظهر بدايات انجراف نحو المحفزات السريعة. الوقت مثالي للتدخل لأن العادة لم تترسخ بعد.",
+      "recommendations": [
+        { "title": "قلّل المحفزات", "body": "أوقف الإشعارات غير الضرورية، وأخرج تطبيقات التمرير اللانهائي من الشاشة الرئيسية، وحدد وقتًا يوميًا أقصى.", "references": ["REF-001"] },
+        { "title": "استبدل لا تمتنع فقط", "body": "ضع بديلًا جاهزًا لحظة الملل: كتاب قريب، مشي قصير، أو ذكر لله؛ الفراغ الذي لا يُملأ بالنافع يعود للشاشة.", "references": ["REF-003", "REF-011"] }
+      ]
+    },
+    {
+      "subscale": null, "min": 30, "max": 44, "label": "نمط ملحوظ",
+      "interpretation": "الاستخدام يزاحم أولوياتك ويؤثر على نومك أو علاقاتك أو إنجازك. تحتاج خطة منظمة لا محاولات متفرقة.",
+      "recommendations": [
+        { "title": "ابدأ خطة 14 يومًا", "body": "التزم ببرنامج «استعادة التركيز» في قسم الخطة والتحديات: فترات انقطاع مجدولة، ومناطق بلا هاتف (السرير، مائدة الطعام)، ومراجعة أسبوعية للتقدم.", "references": ["REF-007"] },
+        { "title": "أعد ترتيب الحقوق", "body": "قسّم يومك بحيث يأخذ بدنك ونومك وأهلك حقهم أولًا، ثم يأتي الترفيه في وقته المحدد.", "references": ["REF-004"] }
+      ]
+    },
+    {
+      "subscale": null, "min": 45, "max": 60, "label": "نمط مرتفع",
+      "interpretation": "المؤشرات مرتفعة وتدل على أن الاستخدام يدير يومك بدلًا من أن تديره. ننصح بطلب دعم متخصص إلى جانب خطة الضبط.",
+      "recommendations": [
+        { "title": "استشر مختصًا", "body": "التغيير هنا أسهل وأثبت بمرافقة مختص سلوكي؛ هذه خطوة وعي وقوة لا ضعف. وابدأ بموازاة ذلك بتقليل تدريجي لا انقطاع مفاجئ.", "references": ["REF-007"] },
+        { "title": "أمّن نومك أولًا", "body": "أخرج الهاتف من غرفة النوم نهائيًا واستبدل السهر الرقمي بروتين تهدئة؛ إصلاح النوم يعيد لك القدرة على بقية الخطة.", "references": ["REF-004", "REF-008"] }
+      ]
+    }
+  ],
+  "flags": [
+    { "code": "SPECIALIST_ADVISED", "label": "يُنصح بمراجعة مختص", "operator": "GTE", "threshold": 45, "onSubscale": null, "severity": "WARN" }
+  ],
+  "references": []
+}

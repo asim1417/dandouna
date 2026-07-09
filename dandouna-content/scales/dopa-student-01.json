@@ -1,0 +1,401 @@
+{
+  "code": "DOPA-STUDENT-01",
+  "title": "مقياس التوازن الرقمي للطلاب",
+  "description": "نسخة مدرسية تطبقها الجهات التعليمية على طلابها (متوسط/ثانوي)، وتقاريرها للجهة مجمّعة مجهولة الهوية. النتائج إرشادية تثقيفية وليست تشخيصًا.",
+  "audience": "INSTITUTION",
+  "version": 1,
+  "scoring": "SUM",
+  "questions": [
+    {
+      "order": 1,
+      "text": "أستخدم هاتفي خلسة أثناء الحصة أو المحاضرة",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "text": "أذاكر وبجانبي هاتفي فأتوقف كل قليل لتفقده",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "text": "أسهر على الجهاز ثم أنام في الصف أو أفقد تركيزي",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "text": "أنجز واجباتي في وقتها دون تأجيل رقمي",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "text": "أول ما أخرج من المدرسة أفتح الجهاز حتى المساء",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "text": "انخفضت درجاتي بسبب انشغالي بالجهاز",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "text": "أشارك في نشاط مدرسي أو رياضي أسبوعيًا",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "text": "أتابع المقاطع أو الألعاب وقت المذاكرة المخصص",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "text": "يصعب علي البقاء بلا هاتف يومًا دراسيًا كاملًا",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "text": "أنظم وقتي بجدول يفصل المذاكرة عن الترفيه",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "bands": [
+    {
+      "subscale": null,
+      "min": 0,
+      "max": 10,
+      "label": "متوازن",
+      "interpretation": "توازن ممتاز بين الدراسة والترفيه الرقمي.",
+      "recommendations": [
+        {
+          "title": "حافظ وتقدّم",
+          "body": "استمر على جدولك، وشارك زملاءك طريقتك.",
+          "references": [
+            "REF-003"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 11,
+      "max": 20,
+      "label": "انتباه مبكر",
+      "interpretation": "الجهاز بدأ يقتطع من المذاكرة والنوم.",
+      "recommendations": [
+        {
+          "title": "مذاكرة نظيفة",
+          "body": "هاتف خارج غرفة المذاكرة، وجلسات 30/5 بمؤقت، وواجب اليوم قبل أي ترفيه.",
+          "references": [
+            "REF-003"
+          ]
+        },
+        {
+          "title": "نوم الطالب",
+          "body": "ساعة إيقاف قبل النوم؛ درجاتك تبدأ من نومك.",
+          "references": [
+            "REF-004"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 21,
+      "max": 30,
+      "label": "نمط مؤثر",
+      "interpretation": "الأثر وصل للدرجات أو الحضور الذهني ويحتاج خطة مع الأسرة والمرشد.",
+      "recommendations": [
+        {
+          "title": "خطة ثلاثية",
+          "body": "اتفاق بين الطالب وولي الأمر والمرشد الطلابي: جدول مذاكرة محمي، وتسليم الجهاز وقت المذاكرة، ومتابعة أسبوعية.",
+          "references": [
+            "REF-007"
+          ]
+        },
+        {
+          "title": "برنامج 14 يومًا",
+          "body": "التزم ببرنامج «استعادة التركيز» في المنصة مع زميل للمساءلة.",
+          "references": [
+            "REF-018"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 31,
+      "max": 40,
+      "label": "نمط مرتفع",
+      "interpretation": "المؤشرات مرتفعة ومؤثرة دراسيًا وصحيًا؛ يُشرك ولي الأمر والمرشد وقد يُستعان بمختص.",
+      "recommendations": [
+        {
+          "title": "تدخل منسق",
+          "body": "جلسة مع المرشد الطلابي وولي الأمر لوضع خطة خفض تدريجي، مع إحالة لمختص عند استمرار النمط.",
+          "references": [
+            "REF-007"
+          ]
+        }
+      ]
+    }
+  ],
+  "flags": [
+    {
+      "code": "COUNSELOR_ADVISED",
+      "label": "يُنصح بإشراك المرشد الطلابي وولي الأمر",
+      "operator": "GTE",
+      "threshold": 21,
+      "onSubscale": null,
+      "severity": "WARN"
+    }
+  ],
+  "references": []
+}

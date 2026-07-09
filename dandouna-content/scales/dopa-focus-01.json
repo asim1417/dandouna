@@ -1,0 +1,468 @@
+{
+  "code": "DOPA-FOCUS-01",
+  "title": "مقياس التسويف الرقمي والتركيز",
+  "description": "مقياس أصلي يرصد هروب الدماغ من المهام الثقيلة إلى المكافآت الرقمية السريعة. النتائج إرشادية تثقيفية وليست تشخيصًا.",
+  "audience": "USER",
+  "version": 1,
+  "scoring": "SUM",
+  "questions": [
+    {
+      "order": 1,
+      "text": "أفتح هاتفي تلقائيًا لحظة أن تصعب المهمة أمامي",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "text": "أبدأ مذاكرتي أو عملي متأخرًا بسبب «إحماء» رقمي طويل",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "text": "أحتاج ضغط اللحظات الأخيرة حتى أنجز",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "text": "أخطط جيدًا ثم يضيع اليوم في التصفح",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "text": "أبدأ بأثقل مهمة في يومي قبل فتح أي تطبيق",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "text": "أشعر بذنب أثناء التصفح لكني أستمر",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "text": "أفقد تسلسل أفكاري بعد كل التفاتة للهاتف",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "text": "أنجز مهام صغيرة سهلة وأتهرب من المهمة الأهم",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "text": "أعمل بجلسات تركيز متصلة 30 دقيقة فأكثر",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "text": "تتراكم مهامي حتى تصبح جبلًا يخيفني",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 11,
+      "text": "أستخدم مؤقتًا أو أسلوب جلسات محددة للتركيز",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": true,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "order": 12,
+      "text": "أقنع نفسي أن التصفح «استراحة قصيرة» ثم تطول",
+      "type": "LIKERT",
+      "weight": 1,
+      "reverse": false,
+      "subscale": null,
+      "options": [
+        {
+          "label": "أبدًا",
+          "value": 0
+        },
+        {
+          "label": "نادرًا",
+          "value": 1
+        },
+        {
+          "label": "أحيانًا",
+          "value": 2
+        },
+        {
+          "label": "غالبًا",
+          "value": 3
+        },
+        {
+          "label": "دائمًا",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "bands": [
+    {
+      "subscale": null,
+      "min": 0,
+      "max": 12,
+      "label": "تركيز متين",
+      "interpretation": "إدارتك لانتباهك قوية والتسويف تحت السيطرة.",
+      "recommendations": [
+        {
+          "title": "طوّر لا تحافظ فقط",
+          "body": "جرّب رفع جلسة التركيز من 30 إلى 50 دقيقة تدريجيًا.",
+          "references": [
+            "REF-018"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 13,
+      "max": 24,
+      "label": "انتباه مبكر",
+      "interpretation": "نمط الهروب الصغير للمكافأة السريعة بدأ يتكرر.",
+      "recommendations": [
+        {
+          "title": "قاعدة البداية الدقيقة",
+          "body": "عند التثاقل ابدأ المهمة دقيقتين فقط؛ الدخول هو الحاجز لا الاستمرار.",
+          "references": [
+            "REF-003"
+          ]
+        },
+        {
+          "title": "بيئة نظيفة",
+          "body": "هاتف في غرفة أخرى أثناء جلسات العمل، والمهمة الوحيدة المفتوحة على الشاشة.",
+          "references": [
+            "REF-001"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 25,
+      "max": 36,
+      "label": "نمط ملحوظ",
+      "interpretation": "التسويف يستهلك يومك ويراكم عليك القلق والمهام.",
+      "recommendations": [
+        {
+          "title": "نظام جلسات ملزم",
+          "body": "اعمل بنظام 45/10 (تركيز/استراحة) بأربع جلسات يومية محمية، ودوّن قبل كل جلسة مخرجها المحدد.",
+          "references": [
+            "REF-018"
+          ]
+        },
+        {
+          "title": "فتّت الجبل",
+          "body": "قسّم أكبر مهمة مؤجلة إلى خطوات ربع ساعة، وابدأ بأولها اليوم لا غدًا.",
+          "references": [
+            "REF-007"
+          ]
+        }
+      ]
+    },
+    {
+      "subscale": null,
+      "min": 37,
+      "max": 48,
+      "label": "نمط مرتفع",
+      "interpretation": "الحلقة (مهمة ثقيلة ← هروب رقمي ← ذنب ← تراكم) صارت مسيطرة وتحتاج تفكيكًا منهجيًا.",
+      "recommendations": [
+        {
+          "title": "أسبوع إعادة ضبط",
+          "body": "أسبوع كامل: هاتف بلا تطبيقات ترفيه، وثلاث جلسات تركيز صباحية قبل أي شاشة، مع متابعة يومية لشخص تثق به.",
+          "references": [
+            "REF-007"
+          ]
+        },
+        {
+          "title": "افحص الجذر",
+          "body": "إن استمر النمط رغم البيئة المنضبطة فقد يكون خلفه إرهاق أو قلق يستحق مختصًا؛ لا تكتفِ بلوم نفسك.",
+          "references": [
+            "REF-017"
+          ]
+        }
+      ]
+    }
+  ],
+  "flags": [
+    {
+      "code": "SPECIALIST_ADVISED",
+      "label": "يُنصح بمراجعة مختص عند استمرار النمط",
+      "operator": "GTE",
+      "threshold": 40,
+      "onSubscale": null,
+      "severity": "WARN"
+    }
+  ],
+  "references": []
+}
