@@ -271,6 +271,42 @@ tbody td b{color:var(--dandona-blue)}
 .foot{max-width:1300px;margin:0 auto;padding:24px 22px 50px;text-align:center;color:var(--dandona-slate);font-size:12.5px;border-top:1px solid var(--dandona-border)}
 .foot b{color:var(--dandona-blue)}
 
+/* ===== auth flow ===== */
+.auth-card{padding:30px}
+.auth-brand{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:16px}
+.auth-brand .logo{width:48px;height:48px}
+.auth-view{display:none;animation:fade .3s ease}
+.auth-view.show{display:block}
+.auth-view h3{font-size:20px;text-align:center;margin-bottom:4px}
+.auth-view .sub{font-size:13px;text-align:center;color:var(--dandona-slate);margin-bottom:18px}
+.field .msg{display:none;color:#e11d48;font-size:11.5px;margin-top:5px}
+.field.err input{border-color:#f43f5e;background:#fff5f6}
+.field.err .msg{display:block}
+.field .pw-wrap{position:relative}
+.field .pw-wrap .eye{position:absolute;left:12px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:15px;opacity:.6;user-select:none}
+.pw-meter{height:5px;border-radius:999px;background:var(--dandona-border);margin-top:7px;overflow:hidden}
+.pw-meter i{display:block;height:100%;width:0;transition:.25s;border-radius:999px}
+.auth-row{display:flex;align-items:center;justify-content:space-between;margin:2px 0 14px;font-size:12.5px}
+.auth-row a{color:var(--dandona-pink-strong);font-weight:700;cursor:pointer}
+.auth-row label{display:flex;align-items:center;gap:7px;color:var(--dandona-slate);font-weight:600;cursor:pointer}
+.auth-row input{width:16px;height:16px;accent-color:var(--dandona-pink-strong)}
+.auth-alt{text-align:center;font-size:13px;color:var(--dandona-slate);margin-top:14px}
+.auth-alt a{color:var(--dandona-pink-strong);font-weight:700;cursor:pointer}
+.auth-back{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:var(--dandona-slate);font-weight:700;cursor:pointer;margin-bottom:10px}
+.auth-toast{border-radius:12px;padding:10px 14px;font-size:12.5px;font-weight:700;margin-bottom:14px;display:flex;gap:8px;align-items:center}
+.auth-toast.ok{background:#dcfce7;color:#16a34a}.auth-toast.err{background:#fee2e2;color:#e11d48}
+.btn.loading{pointer-events:none;opacity:.9}
+.spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;display:inline-block;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.otp{display:flex;gap:9px;direction:ltr;justify-content:center;margin:6px 0 4px}
+.otp input{width:46px;height:54px;text-align:center;font-family:var(--font-num);font-size:22px;font-weight:700;color:var(--dandona-blue);border:1.5px solid var(--dandona-border);border-radius:12px}
+.otp input:focus{outline:none;border-color:var(--dandona-pink-strong);background:#fffafc}
+.otp-hint{text-align:center;font-size:12px;color:var(--dandona-slate);margin:12px 0}
+.otp-hint b{color:var(--dandona-blue)}
+.resend{color:var(--dandona-pink-strong);font-weight:700;cursor:pointer}
+.success-mark{width:76px;height:76px;border-radius:50%;background:#dcfce7;color:var(--dandona-green);display:flex;align-items:center;justify-content:center;font-size:38px;margin:6px auto 14px}
+.demo-note{background:var(--dandona-blue-light);color:var(--dandona-blue);border-radius:10px;padding:8px 12px;font-size:11.5px;font-weight:600;margin-top:14px;text-align:center}
+
 @media(max-width:960px){
   .landing,.dash,.mobile-wrap,.two,.reports,.admin-shell{grid-template-columns:1fr}
   .side,.aside{position:static}
@@ -362,12 +398,14 @@ tbody td b{color:var(--dandona-blue)}
     <div class="card login-card">
       <svg class="logo" viewBox="0 0 40 40" fill="none"><path d="M20 6c-3 0-5 2-6 4-2-1-5 0-6 3-1 2 0 5 2 6-2 2-2 5 0 7 1 2 4 3 6 2 1 2 3 4 6 3 3 0 5-2 5-4 3 0 5-3 4-6 2-2 2-5 0-7 1-3-1-6-4-6-1-2-3-2-4-2-1-1-2-2-3-3z" fill="#F472B6"/><circle cx="20" cy="20" r="4" fill="#EC4899"/></svg>
       <h3>مرحبًا بك في دندونة</h3><p>سجّل دخولك لبدء رحلتك نحو التوازن والسعادة</p>
-      <div class="oauth"><button>🟦 المتابعة مع Google</button><button> المتابعة مع Apple</button></div>
+      <div class="oauth"><button type="button" data-oauth="Google">🟦 المتابعة مع Google</button><button type="button" data-oauth="Apple"> المتابعة مع Apple</button></div>
       <div class="divider">أو</div>
-      <div class="field" style="text-align:right"><label>البريد الإلكتروني</label><input type="email" placeholder="name@email.com" dir="ltr" style="text-align:left"></div>
-      <div class="field" style="text-align:right"><label>كلمة المرور</label><input type="password" placeholder="••••••••"></div>
-      <button class="btn btn-pink" style="width:100%">تسجيل الدخول</button>
-      <p class="mini-note">ليس لديك حساب؟ <b style="color:var(--dandona-pink-strong)">إنشاء حساب جديد</b></p>
+      <form data-form="login">
+        <div class="field" style="text-align:right"><label>البريد الإلكتروني</label><input type="email" name="email" placeholder="name@email.com" dir="ltr" style="text-align:left"><div class="msg">يرجى إدخال بريد إلكتروني صحيح</div></div>
+        <div class="field" style="text-align:right"><label>كلمة المرور</label><div class="pw-wrap"><input type="password" name="password" placeholder="••••••••"><span class="eye" data-eye>👁️</span></div><div class="msg">كلمة المرور ٨ أحرف على الأقل</div></div>
+        <button type="submit" class="btn btn-pink" style="width:100%">تسجيل الدخول</button>
+      </form>
+      <p class="mini-note">ليس لديك حساب؟ <b style="color:var(--dandona-pink-strong);cursor:pointer" data-goauth="signup">إنشاء حساب جديد</b></p>
     </div>
   </div>
   <div class="card why" style="margin-top:22px">
@@ -379,19 +417,104 @@ tbody td b{color:var(--dandona-blue)}
   </div>
 </section>
 
-<!-- ==================== USER · auth ==================== -->
+<!-- ==================== USER · auth (full flow) ==================== -->
 <section class="screen" id="auth">
-  <div class="screen-label"><span class="chip">مستخدم · ٠٢</span><div><h2>تسجيل الدخول (Auth)</h2><p>بطاقة بيضاء هادئة في المنتصف مع الشعار، دخول عبر Google وApple ثم البريد</p></div></div>
-  <div class="center-wrap"><div class="card login-card">
-    <svg class="logo" viewBox="0 0 40 40" fill="none"><path d="M20 6c-3 0-5 2-6 4-2-1-5 0-6 3-1 2 0 5 2 6-2 2-2 5 0 7 1 2 4 3 6 2 1 2 3 4 6 3 3 0 5-2 5-4 3 0 5-3 4-6 2-2 2-5 0-7 1-3-1-6-4-6-1-2-3-2-4-2-1-1-2-2-3-3z" fill="#F472B6"/><circle cx="20" cy="20" r="4" fill="#EC4899"/></svg>
-    <h3>أهلًا بعودتك 🌸</h3><p>سجّل دخولك لمتابعة رحلتك مع دندونة</p>
-    <div class="oauth"><button>🟦 المتابعة مع Google</button><button> المتابعة مع Apple</button></div>
-    <div class="divider">أو بالبريد الإلكتروني</div>
-    <div class="field" style="text-align:right"><label>البريد الإلكتروني</label><input type="email" placeholder="name@email.com" dir="ltr" style="text-align:left"></div>
-    <div class="field" style="text-align:right"><label>كلمة المرور</label><input type="password" placeholder="••••••••"></div>
-    <button class="btn btn-pink" style="width:100%">تسجيل الدخول</button>
-    <p class="mini-note">بتسجيل الدخول فأنت توافق على سياسة الخصوصية وشروط الاستخدام.</p>
-    <p class="mini-note" style="margin-top:6px">للقُصّر: يلزم موافقة ولي الأمر قبل بدء أي اختبار.</p>
+  <div class="screen-label"><span class="chip">مستخدم · ٠٢</span><div><h2>صفحات الدخول (تدفق كامل)</h2><p>دخول · إنشاء حساب · نسيت كلمة المرور · رمز التحقق · إعادة التعيين · موافقة ولي الأمر — كلها تعمل</p></div></div>
+  <div class="center-wrap"><div class="card auth-card">
+    <div class="auth-brand">
+      <svg class="logo" viewBox="0 0 40 40" fill="none"><path d="M20 6c-3 0-5 2-6 4-2-1-5 0-6 3-1 2 0 5 2 6-2 2-2 5 0 7 1 2 4 3 6 2 1 2 3 4 6 3 3 0 5-2 5-4 3 0 5-3 4-6 2-2 2-5 0-7 1-3-1-6-4-6-1-2-3-2-4-2-1-1-2-2-3-3z" fill="#F472B6"/><circle cx="20" cy="20" r="4" fill="#EC4899"/></svg>
+      <span style="font-weight:800;font-size:18px">دندونة</span>
+    </div>
+    <div id="authToast" class="auth-toast" hidden></div>
+
+    <!-- LOGIN -->
+    <div class="auth-view show" data-v="login">
+      <h3>أهلًا بعودتك 🌸</h3><p class="sub">سجّل دخولك لمتابعة رحلتك مع دندونة</p>
+      <div class="oauth"><button type="button" data-oauth="Google">🟦 المتابعة مع Google</button><button type="button" data-oauth="Apple"> المتابعة مع Apple</button></div>
+      <div class="divider">أو بالبريد الإلكتروني</div>
+      <form data-form="login" novalidate>
+        <div class="field"><label>البريد الإلكتروني</label><input type="email" name="email" placeholder="name@email.com" dir="ltr" style="text-align:left"><div class="msg">يرجى إدخال بريد إلكتروني صحيح</div></div>
+        <div class="field"><label>كلمة المرور</label><div class="pw-wrap"><input type="password" name="password" placeholder="••••••••"><span class="eye" data-eye>👁️</span></div><div class="msg">كلمة المرور ٨ أحرف على الأقل</div></div>
+        <div class="auth-row"><label><input type="checkbox">تذكّرني</label><a data-go="forgot">نسيت كلمة المرور؟</a></div>
+        <button type="submit" class="btn btn-pink" style="width:100%">تسجيل الدخول</button>
+      </form>
+      <p class="auth-alt">ليس لديك حساب؟ <a data-go="signup">إنشاء حساب جديد</a></p>
+      <p class="mini-note" style="text-align:center">للقُصّر: يلزم موافقة ولي الأمر قبل بدء أي اختبار.</p>
+    </div>
+
+    <!-- SIGNUP -->
+    <div class="auth-view" data-v="signup">
+      <span class="auth-back" data-go="login">→ رجوع للدخول</span>
+      <h3>إنشاء حساب جديد</h3><p class="sub">ابدأ رحلتك مع دندونة في دقيقة</p>
+      <form data-form="signup" novalidate>
+        <div class="field"><label>الاسم أو اللقب</label><input type="text" name="name" placeholder="مثال: دانة"><div class="msg">يرجى إدخال الاسم</div></div>
+        <div class="field"><label>البريد الإلكتروني</label><input type="email" name="email" placeholder="name@email.com" dir="ltr" style="text-align:left"><div class="msg">بريد إلكتروني غير صحيح</div></div>
+        <div class="field"><label>الفئة العمرية</label><select name="age"><option value="adult">شاب/بالغ</option><option value="teen">مراهق</option><option value="minor">طفل (بإشراف ولي أمر)</option><option value="senior">كبير السن</option></select></div>
+        <div class="field"><label>كلمة المرور</label><div class="pw-wrap"><input type="password" name="password" placeholder="٨ أحرف على الأقل"><span class="eye" data-eye>👁️</span></div><div class="pw-meter"><i></i></div><div class="msg">كلمة المرور ٨ أحرف على الأقل</div></div>
+        <div class="field"><label>تأكيد كلمة المرور</label><input type="password" name="confirm" placeholder="أعد كتابة كلمة المرور"><div class="msg">كلمتا المرور غير متطابقتين</div></div>
+        <label class="auth-row" style="margin-bottom:12px" data-agree><input type="checkbox" name="agree"><span style="color:var(--dandona-slate);font-weight:600">أوافق على سياسة الخصوصية وأقرّ بأن النتائج إرشادية وليست تشخيصًا</span></label>
+        <div class="field" style="display:none" data-minor-note><div class="safety" style="font-size:12px"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>اخترت فئة قاصر — ستُطلب موافقة ولي الأمر بعد التسجيل.</span></div></div>
+        <button type="submit" class="btn btn-pink" style="width:100%">إنشاء الحساب</button>
+      </form>
+      <p class="auth-alt">لديك حساب بالفعل؟ <a data-go="login">تسجيل الدخول</a></p>
+    </div>
+
+    <!-- FORGOT -->
+    <div class="auth-view" data-v="forgot">
+      <span class="auth-back" data-go="login">→ رجوع للدخول</span>
+      <h3>نسيت كلمة المرور؟</h3><p class="sub">أدخل بريدك وسنرسل لك رمز تحقق لإعادة التعيين</p>
+      <form data-form="forgot" novalidate>
+        <div class="field"><label>البريد الإلكتروني</label><input type="email" name="email" placeholder="name@email.com" dir="ltr" style="text-align:left"><div class="msg">بريد إلكتروني غير صحيح</div></div>
+        <button type="submit" class="btn btn-pink" style="width:100%">إرسال رمز التحقق</button>
+      </form>
+    </div>
+
+    <!-- OTP -->
+    <div class="auth-view" data-v="otp">
+      <span class="auth-back" data-go="login">→ رجوع للدخول</span>
+      <h3>أدخل رمز التحقق</h3><p class="sub">أرسلنا رمزًا من ٦ أرقام إلى بريدك</p>
+      <form data-form="otp" novalidate>
+        <div class="otp" id="otpBoxes">
+          <input inputmode="numeric" maxlength="1"><input inputmode="numeric" maxlength="1"><input inputmode="numeric" maxlength="1"><input inputmode="numeric" maxlength="1"><input inputmode="numeric" maxlength="1"><input inputmode="numeric" maxlength="1">
+        </div>
+        <div class="msg" id="otpMsg" style="display:none;text-align:center;color:#e11d48;font-size:12px">الرمز غير مكتمل</div>
+        <div class="otp-hint">للتجربة استخدم الرمز <b class="num">123456</b> · <span class="resend">إعادة الإرسال</span></div>
+        <button type="submit" class="btn btn-pink" style="width:100%">تحقّق</button>
+      </form>
+    </div>
+
+    <!-- RESET -->
+    <div class="auth-view" data-v="reset">
+      <h3>إعادة تعيين كلمة المرور</h3><p class="sub">اختر كلمة مرور جديدة لحسابك</p>
+      <form data-form="reset" novalidate>
+        <div class="field"><label>كلمة المرور الجديدة</label><div class="pw-wrap"><input type="password" name="password" placeholder="٨ أحرف على الأقل"><span class="eye" data-eye>👁️</span></div><div class="pw-meter"><i></i></div><div class="msg">كلمة المرور ٨ أحرف على الأقل</div></div>
+        <div class="field"><label>تأكيد كلمة المرور</label><input type="password" name="confirm" placeholder="أعد كتابة كلمة المرور"><div class="msg">كلمتا المرور غير متطابقتين</div></div>
+        <button type="submit" class="btn btn-pink" style="width:100%">حفظ كلمة المرور</button>
+      </form>
+    </div>
+
+    <!-- GUARDIAN -->
+    <div class="auth-view" data-v="guardian">
+      <span class="auth-back" data-go="login">→ رجوع للدخول</span>
+      <h3>موافقة ولي الأمر</h3><p class="sub">للقُصّر: نرسل طلب موافقة لولي الأمر قبل بدء الاختبار</p>
+      <form data-form="guardian" novalidate>
+        <div class="field"><label>اسم ولي الأمر</label><input type="text" name="gname" placeholder="اسم ولي الأمر"><div class="msg">يرجى إدخال الاسم</div></div>
+        <div class="field"><label>بريد ولي الأمر</label><input type="email" name="gemail" placeholder="guardian@email.com" dir="ltr" style="text-align:left"><div class="msg">بريد إلكتروني غير صحيح</div></div>
+        <div class="field"><label>صلة القرابة</label><select name="rel"><option>أب</option><option>أم</option><option>ولي أمر</option></select></div>
+        <div class="safety" style="font-size:12px;margin-bottom:14px"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>لن يبدأ اختبار القاصر إلا بعد اعتماد ولي الأمر عبر الرابط المُرسل إلى بريده.</span></div>
+        <button type="submit" class="btn btn-pink" style="width:100%">إرسال طلب الموافقة</button>
+      </form>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="auth-view" data-v="success">
+      <div class="success-mark">✓</div>
+      <h3 id="successTitle">تم تسجيل الدخول</h3>
+      <p class="sub" id="successMsg">مرحبًا بك في دندونة 🌸</p>
+      <button type="button" class="btn btn-pink" style="width:100%" id="goDash">الانتقال إلى لوحتي ←</button>
+    </div>
+
+    <div class="demo-note">🔎 هذا تدفق تفاعلي تجريبي (بلا خادم خلفي). أي بريد صحيح + كلمة مرور ٨ أحرف يُكمل الدخول. للمصادقة الحقيقية عبر Supabase أخبرني.</div>
   </div></div>
 </section>
 
@@ -1029,6 +1152,143 @@ tbody td b{color:var(--dandona-blue)}
   // plan tabs demo
   var pt=document.getElementById('planTabs');
   if(pt){pt.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;pt.querySelectorAll('button').forEach(function(x){x.classList.remove('on')});b.classList.add('on')})}
+
+  /* ===================== AUTH FLOW ===================== */
+  var authSection=document.getElementById('auth');
+  var toast=document.getElementById('authToast');
+  var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function gotoAuth(){ // bring the auth screen into view (user group)
+    document.querySelectorAll('#groupbar button').forEach(function(x){x.classList.toggle('gactive',x.dataset.g==='user')});
+    groups.forEach(function(gr){gr.hidden=gr.getAttribute('data-g')!=='user'});
+    nav.querySelectorAll('.ngroup[data-g="user"] button').forEach(function(x){x.classList.toggle('active',x.dataset.s==='auth')});
+    showScreen('auth');
+  }
+  function showView(v){
+    authSection.querySelectorAll('.auth-view').forEach(function(x){x.classList.toggle('show',x.dataset.v===v)});
+    hideToast();
+  }
+  function showToast(msg,ok){toast.hidden=false;toast.className='auth-toast '+(ok?'ok':'err');toast.textContent=(ok?'✓ ':'⚠ ')+msg;}
+  function hideToast(){toast.hidden=true;}
+  function setErr(field,on){field.classList.toggle('err',on);}
+  function loadBtn(btn,label,cb){
+    var orig=btn.innerHTML;btn.classList.add('loading');btn.innerHTML='<span class="spin"></span> '+label;
+    setTimeout(function(){btn.classList.remove('loading');btn.innerHTML=orig;cb();},850);
+  }
+
+  // view links
+  authSection.addEventListener('click',function(e){
+    var g=e.target.closest('[data-go]'); if(g){showView(g.dataset.go);return;}
+    var eye=e.target.closest('[data-eye]');
+    if(eye){var inp=eye.parentNode.querySelector('input');inp.type=inp.type==='password'?'text':'password';eye.style.opacity=inp.type==='text'?'1':'.6';return;}
+    var re=e.target.closest('.resend'); if(re){showToast('أُعيد إرسال الرمز إلى بريدك',true);return;}
+  });
+
+  // password strength meter
+  authSection.addEventListener('input',function(e){
+    if(e.target.name==='password'){
+      var meter=e.target.closest('.field').querySelector('.pw-meter i'); if(!meter)return;
+      var v=e.target.value,s=0; if(v.length>=8)s++; if(/[A-Z]/.test(v)||/[؀-ۿ]/.test(v))s++; if(/\d/.test(v))s++; if(/[^A-Za-z0-9]/.test(v))s++;
+      var w=[0,25,55,80,100][s],c=['#e5e7eb','#f43f5e','#D6A85A','#60a5fa','#16A34A'][s];
+      meter.style.width=w+'%';meter.style.background=c;
+    }
+    var f=e.target.closest('.field.err'); if(f)setErr(f,false);
+  });
+
+  // minor note toggle on signup age select
+  var ageSel=authSection.querySelector('select[name="age"]');
+  if(ageSel){ageSel.addEventListener('change',function(){var n=authSection.querySelector('[data-minor-note]');if(n)n.style.display=this.value==='minor'?'block':'none';});}
+
+  // OTP boxes auto-advance
+  var otpBoxes=document.getElementById('otpBoxes');
+  if(otpBoxes){
+    var inputs=[].slice.call(otpBoxes.querySelectorAll('input'));
+    otpBoxes.addEventListener('input',function(e){
+      var i=inputs.indexOf(e.target); e.target.value=e.target.value.replace(/\D/g,'').slice(0,1);
+      if(e.target.value&&i<inputs.length-1)inputs[i+1].focus();
+      document.getElementById('otpMsg').style.display='none';
+    });
+    otpBoxes.addEventListener('keydown',function(e){
+      var i=inputs.indexOf(e.target);
+      if(e.key==='Backspace'&&!e.target.value&&i>0)inputs[i-1].focus();
+    });
+  }
+
+  // oauth buttons (login card + auth screen)
+  document.querySelectorAll('[data-oauth]').forEach(function(b){
+    b.addEventListener('click',function(){
+      loadBtn(b,'جارٍ التحويل…',function(){gotoAuth();finishSuccess('تم تسجيل الدخول عبر '+b.dataset.oauth,'مرحبًا بك في دندونة 🌸');});
+    });
+  });
+  // landing "create account" link -> auth signup
+  document.querySelectorAll('[data-goauth]').forEach(function(el){
+    el.addEventListener('click',function(){gotoAuth();showView(el.dataset.goauth);});
+  });
+
+  function finishSuccess(title,msg){
+    showView('success');
+    document.getElementById('successTitle').textContent=title;
+    document.getElementById('successMsg').textContent=msg;
+  }
+
+  // form submissions (works on landing login form AND auth screen forms)
+  document.querySelectorAll('form[data-form]').forEach(function(form){
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var type=form.dataset.form,ok=true;
+      function field(name){return form.querySelector('[name="'+name+'"]');}
+      function wrap(el){return el.closest('.field');}
+      function checkEmail(name){var el=field(name);if(!el)return true;var v=emailRe.test(el.value.trim());setErr(wrap(el),!v);if(!v)ok=false;return v;}
+      function checkPass(name){var el=field(name);if(!el)return true;var v=el.value.length>=8;setErr(wrap(el),!v);if(!v)ok=false;return v;}
+      function checkText(name){var el=field(name);if(!el)return true;var v=el.value.trim().length>0;setErr(wrap(el),!v);if(!v)ok=false;return v;}
+
+      if(type==='login'){checkEmail('email');checkPass('password');}
+      else if(type==='signup'){
+        checkText('name');checkEmail('email');checkPass('password');
+        var p=field('password'),c=field('confirm');
+        if(p&&c){var m=p.value===c.value&&c.value.length>0;setErr(wrap(c),!m);if(!m)ok=false;}
+        var agree=field('agree'); if(agree&&!agree.checked){ok=false;showToast('يرجى الموافقة على السياسة للمتابعة',false);}
+      }
+      else if(type==='forgot'){checkEmail('email');}
+      else if(type==='otp'){
+        var code=[].slice.call(otpBoxes.querySelectorAll('input')).map(function(x){return x.value}).join('');
+        if(code.length<6){document.getElementById('otpMsg').style.display='block';document.getElementById('otpMsg').textContent='الرمز غير مكتمل';ok=false;}
+        else if(code!=='123456'){document.getElementById('otpMsg').style.display='block';document.getElementById('otpMsg').textContent='الرمز غير صحيح (جرّب 123456)';ok=false;}
+      }
+      else if(type==='reset'){
+        checkPass('password');var p2=field('password'),c2=field('confirm');
+        if(p2&&c2){var mm=p2.value===c2.value&&c2.value.length>=8;setErr(wrap(c2),!mm);if(!mm)ok=false;}
+      }
+      else if(type==='guardian'){checkText('gname');checkEmail('gemail');}
+
+      if(!ok)return;
+      var btn=form.querySelector('button[type="submit"]');
+      var labels={login:'جارٍ الدخول…',signup:'جارٍ الإنشاء…',forgot:'جارٍ الإرسال…',otp:'جارٍ التحقق…',reset:'جارٍ الحفظ…',guardian:'جارٍ الإرسال…'};
+      loadBtn(btn,labels[type]||'…',function(){
+        if(form.closest('#landing')){ // landing login -> jump to auth success
+          gotoAuth();finishSuccess('تم تسجيل الدخول','مرحبًا بك في دندونة 🌸');return;
+        }
+        if(type==='login'){finishSuccess('تم تسجيل الدخول','مرحبًا بك في دندونة 🌸');}
+        else if(type==='signup'){
+          if(field('age').value==='minor'){showView('guardian');showToast('أنشأنا حسابك — تبقّت موافقة ولي الأمر',true);}
+          else{showView('otp');showToast('أرسلنا رمز تحقق إلى بريدك',true);}
+        }
+        else if(type==='forgot'){showView('otp');showToast('أرسلنا رمز تحقق إلى بريدك',true);}
+        else if(type==='otp'){showView('reset');showToast('تم التحقق بنجاح',true);}
+        else if(type==='reset'){finishSuccess('تم تحديث كلمة المرور','يمكنك الآن استخدام كلمتك الجديدة');}
+        else if(type==='guardian'){finishSuccess('تم إرسال الطلب','بانتظار اعتماد ولي الأمر لبدء الاختبار');}
+      });
+    });
+  });
+
+  // success -> dashboard
+  var goDash=document.getElementById('goDash');
+  if(goDash){goDash.addEventListener('click',function(){
+    document.querySelectorAll('#groupbar button').forEach(function(x){x.classList.toggle('gactive',x.dataset.g==='user')});
+    groups.forEach(function(gr){gr.hidden=gr.getAttribute('data-g')!=='user'});
+    nav.querySelectorAll('.ngroup[data-g="user"] button').forEach(function(x){x.classList.toggle('active',x.dataset.s==='dashboard')});
+    showScreen('dashboard');
+  });}
 })();
 </script>
 </body>
