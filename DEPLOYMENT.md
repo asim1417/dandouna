@@ -33,9 +33,8 @@
 من جهازك مع ضبط `DATABASE_URL` على قاعدة الإنتاج:
 ```bash
 npm install
-npm run db:deploy   # تطبيق الترحيلات الرسمية (prisma migrate deploy)
-npm run db:seed     # حسابات + طفل + شركة تجريبية
-npm run db:import   # ١٨ مرجعًا + ١٤ مقياسًا + برامج/عادات + ركن الطمأنينة
+npm run db:setup        # يشغّل: migrate deploy + seed + import (تهيئة كاملة بأمر واحد)
+npm run db:approve-demo # (اختياري) اعتماد ٥ مقاييس أساسية لتظهر فورًا
 ```
 > الترحيلات الرسمية في `prisma/migrations/` — استخدم `db:deploy` في الإنتاج (لا `db:push`).
 
