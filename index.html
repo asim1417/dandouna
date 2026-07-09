@@ -1,1 +1,643 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dandona UI Kit</title><link rel="stylesheet" href="styles/dandona.css"></head><body><main class="screen"><div class="card" style="padding:38px;max-width:1200px;margin:auto"><div class="logo"><span class="logo-mark"><img src="assets/icons/flower.svg"></span><div>حزمة واجهات دندونة الجاهزة<div class="brand-note">HTML/CSS + SVG Icons + Assets</div></div></div><h1 class="title" style="margin-top:26px">كل واجهة في صفحة مستقلة</h1><div class="preview-grid"><a href="screens/landing.html" target="_blank">landing</a><a href="screens/login.html" target="_blank">login</a><a href="screens/profile-setup.html" target="_blank">profile-setup</a><a href="screens/consent.html" target="_blank">consent</a><a href="screens/dashboard.html" target="_blank">dashboard</a><a href="screens/assessment-start.html" target="_blank">assessment-start</a><a href="screens/assessment-question.html" target="_blank">assessment-question</a><a href="screens/result.html" target="_blank">result</a><a href="screens/plan.html" target="_blank">plan</a><a href="screens/challenges.html" target="_blank">challenges</a><a href="screens/reports.html" target="_blank">reports</a><a href="screens/calm-corner.html" target="_blank">calm-corner</a><a href="screens/guardian.html" target="_blank">guardian</a><a href="screens/specialist.html" target="_blank">specialist</a><a href="screens/organization.html" target="_blank">organization</a><a href="screens/admin.html" target="_blank">admin</a><a href="screens/mobile-home.html" target="_blank">mobile-home</a></div><div style="margin-top:28px"><a class="btn btn-primary" href="assets/images/واجهة_مبهجة_لتطبيق_دندونة_للأطفال.png" target="_blank">فتح التصور البصري الكامل</a></div></div></main></body></html>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>منصة دندونة · الواجهات المعتمدة V4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===================== دندونة · Design Tokens V4 ===================== */
+:root{
+  --dandona-white:#FFFFFF;
+  --dandona-soft-pink-bg:#FFF5F8;
+  --dandona-pink:#F472B6;
+  --dandona-pink-strong:#EC4899;
+  --dandona-pink-light:#FCE7F3;
+  --dandona-blue:#1E3A8A;
+  --dandona-blue-light:#DBEAFE;
+  --dandona-gold:#D6A85A;
+  --dandona-green:#16A34A;
+  --dandona-slate:#64748B;
+  --dandona-border:#E5E7EB;
+  --radius-card:24px;
+  --radius-button:14px;
+  --shadow-soft:0 16px 40px rgba(30,58,138,0.08);
+  --shadow-hover:0 20px 48px rgba(30,58,138,0.12);
+  --font-arabic:'Noto Sans Arabic','IBM Plex Sans Arabic',sans-serif;
+  --font-num:'Inter','Noto Sans Arabic',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-arabic);
+  background:var(--dandona-soft-pink-bg);
+  color:var(--dandona-blue);
+  line-height:1.7;
+  text-align:right;
+  direction:rtl;
+  -webkit-font-smoothing:antialiased;
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+h1,h2,h3,h4{color:var(--dandona-blue);line-height:1.35}
+p{color:var(--dandona-slate)}
+.num{font-family:var(--font-num);font-feature-settings:"tnum"}
+button{font-family:inherit;cursor:pointer}
+a{color:inherit;text-decoration:none}
+
+/* ===================== شريط التبديل بين الشاشات ===================== */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.86);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--dandona-border);
+  box-shadow:0 4px 20px rgba(30,58,138,.05);
+}
+.topbar-inner{max-width:1280px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
+.brand .logo{width:38px;height:38px;flex:0 0 38px}
+.brand small{display:block;font-family:var(--font-num);font-size:9px;letter-spacing:3px;color:var(--dandona-pink-strong);font-weight:700}
+.nav{display:flex;gap:6px;flex-wrap:wrap;margin-inline-start:auto}
+.nav button{
+  border:1px solid transparent;background:transparent;color:var(--dandona-slate);
+  padding:8px 14px;border-radius:999px;font-size:14px;font-weight:600;transition:.2s;
+}
+.nav button:hover{background:var(--dandona-pink-light);color:var(--dandona-blue)}
+.nav button.active{background:var(--dandona-blue);color:#fff}
+
+/* ===================== تخطيط عام ===================== */
+.stage{max-width:1280px;margin:0 auto;padding:34px 22px 80px}
+.screen{display:none;animation:fade .4s ease}
+.screen.show{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.screen-label{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.screen-label .chip{background:var(--dandona-blue);color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;font-family:var(--font-num)}
+.screen-label h2{font-size:22px}
+.screen-label p{font-size:13px}
+
+.card{background:#fff;border:1px solid var(--dandona-border);border-radius:var(--radius-card);box-shadow:var(--shadow-soft)}
+.btn{border:none;border-radius:var(--radius-button);padding:13px 26px;font-size:15px;font-weight:700;min-height:44px;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-pink{background:var(--dandona-pink-strong);color:#fff;box-shadow:0 10px 22px rgba(236,72,153,.28)}
+.btn-pink:hover{background:var(--dandona-pink);transform:translateY(-1px)}
+.btn-blue{background:var(--dandona-blue);color:#fff}
+.btn-blue:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.btn-ghost{background:#fff;color:var(--dandona-blue);border:1.5px solid var(--dandona-border)}
+.btn-ghost:hover{border-color:var(--dandona-pink);color:var(--dandona-pink-strong)}
+.safety{background:var(--dandona-blue-light);color:var(--dandona-blue);border-radius:14px;padding:11px 15px;font-size:13px;font-weight:600;display:flex;gap:9px;align-items:flex-start}
+.safety svg{flex:0 0 18px;margin-top:2px}
+
+/* ===================== 1 · الرئيسية ===================== */
+.landing{display:grid;grid-template-columns:1.15fr .85fr;gap:26px}
+.hero{position:relative;overflow:hidden;padding:44px 40px;background:linear-gradient(155deg,#fff 0%,var(--dandona-soft-pink-bg) 55%,var(--dandona-pink-light) 100%)}
+.hero .petal{position:absolute;border-radius:60% 40% 55% 45%;background:radial-gradient(circle at 30% 30%,#fff,var(--dandona-pink));opacity:.5}
+.hero h1{font-size:40px;font-weight:800;line-height:1.25;margin-bottom:14px;position:relative}
+.hero h1 span{color:var(--dandona-pink-strong)}
+.hero .lead{font-size:17px;color:var(--dandona-slate);max-width:440px;margin-bottom:12px;position:relative}
+.hero .sub{font-size:14px;color:var(--dandona-slate);margin-bottom:26px;position:relative}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;position:relative}
+.hero-photo{position:relative;margin-top:30px;height:280px;border-radius:20px;overflow:hidden;background:linear-gradient(160deg,#fff,var(--dandona-pink-light));box-shadow:inset 0 0 0 1px var(--dandona-pink-light)}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block}
+.hero-photo .cap{position:absolute;inset-inline:0;bottom:0;padding:22px 16px 12px;background:linear-gradient(to top,rgba(255,255,255,.92),transparent);font-size:12px;color:var(--dandona-slate);text-align:center;font-weight:600}
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.trust .t{background:#fff;border:1px solid var(--dandona-border);border-radius:18px;padding:16px 12px;text-align:center}
+.trust .t .ic{width:42px;height:42px;margin:0 auto 8px;border-radius:12px;background:var(--dandona-pink-light);display:flex;align-items:center;justify-content:center;color:var(--dandona-pink-strong)}
+.trust .t b{font-size:14px;display:block;margin-bottom:3px}
+.trust .t small{font-size:11px;color:var(--dandona-slate)}
+.why{padding:30px}
+.why h3{font-size:19px;margin-bottom:18px}
+.why .row{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid var(--dandona-border)}
+.why .row:last-child{border-bottom:none}
+.why .row .ic{width:40px;height:40px;flex:0 0 40px;border-radius:12px;background:var(--dandona-blue-light);color:var(--dandona-blue);display:flex;align-items:center;justify-content:center}
+.why .row b{font-size:15px;display:block;margin-bottom:2px}
+.why .row p{font-size:13px}
+.login-card{padding:30px;text-align:center}
+.login-card .logo{width:52px;height:52px;margin:0 auto 12px}
+.login-card h3{font-size:19px;margin-bottom:4px}
+.login-card p{font-size:13px;margin-bottom:20px}
+.oauth{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.oauth button{width:100%;border:1.5px solid var(--dandona-border);background:#fff;border-radius:var(--radius-button);padding:12px;font-weight:700;font-size:14px;color:var(--dandona-blue);display:flex;align-items:center;justify-content:center;gap:10px;min-height:46px;transition:.2s}
+.oauth button:hover{border-color:var(--dandona-pink);background:#fffafc}
+.divider{display:flex;align-items:center;gap:10px;color:var(--dandona-slate);font-size:12px;margin:14px 0}
+.divider::before,.divider::after{content:"";height:1px;background:var(--dandona-border);flex:1}
+.field{text-align:right;margin-bottom:12px}
+.field label{font-size:13px;font-weight:600;color:var(--dandona-blue);display:block;margin-bottom:6px}
+.field input{width:100%;border:1.5px solid var(--dandona-border);border-radius:12px;padding:12px 14px;font-family:inherit;font-size:14px;text-align:right;direction:rtl;color:var(--dandona-blue)}
+.field input:focus{outline:none;border-color:var(--dandona-pink)}
+.mini-note{font-size:11px;color:var(--dandona-slate);margin-top:8px}
+
+/* ===================== 2 · لوحة المستخدم ===================== */
+.dash{display:grid;grid-template-columns:220px 1fr;gap:22px;align-items:start}
+.side{background:#fff;border:1px solid var(--dandona-border);border-radius:var(--radius-card);padding:20px 14px;box-shadow:var(--shadow-soft)}
+.side .brand{margin:4px 8px 20px}
+.side nav{display:flex;flex-direction:column;gap:3px}
+.side nav a{display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:13px;font-size:14px;font-weight:600;color:var(--dandona-slate);transition:.15s}
+.side nav a .ic{width:20px;height:20px;flex:0 0 20px}
+.side nav a:hover{background:var(--dandona-soft-pink-bg);color:var(--dandona-blue)}
+.side nav a.on{background:var(--dandona-pink-light);color:var(--dandona-blue)}
+.dash-main{display:flex;flex-direction:column;gap:20px}
+.greet{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.greet h2{font-size:24px}
+.greet p{font-size:14px}
+.avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--dandona-pink),var(--dandona-pink-strong));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:20px;flex:0 0 52px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.metric{background:#fff;border:1px solid var(--dandona-border);border-radius:20px;padding:18px 16px;text-align:center;box-shadow:var(--shadow-soft);transition:.2s}
+.metric:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+.metric .cap{font-size:13px;font-weight:600;color:var(--dandona-slate);margin-bottom:12px}
+.metric .big{font-family:var(--font-num);font-size:34px;font-weight:700;color:var(--dandona-blue)}
+.metric .emoji{font-size:34px}
+.metric .tag{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;padding:3px 12px;border-radius:999px}
+.tag-green{background:#dcfce7;color:var(--dandona-green)}
+.tag-pink{background:var(--dandona-pink-light);color:var(--dandona-pink-strong)}
+.tag-blue{background:var(--dandona-blue-light);color:var(--dandona-blue)}
+.ring{display:block;margin:0 auto 6px}
+.rec-wrap{background:#fff;border:1px solid var(--dandona-border);border-radius:var(--radius-card);padding:24px;box-shadow:var(--shadow-soft)}
+.rec-wrap h3{font-size:18px;margin-bottom:16px}
+.recs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.rec{border:1px solid var(--dandona-border);border-radius:18px;overflow:hidden;transition:.2s}
+.rec:hover{border-color:var(--dandona-pink);transform:translateY(-2px)}
+.rec .thumb{height:74px;display:flex;align-items:center;justify-content:center;font-size:30px}
+.rec .body{padding:12px 14px}
+.rec b{font-size:14px;display:block;margin-bottom:3px}
+.rec small{font-size:12px;color:var(--dandona-slate)}
+.calm{background:linear-gradient(135deg,var(--dandona-soft-pink-bg),var(--dandona-pink-light));border:1px solid var(--dandona-pink-light);border-radius:var(--radius-card);padding:22px 26px;display:flex;align-items:center;gap:20px}
+.calm .orn{font-size:40px}
+.calm .txt{flex:1}
+.calm .txt .v{font-size:17px;font-weight:700;color:var(--dandona-blue);margin-bottom:4px}
+.calm .txt .src{font-size:12px;color:var(--dandona-gold);font-weight:700}
+.calm .off{background:#fff;border:1px solid var(--dandona-border);border-radius:999px;padding:8px 14px;font-size:12px;font-weight:700;color:var(--dandona-slate);white-space:nowrap}
+
+/* ===================== 3 · الجوال ===================== */
+.mobile-wrap{display:grid;grid-template-columns:340px 1fr;gap:34px;align-items:start}
+.phone{width:340px;background:#0b1020;border-radius:46px;padding:12px;box-shadow:0 30px 70px rgba(30,58,138,.22);margin:0 auto}
+.phone .screen-in{background:var(--dandona-soft-pink-bg);border-radius:36px;overflow:hidden;height:700px;position:relative;display:flex;flex-direction:column}
+.notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:130px;height:26px;background:#0b1020;border-radius:0 0 18px 18px;z-index:5}
+.m-head{padding:34px 20px 14px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--dandona-border)}
+.m-head .g b{font-size:16px}
+.m-head .g small{font-size:12px;color:var(--dandona-slate)}
+.m-body{flex:1;overflow:auto;padding:16px 18px 90px}
+.m-result{background:#fff;border:1px solid var(--dandona-border);border-radius:22px;padding:20px;text-align:center;box-shadow:var(--shadow-soft);margin-bottom:14px}
+.m-result .cap{font-size:13px;color:var(--dandona-slate);font-weight:600}
+.m-two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.m-two .metric{padding:14px 10px}
+.m-two .metric .cap{margin-bottom:6px;font-size:12px}
+.m-prog{background:#fff;border:1px solid var(--dandona-border);border-radius:20px;padding:16px 18px;box-shadow:var(--shadow-soft)}
+.m-prog .top{display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:10px}
+.bar{height:9px;border-radius:999px;background:var(--dandona-pink-light);overflow:hidden}
+.bar>i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--dandona-pink),var(--dandona-pink-strong))}
+.m-nav{position:absolute;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--dandona-border);display:flex;justify-content:space-around;padding:10px 6px 16px}
+.m-nav a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:600;color:var(--dandona-slate)}
+.m-nav a.on{color:var(--dandona-pink-strong)}
+.m-nav a .ic{width:22px;height:22px}
+.mobile-notes{display:flex;flex-direction:column;gap:14px}
+.note{background:#fff;border:1px solid var(--dandona-border);border-radius:18px;padding:18px 20px;box-shadow:var(--shadow-soft)}
+.note b{font-size:15px;display:block;margin-bottom:6px}
+.note p{font-size:13px}
+
+/* ===================== 4 · الاختبار والنتيجة ===================== */
+.assess{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.assess-start{padding:28px}
+.assess-start h3{font-size:19px;margin-bottom:6px}
+.assess-meta{display:flex;flex-direction:column;gap:12px;margin:20px 0}
+.assess-meta .m{display:flex;align-items:center;gap:12px;padding:13px 15px;border:1px solid var(--dandona-border);border-radius:14px}
+.assess-meta .m .ic{width:38px;height:38px;flex:0 0 38px;border-radius:11px;background:var(--dandona-pink-light);color:var(--dandona-pink-strong);display:flex;align-items:center;justify-content:center}
+.assess-meta .m b{font-size:14px}
+.assess-meta .m span{margin-inline-start:auto;font-family:var(--font-num);font-weight:700;color:var(--dandona-blue)}
+.result-card{padding:28px;text-align:center}
+.result-card .score{font-family:var(--font-num);font-size:60px;font-weight:700;color:var(--dandona-blue);line-height:1}
+.result-card .score small{font-size:22px;color:var(--dandona-slate)}
+.result-band{display:inline-block;margin:8px 0 4px;font-size:14px;font-weight:700;padding:5px 18px;border-radius:999px;background:var(--dandona-pink-light);color:var(--dandona-pink-strong)}
+.bands{display:flex;gap:4px;margin:16px 0 12px}
+.bands .b{flex:1;text-align:center;font-size:10px;color:var(--dandona-slate)}
+.bands .b i{display:block;height:8px;border-radius:6px;margin-bottom:5px}
+.radar-wrap{display:flex;justify-content:center;margin-top:8px}
+
+/* ===================== 5 · برنامجي والتحديات ===================== */
+.prog2{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.panel{padding:24px}
+.panel h3{font-size:18px;margin-bottom:4px}
+.panel .hint{font-size:13px;margin-bottom:18px}
+.task{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid var(--dandona-border)}
+.task:last-child{border-bottom:none}
+.tick{width:26px;height:26px;flex:0 0 26px;border-radius:50%;border:2px solid var(--dandona-border);display:flex;align-items:center;justify-content:center;color:#fff}
+.task.done .tick{background:var(--dandona-green);border-color:var(--dandona-green)}
+.task.done .tx{color:var(--dandona-slate);text-decoration:line-through}
+.task .tx{font-size:14px;font-weight:600;color:var(--dandona-blue)}
+.task .day{margin-inline-start:auto;font-family:var(--font-num);font-size:12px;color:var(--dandona-slate)}
+.chal{padding:15px 0;border-bottom:1px solid var(--dandona-border)}
+.chal:last-child{border-bottom:none}
+.chal .top{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.chal .top .ic{width:34px;height:34px;flex:0 0 34px;border-radius:10px;background:var(--dandona-pink-light);color:var(--dandona-pink-strong);display:flex;align-items:center;justify-content:center;font-size:16px}
+.chal .top b{font-size:14px}
+.chal .top span{margin-inline-start:auto;font-family:var(--font-num);font-size:12px;font-weight:700;color:var(--dandona-pink-strong)}
+
+/* ===================== 6 · التقارير ===================== */
+.reports{display:grid;grid-template-columns:1.3fr .7fr;gap:22px;align-items:start}
+.report-main{padding:26px}
+.report-main .head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.report-main .head h3{font-size:18px}
+.report-main .head .pill{font-family:var(--font-num);font-size:12px;font-weight:700;background:var(--dandona-blue-light);color:var(--dandona-blue);padding:5px 12px;border-radius:999px}
+.avg{display:flex;align-items:baseline;gap:8px;margin:14px 0}
+.avg .n{font-family:var(--font-num);font-size:40px;font-weight:700;color:var(--dandona-blue)}
+.avg .up{font-family:var(--font-num);font-size:14px;font-weight:700;color:var(--dandona-green)}
+.improve{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.improve .r .lbl{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:6px}
+.improve .r .lbl .up{font-family:var(--font-num);color:var(--dandona-green);font-weight:700}
+.report-side{padding:24px;display:flex;flex-direction:column;gap:14px}
+.report-side .exp{border:1px dashed var(--dandona-pink);border-radius:16px;padding:18px;text-align:center;background:#fffafc}
+.report-side .exp .ic{font-size:30px}
+.report-side .exp b{display:block;font-size:15px;margin:6px 0 3px}
+.report-side .exp small{font-size:12px;color:var(--dandona-slate);display:block;margin-bottom:12px}
+
+/* footer */
+.foot{max-width:1280px;margin:0 auto;padding:26px 22px 50px;text-align:center;color:var(--dandona-slate);font-size:12.5px;border-top:1px solid var(--dandona-border)}
+.foot b{color:var(--dandona-blue)}
+
+@media(max-width:960px){
+  .landing,.dash,.mobile-wrap,.assess,.prog2,.reports{grid-template-columns:1fr}
+  .side{display:none}
+  .trust,.recs{grid-template-columns:1fr 1fr}
+  .metrics{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:30px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== شريط التبديل ===================== -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 40 40" fill="none">
+        <path d="M20 6c-3 0-5 2-6 4-2-1-5 0-6 3-1 2 0 5 2 6-2 2-2 5 0 7 1 2 4 3 6 2 1 2 3 4 6 3 3 0 5-2 5-4 3 0 5-3 4-6 2-2 2-5 0-7 1-3-1-6-4-6-1-2-3-2-4-2-1-1-2-2-3-3z" fill="#F472B6" opacity=".9"/>
+        <circle cx="20" cy="20" r="4" fill="#EC4899"/>
+      </svg>
+      <span>دندونة<small>DANDOUNA</small></span>
+    </div>
+    <nav class="nav" id="nav">
+      <button data-s="landing" class="active">الرئيسية</button>
+      <button data-s="dashboard">لوحة المستخدم</button>
+      <button data-s="mobile">الجوال</button>
+      <button data-s="auth">تسجيل الدخول</button>
+      <button data-s="assess">الاختبار والنتيجة</button>
+      <button data-s="program">برنامجي والتحديات</button>
+      <button data-s="reports">التقارير</button>
+    </nav>
+  </div>
+</header>
+
+<main class="stage">
+
+<!-- ============================================================ 1 · الرئيسية -->
+<section class="screen show" id="landing">
+  <div class="screen-label"><span class="chip">01</span><div><h2>الواجهة الرئيسية</h2><p>Hero بصورة طفلة مبهجة، عنوان أزرق، زر رئيسي وردي، وبطاقات ثقة</p></div></div>
+  <div class="landing">
+    <div>
+      <div class="card hero">
+        <span class="petal" style="width:120px;height:120px;top:-30px;left:-30px"></span>
+        <span class="petal" style="width:70px;height:70px;bottom:20px;left:40px;opacity:.35"></span>
+        <span class="petal" style="width:40px;height:40px;top:60px;left:120px;opacity:.4"></span>
+        <h1>منصة متكاملة لفهم <span>نمط تحفيزك</span> وتنمية الوعي الذاتي</h1>
+        <p class="lead">افهم نمطك السلوكي والتحفيزي وعاداتك اليومية، واخرج بخطوة عملية واحدة على الأقل — بلغة ودودة ومطمئنة.</p>
+        <p class="sub">نحو حياة أكثر اتزانًا وسعادة</p>
+        <div class="hero-cta">
+          <button class="btn btn-pink">ابدأ رحلتك الآن ←</button>
+          <button class="btn btn-ghost">تعرّف على دندونة</button>
+        </div>
+        <div class="hero-photo">
+          <img src="assets/dana_child.jpg" alt="طفلة مبهجة بابتسامة طبيعية وإكليل زهور — صورة دندونة الرئيسية">
+          <div class="cap">نحو حياة أكثر اتزانًا وسعادة 🌸</div>
+        </div>
+      </div>
+
+      <div class="trust">
+        <div class="t"><div class="ic">🔬</div><b>علمية موثوقة</b><small>مصمّمة بإشراف مختصين</small></div>
+        <div class="t"><div class="ic">🛡️</div><b>تراعي خصوصيتك</b><small>بياناتك آمنة بالكامل</small></div>
+        <div class="t"><div class="ic">🎯</div><b>خطط مخصّصة</b><small>حسب احتياجاتك</small></div>
+        <div class="t"><div class="ic">🌙</div><b>متوافقة مع قيمنا</b><small>ركن طمأنينة اختياري</small></div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div class="card login-card">
+        <svg class="logo" viewBox="0 0 40 40" fill="none"><path d="M20 6c-3 0-5 2-6 4-2-1-5 0-6 3-1 2 0 5 2 6-2 2-2 5 0 7 1 2 4 3 6 2 1 2 3 4 6 3 3 0 5-2 5-4 3 0 5-3 4-6 2-2 2-5 0-7 1-3-1-6-4-6-1-2-3-2-4-2-1-1-2-2-3-3z" fill="#F472B6"/><circle cx="20" cy="20" r="4" fill="#EC4899"/></svg>
+        <h3>مرحبًا بك في دندونة</h3>
+        <p>سجّل دخولك لبدء رحلتك نحو التوازن والسعادة</p>
+        <div class="oauth">
+          <button>🟦 المتابعة مع Google</button>
+          <button> المتابعة مع Apple</button>
+        </div>
+        <div class="divider">أو</div>
+        <div class="field"><label>البريد الإلكتروني</label><input type="email" placeholder="name@email.com" dir="ltr" style="text-align:left"></div>
+        <div class="field"><label>كلمة المرور</label><input type="password" placeholder="••••••••"></div>
+        <button class="btn btn-pink" style="width:100%">تسجيل الدخول</button>
+        <p class="mini-note">ليس لديك حساب؟ <b style="color:var(--dandona-pink-strong)">إنشاء حساب جديد</b></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card why" style="margin-top:24px">
+    <h3>لماذا دندونة؟</h3>
+    <div class="row"><div class="ic">🧠</div><div><b>اختبارات علمية موثوقة</b><p>مقاييس مصمّمة لقياس مؤشرات التوازن التحفيزي والسلوكي بدقة.</p></div></div>
+    <div class="row"><div class="ic">🎯</div><div><b>برامج مخصّصة</b><p>خطط شخصية بناءً على نتائجك واحتياجاتك اليومية.</p></div></div>
+    <div class="row"><div class="ic">📚</div><div><b>محتوى معرفي موثوق</b><p>مقالات وأدوات من خبراء، مراجَعة علميًا ولغويًا.</p></div></div>
+    <div class="row"><div class="ic">🌙</div><div><b>متوافقة مع قيمنا</b><p>ركن الطمأنينة الاختياري يدعم بناء العادة دون حكم على الإيمان.</p></div></div>
+  </div>
+</section>
+
+<!-- ============================================================ 2 · لوحة المستخدم -->
+<section class="screen" id="dashboard">
+  <div class="screen-label"><span class="chip">02</span><div><h2>لوحة المستخدم (Desktop)</h2><p>تحية شخصية، بطاقات قياس، توصيات مخصّصة، وبطاقة ركن الطمأنينة</p></div></div>
+  <div class="dash">
+    <aside class="side">
+      <div class="brand"><svg class="logo" viewBox="0 0 40 40" fill="none"><path d="M20 6c-3 0-5 2-6 4-2-1-5 0-6 3-1 2 0 5 2 6-2 2-2 5 0 7 1 2 4 3 6 2 1 2 3 4 6 3 3 0 5-2 5-4 3 0 5-3 4-6 2-2 2-5 0-7 1-3-1-6-4-6-1-2-3-2-4-2-1-1-2-2-3-3z" fill="#F472B6"/><circle cx="20" cy="20" r="4" fill="#EC4899"/></svg><span style="font-size:17px">دندونة<small>DANDOUNA</small></span></div>
+      <nav>
+        <a class="on">▦ لوحة التحكم</a>
+        <a>🧭 اختبار المؤشر</a>
+        <a>🗂️ برنامجي</a>
+        <a>🏅 تحدياتي</a>
+        <a>📊 التقارير</a>
+        <a>📚 المحتوى المعرفي</a>
+        <a>🌙 ركن الطمأنينة</a>
+        <a>⚙️ الإعدادات</a>
+        <a>↩️ تسجيل خروج</a>
+      </nav>
+    </aside>
+
+    <div class="dash-main">
+      <div class="greet">
+        <div><h2>مرحبًا دانة 👋</h2><p>كيف تشعرين اليوم؟</p></div>
+        <div class="avatar">د</div>
+      </div>
+
+      <div class="metrics">
+        <div class="metric">
+          <div class="cap">مؤشر التوازن التحفيزي</div>
+          <svg class="ring" width="96" height="96" viewBox="0 0 96 96">
+            <circle cx="48" cy="48" r="40" fill="none" stroke="#FCE7F3" stroke-width="10"/>
+            <circle cx="48" cy="48" r="40" fill="none" stroke="#EC4899" stroke-width="10" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="55.3" transform="rotate(-90 48 48)"/>
+            <text x="48" y="46" text-anchor="middle" font-family="Inter" font-size="26" font-weight="700" fill="#1E3A8A">78</text>
+            <text x="48" y="63" text-anchor="middle" font-family="Inter" font-size="10" fill="#64748B">من 100</text>
+          </svg>
+          <span class="tag tag-pink">مرتفع</span>
+        </div>
+        <div class="metric"><div class="cap">الحالة المزاجية</div><div class="emoji">🙂</div><div style="height:20px"></div><span class="tag tag-green">جيدة</span></div>
+        <div class="metric"><div class="cap">التركيز</div><div class="emoji">🎯</div><div style="height:20px"></div><span class="tag tag-blue">ممتاز</span></div>
+        <div class="metric"><div class="cap">النشاط البدني</div><div class="emoji">🏃</div><div style="height:20px"></div><span class="tag tag-pink">متوسط</span></div>
+      </div>
+
+      <div class="rec-wrap">
+        <h3>توصيات مخصّصة لك</h3>
+        <div class="recs">
+          <div class="rec"><div class="thumb" style="background:#eaf7ee">🌱</div><div class="body"><b>تمرين تنفّس</b><small>٥ دقائق لهدوء أعمق</small></div></div>
+          <div class="rec"><div class="thumb" style="background:#e7f0fe">⛰️</div><div class="body"><b>مشي في الطبيعة</b><small>٢٠ دقيقة تنشّط يومك</small></div></div>
+          <div class="rec"><div class="thumb" style="background:#fdf0e6">📓</div><div class="body"><b>الامتنان اليومي</b><small>اكتب ٣ أشياء</small></div></div>
+          <div class="rec"><div class="thumb" style="background:#fce7f3">✍️</div><div class="body"><b>جلسة تركيز</b><small>٢٥ دقيقة بلا تشتّت</small></div></div>
+        </div>
+      </div>
+
+      <div class="calm">
+        <span class="orn">🌙</span>
+        <div class="txt">
+          <div class="v">«وتعاونوا على البِرِّ والتقوى ولا تعاونوا على الإثم والعدوان»</div>
+          <div class="src">سورة المائدة · الآية ٢</div>
+        </div>
+        <button class="off">لا أريد هذا المحتوى الآن</button>
+      </div>
+
+      <div class="safety">
+        <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>هذه مؤشرات إرشادية تثقيفية وليست تشخيصًا طبيًا أو نفسيًا، ولا تُغني عن مختص مرخّص.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 3 · الجوال -->
+<section class="screen" id="mobile">
+  <div class="screen-label"><span class="chip">03</span><div><h2>واجهة الجوال (Mobile Home)</h2><p>نتيجة رئيسية + مؤشران + تقدّم اليوم، وتنقّل سفلي بأزرار كبيرة</p></div></div>
+  <div class="mobile-wrap">
+    <div class="phone">
+      <div class="screen-in">
+        <div class="notch"></div>
+        <div class="m-head">
+          <div class="g"><b>مرحبًا دانة</b><small>كيف تشعرين اليوم؟</small></div>
+          <div class="avatar" style="width:42px;height:42px;flex:0 0 42px;font-size:16px">د</div>
+        </div>
+        <div class="m-body">
+          <div class="m-result">
+            <div class="cap">مؤشر التوازن التحفيزي</div>
+            <svg width="120" height="120" viewBox="0 0 120 120" style="margin:6px auto">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="#FCE7F3" stroke-width="12"/>
+              <circle cx="60" cy="60" r="50" fill="none" stroke="#EC4899" stroke-width="12" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="69" transform="rotate(-90 60 60)"/>
+              <text x="60" y="58" text-anchor="middle" font-family="Inter" font-size="34" font-weight="700" fill="#1E3A8A">78</text>
+              <text x="60" y="78" text-anchor="middle" font-family="Inter" font-size="11" fill="#64748B">من 100</text>
+            </svg>
+            <span class="tag tag-pink">مرتفع</span>
+          </div>
+          <div class="m-two">
+            <div class="metric"><div class="cap">الحالة المزاجية</div><div class="emoji">🙂</div><span class="tag tag-green" style="margin-top:6px">جيدة</span></div>
+            <div class="metric"><div class="cap">التركيز</div><div class="emoji">🎯</div><span class="tag tag-blue" style="margin-top:6px">ممتاز</span></div>
+          </div>
+          <div class="m-prog">
+            <div class="top"><span>تقدّم اليوم</span><span class="num">٥ من ٧ مهام</span></div>
+            <div class="bar"><i style="width:71%"></i></div>
+            <p style="font-size:12px;margin-top:8px">أنجزتِ معظم مهام اليوم، خطوة صغيرة تكفي 🌸</p>
+          </div>
+        </div>
+        <nav class="m-nav">
+          <a class="on"><span class="ic">🏠</span>الرئيسية</a>
+          <a><span class="ic">📊</span>التقرير</a>
+          <a><span class="ic">🗂️</span>برنامجي</a>
+          <a><span class="ic">🏅</span>تحدياتي</a>
+          <a><span class="ic">👤</span>الحساب</a>
+        </nav>
+      </div>
+    </div>
+    <div class="mobile-notes">
+      <div class="note"><b>Mobile-first</b><p>سؤال واحد في الشاشة، حفظ تلقائي بعد كل إجابة، وأزرار لا يقل ارتفاعها عن ٤٤px مناسبة للإبهام.</p></div>
+      <div class="note"><b>تنقّل سفلي هادئ</b><p>خمسة عناصر فقط: الرئيسية، التقرير، برنامجي، تحدياتي، الحساب — بلا مؤثرات ألعاب أو مكافآت مفرطة.</p></div>
+      <div class="note"><b>نبرة مطمئنة</b><p>رسائل قصيرة غير تأنيبية تدعم الاستمرار: «خطوة صغيرة تكفي»، «عودي بهدوء».</p></div>
+      <div class="safety"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>النتائج إرشادية وليست تشخيصًا. ركن الطمأنينة قابل للإيقاف في أي وقت.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 4 · تسجيل الدخول -->
+<section class="screen" id="auth">
+  <div class="screen-label"><span class="chip">04</span><div><h2>تسجيل الدخول (Auth)</h2><p>بطاقة بيضاء هادئة في المنتصف مع الشعار، دخول عبر Google وApple ثم البريد</p></div></div>
+  <div style="max-width:440px;margin:0 auto">
+    <div class="card login-card">
+      <svg class="logo" viewBox="0 0 40 40" fill="none"><path d="M20 6c-3 0-5 2-6 4-2-1-5 0-6 3-1 2 0 5 2 6-2 2-2 5 0 7 1 2 4 3 6 2 1 2 3 4 6 3 3 0 5-2 5-4 3 0 5-3 4-6 2-2 2-5 0-7 1-3-1-6-4-6-1-2-3-2-4-2-1-1-2-2-3-3z" fill="#F472B6"/><circle cx="20" cy="20" r="4" fill="#EC4899"/></svg>
+      <h3>أهلًا بعودتك 🌸</h3>
+      <p>سجّل دخولك لمتابعة رحلتك مع دندونة</p>
+      <div class="oauth">
+        <button>🟦 المتابعة مع Google</button>
+        <button> المتابعة مع Apple</button>
+      </div>
+      <div class="divider">أو بالبريد الإلكتروني</div>
+      <div class="field"><label>البريد الإلكتروني</label><input type="email" placeholder="name@email.com" dir="ltr" style="text-align:left"></div>
+      <div class="field"><label>كلمة المرور</label><input type="password" placeholder="••••••••"></div>
+      <button class="btn btn-pink" style="width:100%">تسجيل الدخول</button>
+      <p class="mini-note">بتسجيل الدخول فأنت توافق على سياسة الخصوصية وشروط الاستخدام.</p>
+      <p class="mini-note" style="margin-top:6px">للقُصّر: يلزم موافقة ولي الأمر قبل بدء أي اختبار.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 5 · الاختبار والنتيجة -->
+<section class="screen" id="assess">
+  <div class="screen-label"><span class="chip">05</span><div><h2>الاختبار والنتيجة</h2><p>بطاقة بدء الاختبار (المدة، عدد الأسئلة، الحساسية)، ونتيجة برقم واضح ومخطط راداري وردي</p></div></div>
+  <div class="assess">
+    <div class="card assess-start">
+      <h3>اختبار التوازن التحفيزي والسلوكي</h3>
+      <p style="font-size:14px">اختبار علمي مبسّط لفهم نمطك التحفيزي المرتبط بالمكافأة السريعة والتشتت والعادات اليومية.</p>
+      <div class="assess-meta">
+        <div class="m"><div class="ic">⏱️</div><b>مدة الاختبار</b><span>١٥ دقيقة</span></div>
+        <div class="m"><div class="ic">📋</div><b>عدد الأسئلة</b><span>٢٠ سؤالًا</span></div>
+        <div class="m"><div class="ic">🎚️</div><b>درجة الحساسية</b><span>عادية</span></div>
+      </div>
+      <div class="safety" style="margin-bottom:16px"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>قبل البدء: تخصيص وقت هادئ، عدم تناول الاختبار أثناء الانشغال، والإجابة بصدق دون تهويل. النتيجة إرشادية وليست تشخيصًا.</span></div>
+      <button class="btn btn-pink" style="width:100%">ابدأ الاختبار</button>
+      <div style="margin-top:18px">
+        <div class="top" style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--dandona-slate);margin-bottom:7px"><span>السؤال ٤ من ٢٠</span><span class="num">٢٠٪</span></div>
+        <div class="bar"><i style="width:20%"></i></div>
+      </div>
+    </div>
+
+    <div class="card result-card">
+      <div class="cap" style="font-size:14px;color:var(--dandona-slate);font-weight:600">نتيجة الاختبار الأخيرة</div>
+      <div class="score">78<small>/100</small></div>
+      <span class="result-band">مؤشرات مرتفعة</span>
+      <div class="bands">
+        <div class="b"><i style="background:#16A34A"></i>منخفض<br>٠–٤٠</div>
+        <div class="b"><i style="background:#D6A85A"></i>متوسط<br>٤١–٦٠</div>
+        <div class="b"><i style="background:#EC4899"></i>مرتفع<br>٦١–١٠٠</div>
+      </div>
+      <div class="radar-wrap">
+        <svg width="260" height="240" viewBox="0 0 260 240">
+          <g stroke="#E5E7EB" fill="none" stroke-width="1">
+            <polygon points="130,30 216,80 216,180 130,230 44,180 44,80"/>
+            <polygon points="130,63 187,96 187,163 130,197 73,163 73,96"/>
+            <polygon points="130,96 158,113 158,146 130,163 102,146 102,113"/>
+          </g>
+          <g stroke="#E5E7EB" stroke-width="1">
+            <line x1="130" y1="130" x2="130" y2="30"/><line x1="130" y1="130" x2="216" y2="80"/>
+            <line x1="130" y1="130" x2="216" y2="180"/><line x1="130" y1="130" x2="130" y2="230"/>
+            <line x1="130" y1="130" x2="44" y2="180"/><line x1="130" y1="130" x2="44" y2="80"/>
+          </g>
+          <polygon points="130,45 205,88 190,170 130,205 60,168 62,95" fill="rgba(236,72,153,.22)" stroke="#EC4899" stroke-width="2"/>
+          <g fill="#EC4899"><circle cx="130" cy="45" r="3.5"/><circle cx="205" cy="88" r="3.5"/><circle cx="190" cy="170" r="3.5"/><circle cx="130" cy="205" r="3.5"/><circle cx="60" cy="168" r="3.5"/><circle cx="62" cy="95" r="3.5"/></g>
+          <g font-family="Noto Sans Arabic" font-size="11" fill="#64748B" text-anchor="middle">
+            <text x="130" y="20">التشتّت الرقمي</text>
+            <text x="240" y="78">المكافأة</text>
+            <text x="240" y="192">التسويف</text>
+            <text x="130" y="236">النوم</text>
+            <text x="24" y="192">النشاط</text>
+            <text x="24" y="78">المزاج</text>
+          </g>
+        </svg>
+      </div>
+      <p style="font-size:13px;margin-top:6px">تظهر لديك مؤشرات مرتفعة في التشتّت الرقمي والبحث عن التحفيز السريع. ابدئي بخطة ٧ أيام.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 6 · برنامجي والتحديات -->
+<section class="screen" id="program">
+  <div class="screen-label"><span class="chip">06</span><div><h2>برنامجي والتحديات</h2><p>خطة اليوم كقائمة مهام بدوائر اكتمال، وتحديات بأشرطة تقدّم وردية هادئة</p></div></div>
+  <div class="prog2">
+    <div class="card panel">
+      <h3>برنامجي — خطة ٧ أيام</h3>
+      <p class="hint">مهام بسيطة تُبنى تدريجيًا. عودي بهدوء إن تعثّرتِ، دون جلد للذات.</p>
+      <div class="task done"><span class="tick">✓</span><span class="tx">راقبي أكثر وقت تستخدمين فيه الجوال دون هدف</span><span class="day">اليوم ١</span></div>
+      <div class="task done"><span class="tick">✓</span><span class="tx">أوقفي إشعارات تطبيق واحد يشتّتك</span><span class="day">اليوم ٢</span></div>
+      <div class="task done"><span class="tick">✓</span><span class="tx">لا تفتحي التطبيق المفضّل إلا بعد إنجاز مهمة</span><span class="day">اليوم ٣</span></div>
+      <div class="task done"><span class="tick">✓</span><span class="tx">امشي ١٥ دقيقة أو مارسي نشاطًا خفيفًا</span><span class="day">اليوم ٤</span></div>
+      <div class="task"><span class="tick"></span><span class="tx">اجلسي ٢٠ دقيقة مع الأسرة دون جوال</span><span class="day">اليوم ٥</span></div>
+      <div class="task"><span class="tick"></span><span class="tx">اجعلي ١٠ دقائق بعد إحدى الصلوات بلا هاتف</span><span class="day">اليوم ٦</span></div>
+      <div class="task"><span class="tick"></span><span class="tx">راجعي الأسبوع واكتبي عادة واحدة أفادتك</span><span class="day">اليوم ٧</span></div>
+      <div style="margin-top:16px"><div class="bar"><i style="width:57%"></i></div><p style="font-size:12px;margin-top:8px">أنجزتِ ٤ من ٧ مهام — استمري 🌸</p></div>
+    </div>
+
+    <div class="card panel">
+      <h3>تحدياتي</h3>
+      <p class="hint">لا يزيد على ٣–٤ تحديات يوميًا، بأشرطة تقدّم هادئة بلا مكافآت مبالغة.</p>
+      <div class="chal"><div class="top"><div class="ic">📵</div><b>تحدي ٧ أيام بلا تصفّح عشوائي</b><span class="num">٥/٧</span></div><div class="bar"><i style="width:71%"></i></div></div>
+      <div class="chal"><div class="top"><div class="ic">🎯</div><b>تحدي التركيز العميق</b><span class="num">٨/١٠</span></div><div class="bar"><i style="width:80%"></i></div></div>
+      <div class="chal"><div class="top"><div class="ic">🚶</div><b>تحدي المشي اليومي</b><span class="num">١٢/٣٠</span></div><div class="bar"><i style="width:40%"></i></div></div>
+      <div class="chal"><div class="top"><div class="ic">🌙</div><b>تحدي الامتنان</b><span class="num">٤/٧</span></div><div class="bar"><i style="width:57%"></i></div></div>
+      <div class="calm" style="margin-top:18px;padding:16px 18px">
+        <span class="orn" style="font-size:28px">🌿</span>
+        <div class="txt"><div class="v" style="font-size:14px">حفظ الوقت ونعمة الفراغ</div><div class="src" style="font-size:11px">توصية قيمية — اختيارية</div></div>
+        <button class="off">إيقاف</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 7 · التقارير -->
+<section class="screen" id="reports">
+  <div class="screen-label"><span class="chip">07</span><div><h2>التقارير</h2><p>تحسّن المؤشرات بخط أزرق وأشرطة وردية، بلغة مطمئنة، وتصدير PDF بإخفاء الحساسة</p></div></div>
+  <div class="reports">
+    <div class="card report-main">
+      <div class="head"><h3>متوسط مؤشر التوازن التحفيزي</h3><span class="pill">هذا الشهر</span></div>
+      <div class="avg"><span class="n">72</span><span class="up">+١٢٪ عن الشهر الماضي</span></div>
+      <svg width="100%" height="160" viewBox="0 0 560 160" preserveAspectRatio="none">
+        <g stroke="#E5E7EB" stroke-width="1"><line x1="0" y1="40" x2="560" y2="40"/><line x1="0" y1="80" x2="560" y2="80"/><line x1="0" y1="120" x2="560" y2="120"/></g>
+        <polygon points="0,120 80,110 160,118 240,92 320,96 400,70 480,74 560,44 560,160 0,160" fill="rgba(30,58,138,.06)"/>
+        <polyline points="0,120 80,110 160,118 240,92 320,96 400,70 480,74 560,44" fill="none" stroke="#1E3A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <g fill="#EC4899"><circle cx="0" cy="120" r="4"/><circle cx="160" cy="118" r="4"/><circle cx="320" cy="96" r="4"/><circle cx="480" cy="74" r="4"/><circle cx="560" cy="44" r="4"/></g>
+      </svg>
+
+      <h3 style="font-size:16px;margin:22px 0 4px">تحسّن في الجوانب</h3>
+      <p class="hint" style="font-size:13px;margin-bottom:14px">نعرض التحسّن لا «المشكلات» — كل خطوة تُحتسب.</p>
+      <div class="improve">
+        <div class="r"><div class="lbl"><span>التركيز</span><span class="up">+١٨٪</span></div><div class="bar"><i style="width:78%"></i></div></div>
+        <div class="r"><div class="lbl"><span>المزاج</span><span class="up">+١٥٪</span></div><div class="bar"><i style="width:70%"></i></div></div>
+        <div class="r"><div class="lbl"><span>النوم</span><span class="up">+١٠٪</span></div><div class="bar"><i style="width:60%"></i></div></div>
+        <div class="r"><div class="lbl"><span>النشاط</span><span class="up">+١٦٪</span></div><div class="bar"><i style="width:66%"></i></div></div>
+      </div>
+    </div>
+
+    <div class="card report-side">
+      <div class="exp">
+        <div class="ic">📄</div>
+        <b>تقرير PDF</b>
+        <small>ملخّص نتائجك وخطتك بلغة مطمئنة</small>
+        <button class="btn btn-blue" style="width:100%">تصدير PDF</button>
+      </div>
+      <div class="exp" style="border-color:var(--dandona-border);background:#fff">
+        <div class="ic">🤝</div>
+        <b>مشاركة مع مختص</b>
+        <small>بتفويض صريح منكِ فقط</small>
+        <button class="btn btn-ghost" style="width:100%">مشاركة النتيجة</button>
+      </div>
+      <div class="safety"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#1E3A8A" stroke-width="1.6"/><path d="M10 6v5M10 13.5v.5" stroke="#1E3A8A" stroke-width="1.8" stroke-linecap="round"/></svg><span>تُخفى البيانات الحسّاسة في التقارير، والمؤسسة لا ترى أي بيانات فردية بالاسم.</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <p><b>منصة دندونة · DANDOUNA</b> — مؤشر التوازن التحفيزي والسلوكي · هوية V4: بياض ناعم، أزرق يطمئن، وردي يحنو</p>
+  <p style="margin-top:6px">النتائج إرشادية تثقيفية وليست تشخيصًا طبيًا أو نفسيًا، ولا تُغني عن مختص مرخّص · جميع الشاشات RTL كامل ومتوافقة مع نظام الألوان ٧٠٪ أبيض · ٢٠٪ أزرق · ٨٪ وردي · ٢٪ ذهبي</p>
+</footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  var btns=nav.querySelectorAll('button');
+  var screens=document.querySelectorAll('.screen');
+  nav.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b)return;
+    btns.forEach(function(x){x.classList.remove('active')});
+    b.classList.add('active');
+    var id=b.getAttribute('data-s');
+    screens.forEach(function(s){s.classList.toggle('show', s.id===id)});
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>
