@@ -9,12 +9,14 @@ export type Role =
   | "SPECIALIST"
   | "INSTITUTION"
   | "COMPANY"
+  | "CONTENT_EDITOR"
   | "ADMIN";
 
 export type Permission =
   | "assessment:take"
   | "assessment:read:self"
   | "assessment:read:ward"
+  | "child:manage"
   | "ward:link"
   | "consent:grant"
   | "mood:write"
@@ -27,23 +29,32 @@ export type Permission =
   | "audit:view"
   | "security:manage";
 
+// صلاحيات إدارة المحتوى (لمشرف المحتوى والمدير)
+const CONTENT: Permission[] = [
+  "scale:manage",
+  "question:manage",
+  "recommendation:manage",
+  "reference:manage",
+];
+
 // مصفوفة الأدوار ← الصلاحيات
 const MATRIX: Record<Role, Permission[]> = {
   USER: ["assessment:take", "assessment:read:self", "mood:write", "consent:grant"],
   GUARDIAN: [
+    "assessment:take",
     "assessment:read:ward",
+    "assessment:read:self",
+    "child:manage",
     "ward:link",
     "consent:grant",
-    "assessment:read:self",
+    "mood:write",
   ],
   SPECIALIST: ["assessment:read:ward", "assessment:read:self"],
   INSTITUTION: ["org:manage", "assessment:read:ward"],
   COMPANY: ["org:manage"],
+  CONTENT_EDITOR: [...CONTENT],
   ADMIN: [
-    "scale:manage",
-    "question:manage",
-    "recommendation:manage",
-    "reference:manage",
+    ...CONTENT,
     "org:manage",
     "user:manage",
     "audit:view",

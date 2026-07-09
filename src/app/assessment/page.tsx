@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { prisma } from '@/lib/db'
 import { currentUser } from '@/lib/session'
@@ -8,34 +9,36 @@ import { Icon } from '@/components/Icon'
 export const dynamic = 'force-dynamic'
 export const metadata = { title: 'الاختبارات' }
 
-// بدء جلسة تقييم (Server Action) — يطبّق نفس شروط RBAC وموافقة القاصر
+// بدء جلسة تقييم لطفل (Server Action)
 async function startAssessment(formData: FormData) {
   'use server'
   const versionId = String(formData.get('versionId') || '')
+  const childId = String(formData.get('childId') || '')
   const user = await currentUser()
   if (!user) redirect('/auth')
 
   try {
     assertPermission(user.role, 'assessment:take')
   } catch (e) {
-    if (e instanceof ForbiddenError) redirect('/dashboard')
+    if (e instanceof ForbiddenError) redirect('/parent-dashboard')
     throw e
   }
 
-  // شرط PDPL: لا تُفتح جلسة لقاصر إلا بموافقة سارية
-  if (user.isMinor) {
-    const consent = await prisma.consent.findFirst({
-      where: { subjectId: user.id, status: 'GRANTED' },
-    })
-    if (!consent) redirect('/consent')
-  }
+  // ملكية الطفل
+  const child = await prisma.child.findFirst({
+    where: { id: childId, guardianId: user.id, deletedAt: null },
+  })
+  if (!child) redirect('/children')
 
-  // استئناف جلسة قائمة لنفس النسخة أو إنشاء جديدة
+  // موافقة PDPL سارية
+  const consent = await prisma.consent.findFirst({ where: { childId, status: 'GRANTED' } })
+  if (!consent) redirect(`/children/${childId}`)
+
   const existing = await prisma.assessment.findFirst({
-    where: { userId: user.id, versionId, status: 'IN_PROGRESS' },
+    where: { userId: user.id, childId, versionId, status: 'IN_PROGRESS' },
   })
   const assessment =
-    existing ?? (await prisma.assessment.create({ data: { userId: user.id, versionId } }))
+    existing ?? (await prisma.assessment.create({ data: { userId: user.id, childId, versionId } }))
 
   redirect(`/assessment/run/${assessment.id}`)
 }
@@ -44,18 +47,25 @@ export default async function AssessmentListPage() {
   const user = await currentUser()
   if (!user) redirect('/auth')
 
-  const scales = await prisma.scale.findMany({
-    where: { isActive: true },
-    select: {
-      id: true,
-      title: true,
-      description: true,
-      versions: {
-        where: { isCurrent: true },
-        select: { id: true, _count: { select: { questions: true } } },
+  const [scales, children] = await Promise.all([
+    prisma.scale.findMany({
+      where: { isActive: true },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        versions: {
+          where: { isCurrent: true },
+          select: { id: true, _count: { select: { questions: true } } },
+        },
       },
-    },
-  })
+    }),
+    prisma.child.findMany({
+      where: { guardianId: user.id, deletedAt: null },
+      select: { id: true, fullName: true },
+      orderBy: { createdAt: 'asc' },
+    }),
+  ])
 
   return (
     <>
@@ -64,14 +74,23 @@ export default async function AssessmentListPage() {
         <span className="pill pill-pink">
           <Icon name="clipboard-list" /> الاختبارات المتاحة
         </span>
-        <h1 style={{ margin: '12px 0 20px' }}>اختر اختبارًا لتبدأ</h1>
+        <h1 style={{ margin: '12px 0 8px' }}>اختر اختبارًا وطفلًا لتبدأ</h1>
 
-        {scales.length === 0 ? (
-          <div className="card pad">
-            <p>لا توجد اختبارات متاحة حاليًا. سيتم إضافتها قريبًا.</p>
+        {children.length === 0 ? (
+          <div className="card pad" style={{ marginTop: 12 }}>
+            <p style={{ marginBottom: 12 }}>
+              لبدء اختبار، أضِف ملف طفل أولًا (تُطلب موافقتك على معالجة بياناته).
+            </p>
+            <Link href="/children/new" className="btn btn-pink">
+              <Icon name="user" size={16} /> إضافة ملف طفل
+            </Link>
+          </div>
+        ) : scales.length === 0 ? (
+          <div className="card pad" style={{ marginTop: 12 }}>
+            <p>لا توجد اختبارات متاحة حاليًا. سيتم إضافتها من لوحة الإدارة.</p>
           </div>
         ) : (
-          <div className="why-grid">
+          <div className="why-grid" style={{ marginTop: 16 }}>
             {scales.map((s) => {
               const version = s.versions[0]
               return (
@@ -91,18 +110,24 @@ export default async function AssessmentListPage() {
                       <b>الأسئلة</b>
                       <span>{version ? toArabic(version._count.questions) : '—'}</span>
                     </div>
-                    <div className="m">
-                      <span className="tile">
-                        <Icon name="shield-check" />
-                      </span>
-                      <b>الخصوصية</b>
-                      <span>كاملة</span>
-                    </div>
                   </div>
                   {version ? (
-                    <form action={startAssessment}>
+                    <form action={startAssessment} style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 10 }}>
                       <input type="hidden" name="versionId" value={version.id} />
-                      <button type="submit" className="btn btn-pink btn-block" style={{ marginTop: 12 }}>
+                      <label className="field">
+                        <span className="field-label">اختر الطفل</span>
+                        <span className="field-input">
+                          <Icon name="user" size={18} />
+                          <select name="childId" required defaultValue={children[0].id}>
+                            {children.map((c) => (
+                              <option key={c.id} value={c.id}>
+                                {c.fullName}
+                              </option>
+                            ))}
+                          </select>
+                        </span>
+                      </label>
+                      <button type="submit" className="btn btn-pink btn-block">
                         ابدأ الاختبار
                       </button>
                     </form>

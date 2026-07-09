@@ -1,164 +1,147 @@
 'use client'
 
-import { Suspense, useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { Suspense, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { Icon } from '@/components/Icon'
 
 function AuthInner() {
   const router = useRouter()
-  const params = useSearchParams()
-  const [mode, setMode] = useState<'login' | 'register'>(
-    params.get('mode') === 'register' ? 'register' : 'login',
-  )
+  const [step, setStep] = useState<'email' | 'code'>('email')
+  const [email, setEmail] = useState('')
+  const [fullName, setFullName] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const [showPw, setShowPw] = useState(false)
+  const [devCode, setDevCode] = useState<string | null>(null)
+  const [code, setCode] = useState(['', '', '', '', '', ''])
+  const inputs = useRef<(HTMLInputElement | null)[]>([])
 
-  async function handleLogin(form: FormData) {
-    const email = String(form.get('email') || '')
-    const password = String(form.get('password') || '')
-    const res = await signIn('credentials', { email, password, redirect: false })
-    if (res?.error) {
-      setError('البريد أو كلمة المرور غير صحيحة')
-      return false
-    }
-    return true
-  }
-
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function requestCode(e: React.FormEvent) {
     e.preventDefault()
     setError('')
-    const form = new FormData(e.currentTarget)
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('البريد غير صحيح')
+      return
+    }
     setLoading(true)
-
     try {
-      if (mode === 'register') {
-        const payload = {
-          fullName: String(form.get('fullName') || ''),
-          email: String(form.get('email') || ''),
-          password: String(form.get('password') || ''),
-          isMinor: form.get('isMinor') === 'MINOR',
-        }
-        const res = await fetch('/api/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        })
-        const data = await res.json().catch(() => ({}))
-        if (!res.ok) {
-          setError(data.error || 'تعذّر إنشاء الحساب')
-          return
-        }
-        const ok = await signIn('credentials', {
-          email: payload.email,
-          password: payload.password,
-          redirect: false,
-        })
-        if (ok?.error) {
-          setError('تم إنشاء الحساب — يرجى تسجيل الدخول')
-          setMode('login')
-          return
-        }
-        router.push(data.needsGuardianConsent ? '/consent' : '/dashboard')
-        router.refresh()
-      } else {
-        const ok = await handleLogin(form)
-        if (!ok) return
-        router.push('/dashboard')
-        router.refresh()
+      const res = await fetch('/api/auth/otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, fullName }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) {
+        setError(data.error || 'تعذّر إرسال الرمز')
+        return
       }
+      setDevCode(data.devCode ?? null)
+      setStep('code')
     } finally {
       setLoading(false)
     }
   }
 
-  const isRegister = mode === 'register'
+  function onCodeChange(i: number, v: string) {
+    const digit = v.replace(/\D/g, '').slice(-1)
+    const next = [...code]
+    next[i] = digit
+    setCode(next)
+    if (digit && i < 5) inputs.current[i + 1]?.focus()
+  }
+
+  function onCodeKey(i: number, e: React.KeyboardEvent) {
+    if (e.key === 'Backspace' && !code[i] && i > 0) inputs.current[i - 1]?.focus()
+  }
+
+  async function verifyCode(e: React.FormEvent) {
+    e.preventDefault()
+    setError('')
+    const full = code.join('')
+    if (full.length !== 6) {
+      setError('أدخل الرمز المكوّن من ٦ أرقام')
+      return
+    }
+    setLoading(true)
+    try {
+      const res = await signIn('email-otp', { email, code: full, fullName, redirect: false })
+      if (res?.error) {
+        setError('الرمز غير صحيح أو منتهٍ')
+        return
+      }
+      router.push('/parent-dashboard')
+      router.refresh()
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (step === 'email') {
+    return (
+      <>
+        <h1 className="auth-title">الدخول إلى دندونة 🌸</h1>
+        <p className="auth-sub">أدخل بريدك وسنرسل لك رمز دخول — بلا كلمات مرور.</p>
+        {error && <div className="auth-alert err">⚠ {error}</div>}
+        <form onSubmit={requestCode} className="auth-form" noValidate>
+          <label className="field">
+            <span className="field-label">الاسم (لأول دخول)</span>
+            <span className="field-input">
+              <Icon name="user" size={18} />
+              <input value={fullName} onChange={(e) => setFullName(e.target.value)} type="text" placeholder="اسمك الكريم" autoComplete="name" />
+            </span>
+          </label>
+          <label className="field">
+            <span className="field-label">البريد الإلكتروني</span>
+            <span className="field-input">
+              <Icon name="mail" size={18} />
+              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="you@example.com" autoComplete="email" required />
+            </span>
+          </label>
+          <button type="submit" className="btn btn-pink btn-block" disabled={loading}>
+            {loading ? 'جارٍ الإرسال…' : 'إرسال رمز الدخول'}
+          </button>
+        </form>
+      </>
+    )
+  }
 
   return (
     <>
-      <div className="auth-tabs">
-        <button
-          type="button"
-          className={!isRegister ? 'on' : ''}
-          onClick={() => {
-            setMode('login')
-            setError('')
-          }}
-        >
-          تسجيل الدخول
-        </button>
-        <button
-          type="button"
-          className={isRegister ? 'on' : ''}
-          onClick={() => {
-            setMode('register')
-            setError('')
-          }}
-        >
-          إنشاء حساب
-        </button>
-      </div>
-
-      <h1 className="auth-title">{isRegister ? 'أنشئي حسابك في دندونة' : 'أهلًا بعودتك 🌸'}</h1>
-      <p className="auth-sub">
-        {isRegister ? 'خطوة واحدة تفصلك عن بداية رحلتك.' : 'سجّلي الدخول لمتابعة رحلتك مع دندونة.'}
-      </p>
-
+      <h1 className="auth-title">أدخل الرمز</h1>
+      <p className="auth-sub">أرسلنا رمزًا من ٦ أرقام إلى {email}.</p>
+      {devCode && <div className="dev-code">وضع التطوير — رمزك: <b>{devCode}</b></div>}
       {error && <div className="auth-alert err">⚠ {error}</div>}
-
-      <form onSubmit={onSubmit} className="auth-form" noValidate>
-        {isRegister && (
-          <label className="field">
-            <span className="field-label">الاسم</span>
-            <span className="field-input">
-              <Icon name="user" size={18} />
-              <input name="fullName" type="text" placeholder="اسمك الكريم" autoComplete="name" required />
-            </span>
-          </label>
-        )}
-
-        <label className="field">
-          <span className="field-label">البريد الإلكتروني</span>
-          <span className="field-input">
-            <Icon name="mail" size={18} />
-            <input name="email" type="email" placeholder="you@example.com" autoComplete="email" required />
-          </span>
-        </label>
-
-        <label className="field">
-          <span className="field-label">كلمة المرور</span>
-          <span className="field-input">
-            <Icon name="lock" size={18} />
+      <form onSubmit={verifyCode} className="auth-form" noValidate>
+        <div className="otp-boxes">
+          {code.map((d, i) => (
             <input
-              name="password"
-              type={showPw ? 'text' : 'password'}
-              placeholder={isRegister ? '٨ أحرف على الأقل' : '••••••••'}
-              autoComplete={isRegister ? 'new-password' : 'current-password'}
-              minLength={8}
-              required
+              key={i}
+              ref={(el) => {
+                inputs.current[i] = el
+              }}
+              value={d}
+              onChange={(e) => onCodeChange(i, e.target.value)}
+              onKeyDown={(e) => onCodeKey(i, e)}
+              inputMode="numeric"
+              maxLength={1}
+              aria-label={`الرقم ${i + 1}`}
             />
-            <button type="button" className="eye" onClick={() => setShowPw((v) => !v)} aria-label="إظهار كلمة المرور">
-              <Icon name="eye" size={18} />
-            </button>
-          </span>
-        </label>
-
-        {isRegister && (
-          <label className="field">
-            <span className="field-label">الفئة العمرية</span>
-            <span className="field-input">
-              <Icon name="users" size={18} />
-              <select name="isMinor" defaultValue="ADULT" required>
-                <option value="ADULT">بالغ (١٨ سنة فأكثر)</option>
-                <option value="MINOR">قاصر (يتطلب موافقة ولي الأمر)</option>
-              </select>
-            </span>
-          </label>
-        )}
-
+          ))}
+        </div>
         <button type="submit" className="btn btn-pink btn-block" disabled={loading}>
-          {loading ? (isRegister ? 'جارٍ الإنشاء…' : 'جارٍ الدخول…') : isRegister ? 'إنشاء الحساب' : 'تسجيل الدخول'}
+          {loading ? 'جارٍ التحقق…' : 'تأكيد والدخول'}
+        </button>
+        <button
+          type="button"
+          className="link-pink"
+          style={{ background: 'none', border: 0 }}
+          onClick={() => {
+            setStep('email')
+            setCode(['', '', '', '', '', ''])
+            setError('')
+          }}
+        >
+          تغيير البريد
         </button>
       </form>
     </>

@@ -28,34 +28,47 @@ async function main() {
     create: { email: "guardian@dandouna.local", fullName: "ولي الأمر", role: "GUARDIAN", passwordHash: pass },
   });
 
-  const child = await prisma.user.upsert({
-    where: { email: "child@dandouna.local" },
+  // مشرف محتوى تجريبي
+  await prisma.user.upsert({
+    where: { email: "editor@dandouna.local" },
     update: {},
-    create: {
-      email: "child@dandouna.local",
-      fullName: "المستخدم القاصر",
-      role: "USER",
-      isMinor: true,
-      birthDate: new Date("2013-01-01"),
-      passwordHash: pass,
-    },
+    create: { email: "editor@dandouna.local", fullName: "مشرف المحتوى", role: "CONTENT_EDITOR", passwordHash: pass },
   });
 
-  // ربط ولي الأمر بالقاصر + موافقة سارية
-  await prisma.guardianLink.upsert({
-    where: { guardianId_wardId: { guardianId: guardian.id, wardId: child.id } },
-    update: {},
-    create: { guardianId: guardian.id, wardId: child.id, relation: "أب" },
+  // ملف طفل يملكه ولي الأمر + موافقة سارية على معالجة بياناته
+  const existingChild = await prisma.child.findFirst({
+    where: { guardianId: guardian.id, fullName: "سارة" },
   });
-  await prisma.consent.create({
-    data: {
-      subjectId: child.id,
-      grantedBy: guardian.id,
-      purpose: "أداء مقاييس التقييم السلوكي",
-      status: "GRANTED",
-      grantedAt: new Date(),
-    },
-  });
+  const child =
+    existingChild ??
+    (await prisma.child.create({
+      data: {
+        guardianId: guardian.id,
+        fullName: "سارة",
+        birthDate: new Date("2013-01-01"),
+        gender: "أنثى",
+        avatarColor: "#F74A80",
+      },
+    }));
+  const hasConsent = await prisma.consent.findFirst({ where: { childId: child.id } });
+  if (!hasConsent) {
+    await prisma.consent.create({
+      data: {
+        childId: child.id,
+        grantedById: guardian.id,
+        purpose: "أداء مقاييس التقييم السلوكي",
+        status: "GRANTED",
+        grantedAt: new Date(),
+      },
+    });
+  }
+
+  // تفادي التكرار عند إعادة التشغيل
+  const existingScale = await prisma.scale.findUnique({ where: { code: "DOPA-SCREEN-01" } });
+  if (existingScale) {
+    console.log("✓ البيانات موجودة مسبقًا — تم تخطّي إنشاء المقياس");
+    return;
+  }
 
   // ===== مرجع شرعي =====
   const ref = await prisma.islamicReference.create({
@@ -133,7 +146,7 @@ async function main() {
   console.log("✓ اكتملت التهيئة");
   console.log("  المدير: admin@dandouna.local");
   console.log("  ولي الأمر: guardian@dandouna.local");
-  console.log("  القاصر: child@dandouna.local");
+  console.log("  مشرف المحتوى: editor@dandouna.local");
   console.log("  كلمة المرور للجميع: Dandouna#1447");
   console.log(`  المقياس: ${scale.code} (نسخة ${scale.versions[0].version})`);
 }

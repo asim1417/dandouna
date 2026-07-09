@@ -25,23 +25,20 @@ export async function POST(req: Request) {
   }
 
   const passwordHash = await bcrypt.hash(parsed.data.password, 12)
+  // المسجّل هو ولي أمر يدير ملفات أطفاله
   const user = await prisma.user.create({
     data: {
       email,
       fullName: parsed.data.fullName,
       passwordHash,
-      isMinor: parsed.data.isMinor,
-      role: 'USER',
+      role: 'GUARDIAN',
     },
-    select: { id: true, isMinor: true },
+    select: { id: true },
   })
 
   await prisma.auditLog.create({
     data: { actorId: user.id, action: 'user.register', entity: 'User', entityId: user.id },
   })
 
-  return NextResponse.json(
-    { ok: true, userId: user.id, needsGuardianConsent: user.isMinor },
-    { status: 201 },
-  )
+  return NextResponse.json({ ok: true, userId: user.id }, { status: 201 })
 }

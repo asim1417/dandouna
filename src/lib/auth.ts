@@ -14,6 +14,7 @@ import type { Role } from "@/lib/rbac";
 
 const providers: NextAuthConfig["providers"] = [
   Credentials({
+    id: "credentials",
     credentials: {
       email: { label: "البريد", type: "email" },
       password: { label: "كلمة المرور", type: "password" },
@@ -28,6 +29,52 @@ const providers: NextAuthConfig["providers"] = [
 
       const ok = await bcrypt.compare(password, user.passwordHash);
       if (!ok) return null;
+
+      return { id: user.id, name: user.fullName, email: user.email ?? undefined };
+    },
+  }),
+  // دخول برمز التحقق (OTP) عبر البريد — يُنشئ ولي أمر جديد عند أول دخول
+  Credentials({
+    id: "email-otp",
+    credentials: {
+      email: { label: "البريد", type: "email" },
+      code: { label: "الرمز", type: "text" },
+      fullName: { label: "الاسم", type: "text" },
+    },
+    async authorize(creds) {
+      const email = String(creds?.email ?? "").toLowerCase();
+      const code = String(creds?.code ?? "");
+      const fullName = String(creds?.fullName ?? "").trim();
+      if (!email || code.length !== 6) return null;
+
+      // تحقق من رمز غير منتهٍ
+      const tokens = await prisma.verificationToken.findMany({
+        where: { identifier: email, expires: { gt: new Date() } },
+      });
+      let matched = null as null | { token: string };
+      for (const t of tokens) {
+        if (await bcrypt.compare(code, t.token)) {
+          matched = t;
+          break;
+        }
+      }
+      if (!matched) return null;
+
+      // استهلاك الرمز
+      await prisma.verificationToken.deleteMany({ where: { identifier: email } });
+
+      // أنشئ ولي الأمر إن لم يكن موجودًا
+      let user = await prisma.user.findUnique({ where: { email } });
+      if (!user) {
+        user = await prisma.user.create({
+          data: { email, fullName: fullName || email.split("@")[0], role: "GUARDIAN", emailVerified: new Date() },
+        });
+        await prisma.auditLog.create({
+          data: { actorId: user.id, action: "user.register.otp", entity: "User", entityId: user.id },
+        });
+      } else if (user.deletedAt) {
+        return null;
+      }
 
       return { id: user.id, name: user.fullName, email: user.email ?? undefined };
     },

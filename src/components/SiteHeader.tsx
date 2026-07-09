@@ -12,7 +12,7 @@ export async function SiteHeader() {
   return (
     <header className="site-header">
       <div className="site-header-inner">
-        <Link href={user ? '/dashboard' : '/'} className="brand" aria-label="دندونة — الصفحة الرئيسية">
+        <Link href={user ? '/parent-dashboard' : '/'} className="brand" aria-label="دندونة — الصفحة الرئيسية">
           <span className="logo-tile">
             <Icon name="sparkles" size={22} />
           </span>
@@ -24,7 +24,7 @@ export async function SiteHeader() {
 
         {user ? (
           <nav className="site-nav">
-            <Link href="/dashboard" className="nav-user">
+            <Link href="/parent-dashboard" className="nav-user">
               <Icon name="user" size={16} /> {user.name || 'حسابي'}
             </Link>
             <form

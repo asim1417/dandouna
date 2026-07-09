@@ -430,3 +430,11 @@ tbody td{padding:12px 16px;border-bottom:1px solid var(--border2);color:var(--sl
 .ref-quote{background:var(--soft-pink);border-inline-start:3px solid var(--gold);border-radius:12px;padding:12px 14px;margin-top:12px}
 .ref-quote .txt{font-size:14px;font-weight:600;color:var(--blue);line-height:1.9}
 .ref-quote .cite{font-size:12px;color:var(--gold2);font-weight:700;margin-top:4px}
+
+/* ===== موافقة / OTP ===== */
+.consent-row{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--slate);line-height:1.7;background:var(--soft-pink);border-radius:12px;padding:12px}
+.consent-row input{margin-top:3px;width:16px;height:16px;flex:0 0 auto;accent-color:var(--pink)}
+.otp-boxes{display:flex;gap:10px;justify-content:center;direction:ltr;margin:6px 0}
+.otp-boxes input{width:46px;height:54px;text-align:center;font-size:22px;font-weight:700;border:1px solid var(--border);border-radius:12px;color:var(--blue);font-family:var(--fn)}
+.otp-boxes input:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 3px rgba(247,74,128,.12)}
+.dev-code{background:#FEF9C3;border:1px solid #FDE68A;border-radius:10px;padding:8px 12px;font-size:13px;color:#854D0E;text-align:center;margin-bottom:14px}
