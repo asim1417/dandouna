@@ -33,9 +33,10 @@
 من جهازك مع ضبط `DATABASE_URL` على قاعدة الإنتاج:
 ```bash
 npm install
-npm run db:deploy   # أو: npm run db:push
-npm run db:seed     # بيانات تجريبية + مقياس DOPA-SCREEN-01
+npm run db:deploy   # تطبيق الترحيلات الرسمية (prisma migrate deploy)
+npm run db:seed     # مكتبة مراجع (٧) + ٣ مقاييس علمية جاهزة
 ```
+> الترحيلات الرسمية في `prisma/migrations/` — استخدم `db:deploy` في الإنتاج (لا `db:push`).
 
 ### 5) التحقق
 - افتح رابط الموقع → «تسجيل الدخول» → أدخل بريدك → استلم الرمز → لوحة ولي الأمر.

@@ -237,10 +237,17 @@ model Scale {
   title       String
   description String?
   audience    Role           @default(USER)
+  // بيانات وصفية: الفئة العمرية والتصنيف والمدة التقديرية
+  category    String?        // مثل: التوازن الرقمي، التركيز، النوم، الانفعال
+  minAge      Int?           // أصغر عمر مناسب (بالسنوات)
+  maxAge      Int?           // أكبر عمر مناسب
+  estMinutes  Int            @default(10)
   isActive    Boolean        @default(true)
   createdAt   DateTime       @default(now())
 
   versions    ScaleVersion[]
+
+  @@index([isActive])
 }
 
 model ScaleVersion {

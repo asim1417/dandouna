@@ -50,10 +50,15 @@ export default async function AssessmentListPage() {
   const [scales, children] = await Promise.all([
     prisma.scale.findMany({
       where: { isActive: true },
+      orderBy: { createdAt: 'asc' },
       select: {
         id: true,
         title: true,
         description: true,
+        category: true,
+        estMinutes: true,
+        minAge: true,
+        maxAge: true,
         versions: {
           where: { isCurrent: true },
           select: { id: true, _count: { select: { questions: true } } },
@@ -101,7 +106,12 @@ export default async function AssessmentListPage() {
                     </span>
                     <h3 style={{ fontSize: 18 }}>{s.title}</h3>
                   </div>
-                  {s.description && <p style={{ fontSize: 13.5 }}>{s.description}</p>}
+                  {s.category && (
+                    <span className="pill pill-pink" style={{ marginTop: 2, fontSize: 12 }}>
+                      {s.category}
+                    </span>
+                  )}
+                  {s.description && <p style={{ fontSize: 13.5, marginTop: 8 }}>{s.description}</p>}
                   <div className="assess-meta">
                     <div className="m">
                       <span className="tile">
@@ -110,6 +120,24 @@ export default async function AssessmentListPage() {
                       <b>الأسئلة</b>
                       <span>{version ? toArabic(version._count.questions) : '—'}</span>
                     </div>
+                    <div className="m">
+                      <span className="tile">
+                        <Icon name="clock" />
+                      </span>
+                      <b>المدة</b>
+                      <span>{toArabic(s.estMinutes)} د</span>
+                    </div>
+                    {(s.minAge || s.maxAge) && (
+                      <div className="m">
+                        <span className="tile">
+                          <Icon name="users" />
+                        </span>
+                        <b>العمر</b>
+                        <span>
+                          {toArabic(s.minAge ?? 0)}–{toArabic(s.maxAge ?? 18)}
+                        </span>
+                      </div>
+                    )}
                   </div>
                   {version ? (
                     <form action={startAssessment} style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 10 }}>
