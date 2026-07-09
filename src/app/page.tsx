@@ -162,6 +162,7 @@ function SiteFooter() {
         <p className="disclaimer">النتائج إرشادية تثقيفية وليست تشخيصًا طبيًا.</p>
         <nav className="footer-links">
           <Link href="/privacy">الخصوصية</Link>
+          <Link href="/terms">الشروط</Link>
           <Link href="/auth">تسجيل الدخول</Link>
         </nav>
       </div>

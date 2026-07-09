@@ -3,8 +3,19 @@ import type { NextRequest } from "next/server";
 
 // حماية مبدئية: توجيه غير المصادَق بعيدًا عن المسارات المحمية.
 // التحقق النهائي من الإذن يتم داخل كل مسار API عبر assertPermission.
-const PROTECTED = ["/dashboard", "/admin", "/reports", "/plan"];
-const PROTECTED_API = ["/api/assessments", "/api/consent", "/api/moods", "/api/admin"];
+const PROTECTED = [
+  "/dashboard",
+  "/parent-dashboard",
+  "/admin",
+  "/children",
+  "/assessment",
+  "/recommendations",
+  "/onboarding",
+  "/consent",
+  "/reports",
+  "/plan",
+];
+const PROTECTED_API = ["/api/assessments", "/api/children", "/api/consent", "/api/moods", "/api/admin"];
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -31,5 +42,17 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/admin/:path*", "/reports/:path*", "/plan/:path*", "/api/:path*"],
+  matcher: [
+    "/dashboard/:path*",
+    "/parent-dashboard/:path*",
+    "/admin/:path*",
+    "/children/:path*",
+    "/assessment/:path*",
+    "/recommendations/:path*",
+    "/onboarding/:path*",
+    "/consent/:path*",
+    "/reports/:path*",
+    "/plan/:path*",
+    "/api/:path*",
+  ],
 };

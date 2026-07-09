@@ -24,6 +24,11 @@ export async function SiteHeader() {
 
         {user ? (
           <nav className="site-nav">
+            {(user.role === 'ADMIN' || user.role === 'CONTENT_EDITOR') && (
+              <Link href="/admin" className="btn btn-ghost btn-sm">
+                <Icon name="layout-dashboard" size={16} /> الإدارة
+              </Link>
+            )}
             <Link href="/parent-dashboard" className="nav-user">
               <Icon name="user" size={16} /> {user.name || 'حسابي'}
             </Link>

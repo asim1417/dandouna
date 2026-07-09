@@ -67,17 +67,20 @@ export default async function ResultPage({ params }: { params: Promise<{ id: str
               </div>
             )}
             <div className="cap" style={{ fontSize: 14, color: '#64748B', fontWeight: 600 }}>
-              درجتك الخام
+              المؤشر (من ١٠٠)
             </div>
-            <div className="score">{toArabic(Math.round(r.rawScore))}</div>
+            <div className="score">{toArabic(Math.round(r.normalizedScore))}</div>
             <span className="pill pill-pink" style={{ marginTop: 6 }}>
               {r.band}
             </span>
+            <div style={{ fontSize: 12, color: 'var(--slate)', marginTop: 4 }}>
+              الدرجة الخام: {toArabic(Math.round(r.rawScore))}
+            </div>
 
             <div className="scale-bar">
-              <span className="seg" style={{ background: '#E2E5EC' }} />
-              <span className="seg" style={{ background: '#FCE7CF' }} />
               <span className="seg" style={{ background: '#DCFCE7' }} />
+              <span className="seg" style={{ background: '#FCE7CF' }} />
+              <span className="seg" style={{ background: '#FEE2E2' }} />
             </div>
             <div className="scale-labels">
               <span>منخفض</span>
@@ -86,6 +89,19 @@ export default async function ResultPage({ params }: { params: Promise<{ id: str
             </div>
 
             {r.interpretation && <p style={{ fontSize: 14, marginTop: 8 }}>{r.interpretation}</p>}
+
+            {Array.isArray(r.flags) && r.flags.length > 0 && (
+              <div className="flags-box">
+                <b>
+                  <Icon name="shield" size={15} /> إشارات تستدعي الانتباه
+                </b>
+                <ul>
+                  {(r.flags as string[]).map((f, i) => (
+                    <li key={i}>{f}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         ))}
 

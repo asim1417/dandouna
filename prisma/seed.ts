@@ -95,11 +95,15 @@ async function main() {
           isCurrent: true,
           questions: {
             create: [
-              likert(1, "أجد صعوبة في التوقف عن استخدام الشاشة رغم رغبتي في ذلك"),
+              likert(1, "أجد صعوبة في التوقف عن استخدام الشاشة رغم رغبتي في ذلك", {
+                flagThreshold: 4,
+                flagLabel: "صعوبة مرتفعة في ضبط استخدام الشاشة — يُنصح بمتابعة أقرب.",
+              }),
               likert(2, "أشعر بالملل بسرعة عند غياب المحفزات السريعة"),
               likert(3, "أؤجّل مهامي المهمة لصالح متعة لحظية"),
               likert(4, "أتفقّد هاتفي بشكل متكرر دون سبب واضح"),
-              likert(5, "أحتاج جرعات متزايدة من التسلية لأشعر بالرضا"),
+              // سؤال عكسي: الموافقة العالية تدل على توازن (تُقلب قيمته عند الاحتساب)
+              likert(5, "ألتزم بأوقات محدّدة ومنظّمة لاستخدام الأجهزة", { isReverse: true }),
             ],
           },
           bands: {
@@ -152,13 +156,20 @@ async function main() {
 }
 
 // مولّد سؤال ليكرت خماسي (أبدًا … دائمًا) بقيم 0..4
-function likert(order: number, text: string) {
+function likert(
+  order: number,
+  text: string,
+  opts?: { isReverse?: boolean; flagThreshold?: number; flagLabel?: string },
+) {
   const labels = ["أبدًا", "نادرًا", "أحيانًا", "غالبًا", "دائمًا"];
   return {
     order,
     text,
     type: "LIKERT" as const,
     weight: 1,
+    isReverse: opts?.isReverse ?? false,
+    flagThreshold: opts?.flagThreshold ?? null,
+    flagLabel: opts?.flagLabel ?? null,
     options: { create: labels.map((label, i) => ({ label, value: i, order: i + 1 })) },
   };
 }

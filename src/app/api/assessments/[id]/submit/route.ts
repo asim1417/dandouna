@@ -1,13 +1,16 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { currentUser } from "@/lib/session";
-import { scoreAssessment, type ScoredQuestion, type Band, type ScoringMethod } from "@/lib/scoring";
+import {
+  scoreAssessment,
+  type EngineQuestion,
+  type EngineBand,
+  type EngineConfig,
+  type ScoringMethod,
+} from "@/lib/assessment-engine";
 
-// POST /api/assessments/[id]/submit — إغلاق الجلسة واحتساب الدرجات
-export async function POST(
-  _req: Request,
-  { params }: { params: Promise<{ id: string }> }
-) {
+// POST /api/assessments/[id]/submit — إغلاق الجلسة واحتساب الدرجات (في الخادم)
+export async function POST(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const user = await currentUser();
   if (!user) return NextResponse.json({ error: "غير مصرّح" }, { status: 401 });
 
@@ -19,7 +22,16 @@ export async function POST(
       responses: true,
       version: {
         include: {
-          questions: { select: { id: true, weight: true, subscale: true } },
+          questions: {
+            select: {
+              id: true,
+              weight: true,
+              subscale: true,
+              isReverse: true,
+              flagThreshold: true,
+              flagLabel: true,
+            },
+          },
           bands: {
             include: {
               recommendations: { include: { references: { include: { reference: true } } } },
@@ -35,16 +47,24 @@ export async function POST(
   if (assessment.status !== "IN_PROGRESS")
     return NextResponse.json({ error: "الجلسة مغلقة مسبقًا" }, { status: 409 });
 
-  // بناء مدخلات المحرّك
   const answerMap = new Map(assessment.responses.map((r) => [r.questionId, r.value]));
-  const scored: ScoredQuestion[] = assessment.version.questions.map((q) => ({
-    questionId: q.id,
+  const cfg: EngineConfig = {
+    method: assessment.version.scoring as ScoringMethod,
+    optionMin: assessment.version.optionMin,
+    optionMax: assessment.version.optionMax,
+  };
+
+  const questions: EngineQuestion[] = assessment.version.questions.map((q) => ({
+    id: q.id,
     weight: q.weight,
     subscale: q.subscale,
+    isReverse: q.isReverse,
     value: answerMap.get(q.id) ?? null,
+    flagThreshold: q.flagThreshold,
+    flagLabel: q.flagLabel,
   }));
 
-  const bands: Band[] = assessment.version.bands.map((b) => ({
+  const bands: EngineBand[] = assessment.version.bands.map((b) => ({
     subscale: b.subscale,
     minScore: b.minScore,
     maxScore: b.maxScore,
@@ -52,13 +72,8 @@ export async function POST(
     interpretation: b.interpretation,
   }));
 
-  const results = scoreAssessment(
-    scored,
-    bands,
-    assessment.version.scoring as ScoringMethod
-  );
+  const results = scoreAssessment(questions, bands, cfg);
 
-  // حفظ النتائج وإغلاق الجلسة
   await prisma.$transaction([
     prisma.scaleResult.deleteMany({ where: { assessmentId: id } }),
     ...results.map((r) =>
@@ -67,10 +82,12 @@ export async function POST(
           assessmentId: id,
           subscale: r.subscale,
           rawScore: r.rawScore,
+          normalizedScore: r.normalizedScore,
           band: r.band,
           interpretation: r.interpretation,
+          flags: r.flags,
         },
-      })
+      }),
     ),
     prisma.assessment.update({
       where: { id },
@@ -81,7 +98,6 @@ export async function POST(
     }),
   ]);
 
-  // ربط التوصيات والمراجع الشرعية بالنطاق الناتج (للعرض في التقرير)
   const recommendations = assessment.version.bands
     .filter((b) => results.some((r) => r.band === b.label && r.subscale === b.subscale))
     .flatMap((b) =>
@@ -94,7 +110,7 @@ export async function POST(
           citation: rr.reference.citation,
           source: rr.reference.source,
         })),
-      }))
+      })),
     );
 
   return NextResponse.json({

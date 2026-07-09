@@ -6,7 +6,7 @@ import { sendOtpEmail } from "@/lib/email";
 
 const schema = z.object({
   email: z.string().email("البريد غير صحيح"),
-  fullName: z.string().trim().min(2).optional(),
+  fullName: z.string().trim().optional(),
 })
 
 // POST /api/auth/otp — توليد رمز تحقق وإرساله للبريد
