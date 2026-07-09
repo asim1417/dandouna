@@ -1,81 +1,111 @@
-// مخطط قاعدة بيانات منصة دندونة
-// المرحلة ٠–١: المصادقة، الأدوار، وموافقة ولي الأمر + هيكل أوّلي للمقاييس.
+// ============================================================
+//  دندونة · مخطط قاعدة البيانات (Prisma)
+//  منصة تقييم سلوكي متعلقة بالدوبامين — النسخة الأساسية
+// ============================================================
+
 generator client {
   provider = "prisma-client-js"
 }
 
+// ملاحظة (Prisma 7): رابط الاتصال يُضبط في prisma.config.ts عبر محوّل pg
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
-// ===== الأدوار =====
+// ===================== التعدادات =====================
 enum Role {
-  USER // مستخدم (طفل/مراهق/بالغ)
-  PARENT // ولي أمر
-  SPECIALIST // مختص
-  INSTITUTION // مؤسسة
-  COMPANY // شركة
-  ADMIN // مدير النظام
+  USER          // فرد
+  GUARDIAN      // ولي أمر
+  SPECIALIST    // مختص
+  INSTITUTION   // مؤسسة
+  COMPANY       // شركة
+  ADMIN         // مدير
 }
 
-// فئة عمرية تحدد مسار الموافقة
-enum AgeBand {
-  ADULT // بالغ (18+)
-  MINOR // قاصر (يتطلب موافقة ولي أمر)
+enum QuestionType {
+  LIKERT
+  SINGLE
+  MULTI
+  BOOLEAN
+  NUMERIC
+  TEXT
+}
+
+enum ScoringMethod {
+  SUM
+  AVERAGE
+  WEIGHTED
+  SUBSCALE
+}
+
+enum AssessmentStatus {
+  IN_PROGRESS
+  COMPLETED
+  ABANDONED
 }
 
 enum ConsentStatus {
-  PENDING // بانتظار موافقة ولي الأمر
-  APPROVED // معتمدة
-  REJECTED // مرفوضة
+  PENDING
+  GRANTED
+  REVOKED
+  EXPIRED
 }
 
-// ===== المستخدم =====
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  emailVerified DateTime?
-  passwordHash  String? // فارغ عند الدخول عبر مزوّد خارجي فقط
-  image         String?
-  role          Role      @default(USER)
-  ageBand       AgeBand   @default(ADULT)
-  locale        String    @default("ar")
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+enum RefSource {
+  QURAN     // قرآن
+  SUNNAH    // سنة
+  SCHOLARLY // قول أهل العلم
+  OTHER
+}
 
-  accounts        Account[]
-  sessions        Session[]
-  // موافقات ولي الأمر التي يملكها هذا المستخدم (بصفته قاصرًا)
-  consentsAsMinor GuardianConsent[] @relation("MinorConsents")
-  // موافقات منحها هذا المستخدم (بصفته ولي أمر)
-  consentsAsGuardian GuardianConsent[] @relation("GuardianConsents")
+// ===================== المستخدمون =====================
+model User {
+  id           String    @id @default(cuid())
+  email        String?   @unique
+  phone        String?   @unique
+  passwordHash String?
+  fullName     String
+  role         Role      @default(USER)
+  isMinor      Boolean   @default(false)
+  birthDate    DateTime?
+  locale       String    @default("ar")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime? // حذف منطقي لأغراض الاحتفاظ (PDPL)
+
+  // علاقات
+  accounts       Account[]
+  sessions       Session[]
+  guardianLinks  GuardianLink[] @relation("Guardian")
+  wardLinks      GuardianLink[] @relation("Ward")
+  assessments    Assessment[]
+  memberships    Membership[]
+  consentsAsSubject Consent[]   @relation("ConsentSubject")
+  moods          MoodEntry[]
+  auditLogs      AuditLog[]
 
   @@index([role])
+  @@index([deletedAt])
 }
 
-// ===== موافقة ولي الأمر (لبيانات القُصّر — متطلب PDPL) =====
-model GuardianConsent {
-  id           String        @id @default(cuid())
-  minorId      String
-  minor        User          @relation("MinorConsents", fields: [minorId], references: [id], onDelete: Cascade)
-  guardianId   String?
-  guardian     User?         @relation("GuardianConsents", fields: [guardianId], references: [id])
-  guardianName String
-  guardianEmail String
-  status       ConsentStatus @default(PENDING)
-  token        String        @unique // رابط الاعتماد المُرسل لولي الأمر
-  approvedAt   DateTime?
-  createdAt    DateTime      @default(now())
+// ربط ولي الأمر بالقاصر
+model GuardianLink {
+  id         String   @id @default(cuid())
+  guardian   User     @relation("Guardian", fields: [guardianId], references: [id], onDelete: Cascade)
+  guardianId String
+  ward       User     @relation("Ward", fields: [wardId], references: [id], onDelete: Cascade)
+  wardId     String
+  relation   String   // صلة القرابة
+  createdAt  DateTime @default(now())
 
-  @@index([minorId])
-  @@index([status])
+  @@unique([guardianId, wardId])
+  @@index([wardId])
 }
 
-// ===== نماذج Auth.js (Prisma Adapter) =====
+// ===================== مصادقة Auth.js =====================
 model Account {
   id                String  @id @default(cuid())
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId            String
   type              String
   provider          String
@@ -88,19 +118,21 @@ model Account {
   id_token          String?
   session_state     String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
+// رموز التحقق و OTP (بريد/جوال)
 model VerificationToken {
   identifier String
   token      String   @unique
@@ -109,31 +141,221 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// ===== هيكل أولي لمحرّك المقاييس (المرحلة ٢) =====
-model Scale {
-  id          String     @id @default(cuid())
-  slug        String     @unique
-  title       String
-  description String?
-  active      Boolean    @default(true)
-  createdAt   DateTime   @default(now())
-  questions   Question[]
+// ===================== المؤسسات =====================
+model Organization {
+  id          String       @id @default(cuid())
+  name        String
+  type        Role         // INSTITUTION | COMPANY
+  seats       Int          @default(0)
+  createdAt   DateTime     @default(now())
+
+  memberships Membership[]
 }
 
-enum QuestionType {
-  LIKERT // مقياس ليكرت
-  CHOICE // اختيار من متعدد
-  BOOLEAN // نعم/لا
+model Membership {
+  id        String       @id @default(cuid())
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  org       Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  orgId     String
+  roleInOrg Role
+
+  @@unique([userId, orgId])
+  @@index([orgId])
+}
+
+// ===================== المقاييس =====================
+model Scale {
+  id          String         @id @default(cuid())
+  code        String         @unique
+  title       String
+  description String?
+  audience    Role           @default(USER)
+  isActive    Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+
+  versions    ScaleVersion[]
+}
+
+model ScaleVersion {
+  id        String        @id @default(cuid())
+  scale     Scale         @relation(fields: [scaleId], references: [id], onDelete: Cascade)
+  scaleId   String
+  version   Int
+  scoring   ScoringMethod @default(SUM)
+  isCurrent Boolean       @default(false)
+
+  questions   Question[]
+  bands       ScoreBand[]
+  assessments Assessment[]
+
+  @@unique([scaleId, version])
 }
 
 model Question {
-  id      String       @id @default(cuid())
-  scaleId String
-  scale   Scale        @relation(fields: [scaleId], references: [id], onDelete: Cascade)
-  order   Int          @default(0)
-  text    String
-  type    QuestionType @default(LIKERT)
-  weight  Float        @default(1)
+  id        String       @id @default(cuid())
+  version   ScaleVersion @relation(fields: [versionId], references: [id], onDelete: Cascade)
+  versionId String
+  order     Int
+  text      String
+  type      QuestionType @default(LIKERT)
+  weight    Float        @default(1)
+  subscale  String?      // اسم المقياس الفرعي إن وجد
 
-  @@index([scaleId])
+  options   QuestionOption[]
+  responses Response[]
+
+  @@index([versionId])
+}
+
+model QuestionOption {
+  id         String   @id @default(cuid())
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId String
+  label      String
+  value      Float    // القيمة الرقمية للاحتساب
+  order      Int
+
+  @@index([questionId])
+}
+
+// نطاقات التفسير: خام ← نطاق ← تفسير + توصية
+model ScoreBand {
+  id             String        @id @default(cuid())
+  version        ScaleVersion  @relation(fields: [versionId], references: [id], onDelete: Cascade)
+  versionId      String
+  subscale       String?
+  minScore       Float
+  maxScore       Float
+  label          String        // منخفض | متوسط | مرتفع
+  interpretation String
+
+  recommendations Recommendation[]
+
+  @@index([versionId])
+}
+
+// ===================== التوصيات والمراجع الشرعية =====================
+model Recommendation {
+  id        String    @id @default(cuid())
+  band      ScoreBand @relation(fields: [bandId], references: [id], onDelete: Cascade)
+  bandId    String
+  title     String
+  body      String
+  order     Int       @default(0)
+
+  references RecommendationReference[]
+
+  @@index([bandId])
+}
+
+// مرجع شرعي (قرآن/سنة/قول أهل العلم)
+model IslamicReference {
+  id        String    @id @default(cuid())
+  source    RefSource @default(SCHOLARLY)
+  title     String
+  textAr    String            // نص المرجع
+  citation  String?           // الإحالة (سورة/آية، أو تخريج الحديث)
+  category  String?
+  createdAt DateTime  @default(now())
+
+  usedIn    RecommendationReference[]
+}
+
+// ربط التوصية بمرجع شرعي (متعدد لمتعدد)
+model RecommendationReference {
+  id               String           @id @default(cuid())
+  recommendation   Recommendation   @relation(fields: [recommendationId], references: [id], onDelete: Cascade)
+  recommendationId String
+  reference        IslamicReference @relation(fields: [referenceId], references: [id], onDelete: Cascade)
+  referenceId      String
+
+  @@unique([recommendationId, referenceId])
+}
+
+// ===================== الجلسات والنتائج =====================
+model Assessment {
+  id          String           @id @default(cuid())
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  version     ScaleVersion     @relation(fields: [versionId], references: [id])
+  versionId   String
+  status      AssessmentStatus @default(IN_PROGRESS)
+  startedAt   DateTime         @default(now())
+  completedAt DateTime?
+
+  responses Response[]
+  results   ScaleResult[]
+
+  @@index([userId])
+  @@index([status])
+}
+
+model Response {
+  id           String     @id @default(cuid())
+  assessment   Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  assessmentId String
+  question     Question   @relation(fields: [questionId], references: [id])
+  questionId   String
+  value        Float?     // للأنواع الرقمية/الخيارات
+  textValue    String?    // للنوع النصي
+  createdAt    DateTime   @default(now())
+
+  @@unique([assessmentId, questionId])
+}
+
+model ScaleResult {
+  id             String     @id @default(cuid())
+  assessment     Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  assessmentId   String
+  subscale       String?
+  rawScore       Float
+  band           String
+  interpretation String
+  createdAt      DateTime   @default(now())
+
+  @@index([assessmentId])
+}
+
+// ===================== ركن الطمأنينة (المزاج) =====================
+model MoodEntry {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  mood      Int      // 1..5 (منتقي المزاج)
+  note      String?
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
+// ===================== الموافقة (PDPL) =====================
+model Consent {
+  id        String        @id @default(cuid())
+  subject   User          @relation("ConsentSubject", fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId String        // صاحب البيانات (قد يكون قاصرًا)
+  grantedBy String        // معرّف مانح الموافقة (ولي الأمر أو نفس المستخدم)
+  purpose   String        // الغرض من المعالجة
+  status    ConsentStatus @default(PENDING)
+  grantedAt DateTime?
+  revokedAt DateTime?
+  expiresAt DateTime?
+  createdAt DateTime      @default(now())
+
+  @@index([subjectId, status])
+}
+
+// ===================== التدقيق =====================
+model AuditLog {
+  id        String   @id @default(cuid())
+  actor     User?    @relation(fields: [actorId], references: [id])
+  actorId   String?
+  action    String   // نوع الحدث
+  entity    String   // الكيان المتأثر
+  entityId  String?
+  ipAddress String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([entity, createdAt])
 }
