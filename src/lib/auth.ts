@@ -81,6 +81,23 @@ const providers: NextAuthConfig["providers"] = [
   }),
 ];
 
+// دخول تجريبي (جولة ضيف) — مفعّل فقط عند DEMO_MODE=true
+if (process.env.DEMO_MODE === "true") {
+  providers.push(
+    Credentials({
+      id: "demo",
+      name: "جولة تجريبية",
+      credentials: {},
+      async authorize() {
+        // حساب تجريبي جاهز من البذور (ولي أمر لديه طفل وموافقة)
+        const user = await prisma.user.findFirst({ where: { email: "guardian@dandouna.local", deletedAt: null } });
+        if (!user) return null;
+        return { id: user.id, name: user.fullName, email: user.email ?? undefined };
+      },
+    }),
+  );
+}
+
 // نُفعّل Google فقط عند توفّر بيانات الاعتماد
 if (process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET) {
   providers.push(

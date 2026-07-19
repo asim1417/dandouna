@@ -478,3 +478,7 @@ tbody td{padding:12px 16px;border-bottom:1px solid var(--border2);color:var(--sl
   .site-nav .btn-sm{padding:8px 12px;font-size:13px}
   .brand small{letter-spacing:2px}
 }
+
+/* فاصل "أو" في صفحة الدخول */
+.auth-or{display:flex;align-items:center;gap:10px;color:var(--slate2);font-size:12px;margin:16px 0}
+.auth-or::before,.auth-or::after{content:"";flex:1;height:1px;background:var(--border)}

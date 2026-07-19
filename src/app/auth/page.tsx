@@ -110,6 +110,27 @@ function AuthInner() {
         </button>
       </form>
 
+      {process.env.NEXT_PUBLIC_DEMO_MODE === 'true' && (
+        <>
+          <div className="auth-or">أو</div>
+          <button
+            type="button"
+            className="btn btn-ghost btn-block"
+            disabled={loading}
+            onClick={async () => {
+              setLoading(true)
+              const res = await signIn('demo', { redirect: false })
+              setLoading(false)
+              if (res?.error) { setError('الجولة التجريبية غير متاحة الآن'); return }
+              router.push('/parent-dashboard')
+              router.refresh()
+            }}
+          >
+            <Icon name="sparkles" size={16} /> جولة تجريبية (دخول كضيف)
+          </button>
+        </>
+      )}
+
       <p className="auth-switch">
         {isRegister ? (
           <>لديك حساب؟ <button type="button" className="link-pink" style={{ background: 'none', border: 0 }} onClick={() => { setMode('login'); setError('') }}>سجّلي الدخول</button></>
